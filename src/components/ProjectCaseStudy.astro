@@ -1,0 +1,113 @@
+---
+import type { Project } from '../data/projects/types.ts';
+
+type Props = {
+	project: Project;
+};
+
+const { project } = Astro.props;
+---
+
+<article
+	class="case-study"
+	style={`--project-accent: ${project.accent}; --project-soft: ${project.accentSoft};`}
+>
+	<header class="case-study__hero shell">
+		<p class="eyebrow">{project.type}</p>
+		<h1>{project.title}</h1>
+		<p class="case-study__lede">{project.summary}</p>
+		<dl class="project-details">
+			{
+				project.details.map((detail) => (
+					<div>
+						<dt>{detail.label}</dt>
+						<dd>{detail.value}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</header>
+
+	<div class="case-study__feature">
+		<div
+			class:list={[
+				'case-study__gallery',
+				{
+					'case-study__gallery--single': project.cardImages.length === 1,
+					'case-study__gallery--wide-bottom': project.galleryLayout === 'wide-bottom',
+				},
+			]}
+			aria-label={`${project.title} project gallery`}
+		>
+			{
+				project.cardImages.map((image, index) => (
+					<div class="case-study__media">
+						<img
+							src={image}
+							alt={`${project.title} project image ${index + 1}`}
+							loading={index === 0 ? 'eager' : 'lazy'}
+							decoding="async"
+						/>
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<div class="shell case-study__content">
+		{
+			project.sections.map((section) => (
+				<section class="case-study__section content-split content-split--case-study">
+					<div>
+						<p class="eyebrow">{section.title}</p>
+					</div>
+					<div class="case-study__section-body">
+						{section.lead && <p class="case-study__lead">{section.lead}</p>}
+
+						{section.listBeforeParagraphs && section.list && (
+							<ul>
+								{section.list.map((item) => <li>{item}</li>)}
+							</ul>
+						)}
+
+						{section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+
+						{!section.listBeforeParagraphs && section.list && (
+							<ul>
+								{section.list.map((item) => <li>{item}</li>)}
+							</ul>
+						)}
+
+						{section.details && (
+							<dl class="section-details">
+								{section.details.map((detail) => (
+									<div>
+										<dt>{detail.label}</dt>
+										<dd>{detail.value}</dd>
+									</div>
+								))}
+							</dl>
+						)}
+
+						{section.link && (
+							<p>
+								<a
+									class="text-link"
+									href={section.link.href}
+									target="_blank"
+									rel="noreferrer"
+								>
+									{section.link.label} <span class="link-arrow" aria-hidden="true">↗</span>
+								</a>
+							</p>
+						)}
+					</div>
+				</section>
+			))
+		}
+	</div>
+
+	<div class="shell case-study__next">
+		<a href="/">← Back to selected work</a>
+	</div>
+</article>

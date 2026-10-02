@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { home } from '../data/pages/home.ts';
+import { projects } from '../data/projects/index.ts';
+import { emailLink, site } from '../data/site.ts';
+
+const homeProjects = projects.filter((project) => project.showOnHome);
+const featuredProjects = homeProjects.filter((project) => project.featured);
+const gridProjects = homeProjects.filter((project) => !project.featured);
+---
+
+<BaseLayout description={home.intro}>
+	<section class="shell hero">
+		<div class="hero__copy">
+			<div>
+				<h1>{home.title}</h1>
+				<p class="hero__intro">{home.intro}</p>
+			</div>
+			<div class="hero__footer">
+				<a class="text-link" href={home.aboutLink.href}>
+					{home.aboutLink.label} <span class="link-arrow" aria-hidden="true">→</span>
+				</a>
+				<p class="meta-list">
+					{home.heroMeta.map((item) => <span>{item}</span>)}
+				</p>
+			</div>
+		</div>
+		<img
+			class="hero__portrait"
+			src={home.portrait.src}
+			alt={home.portrait.alt}
+			width="520"
+			height="520"
+		/>
+	</section>
+
+	<section class="shell projects" aria-labelledby="selected-work">
+		<header class="section-heading">
+			<div>
+				<p class="eyebrow">{home.workLabel}</p>
+				<h2 id="selected-work">{home.workHeading}</h2>
+			</div>
+			<p>{home.workIntro}</p>
+		</header>
+		{featuredProjects.map((project) => <ProjectCard project={project} />)}
+		<div class="project-grid">
+			{gridProjects.map((project) => <ProjectCard project={project} />)}
+		</div>
+	</section>
+
+	<section class="shell disciplines" aria-labelledby="disciplines-heading">
+		<p class="eyebrow">{home.disciplinesLabel}</p>
+		<div class="disciplines__intro">
+			<h2 id="disciplines-heading">{home.disciplinesHeading}</h2>
+			<p>{home.disciplinesIntro}</p>
+		</div>
+		<ol class="disciplines__list list-reset">
+			{
+				home.services.map((service, index) => (
+					<li>
+						<span class="eyebrow">{String(index + 1).padStart(2, '0')}</span>
+						<h3>{service.title}</h3>
+						<p>{service.description}</p>
+					</li>
+				))
+			}
+		</ol>
+	</section>
+
+	<section class="shell closing-callout">
+		<div>
+			<p class="eyebrow">{home.calloutLabel}</p>
+			<h2>{home.calloutHeading}</h2>
+		</div>
+		<div class="closing-callout__details">
+			<a class="text-link" href={emailLink.href}>
+				{site.email} <span class="link-arrow" aria-hidden="true">→</span>
+			</a>
+			<p>{home.availability}</p>
+		</div>
+	</section>
+</BaseLayout>

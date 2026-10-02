@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { work } from '../data/pages/work.ts';
+import { projects } from '../data/projects/index.ts';
+---
+
+<BaseLayout title={work.metadata.title} description={work.metadata.description}>
+	<section class="shell work-page" aria-labelledby="work-heading">
+		<header class="work-page__intro">
+			<p class="eyebrow">{work.eyebrow}</p>
+			<h1 id="work-heading">{work.title}</h1>
+			<div class="page-intro__copy">
+				<p>{work.intro}</p>
+			</div>
+		</header>
+
+		<div class="project-grid">
+			{projects.map((project) => <ProjectCard project={project} layout="grid" />)}
+		</div>
+	</section>
+</BaseLayout>

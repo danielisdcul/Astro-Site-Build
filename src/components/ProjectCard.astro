@@ -1,0 +1,53 @@
+---
+import type { Project } from '../data/projects/types.ts';
+
+type Props = {
+	project: Project;
+	layout?: 'home' | 'grid';
+};
+
+const { project, layout = 'home' } = Astro.props;
+const featured = layout === 'home' && project.featured;
+const { galleryLayout } = project;
+---
+
+<article
+	class:list={[
+		'project-card',
+		{
+			'project-card--featured': featured,
+			'project-card--single-image': project.cardImages.length === 1,
+			'project-card--wide-bottom': galleryLayout === 'wide-bottom',
+		},
+	]}
+>
+	<a class="project-card__link" href={`/projects/${project.slug}/`}>
+		<div class="project-card__gallery">
+			{
+				project.cardImages.map((image, index) => (
+					<div class="project-card__image">
+						<img
+							src={image}
+							alt={`${project.cardTitle} project image ${index + 1}`}
+							loading="eager"
+							decoding="async"
+						/>
+					</div>
+				))
+			}
+		</div>
+		<div class="project-card__copy">
+			<div class="project-card__primary">
+				<p class="eyebrow">{project.cardLabel}</p>
+				<h2>{project.cardTitle}</h2>
+				<p>{project.cardSummary}</p>
+			</div>
+			<div class="project-card__cta">
+				<span>
+					{featured ? 'Explore the case study' : 'View project'} <span class="link-arrow" aria-hidden="true">→</span>
+				</span>
+				{featured && <small>{project.cardMeta}</small>}
+			</div>
+		</div>
+	</a>
+</article>

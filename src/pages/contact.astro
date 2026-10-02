@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { contact } from '../data/pages/contact.ts';
+import { emailLink, site } from '../data/site.ts';
+
+const links = [emailLink, ...site.socialLinks];
+---
+
+<BaseLayout title={contact.metadata.title} description={contact.metadata.description}>
+	<section class="shell page-intro">
+		<p class="eyebrow">{contact.eyebrow}</p>
+		<h1>{contact.title}</h1>
+		<div class="page-intro__copy">
+			<p>{contact.intro}</p>
+		</div>
+		<ul class="contact-links list-reset">
+			{
+				links.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							target={link.href.startsWith('http') ? '_blank' : undefined}
+							rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+						>
+							{link.label} <span aria-hidden="true">↗</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</BaseLayout>

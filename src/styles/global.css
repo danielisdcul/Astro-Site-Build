@@ -1,0 +1,1221 @@
+/* ========================================================================== 
+   GLOBAL STYLES INDEX
+   ========================================================================== 
+
+   1. Foundations ............................................... Line 52
+      1.1 Font Faces ............................................ Line 55
+      1.2 Design Tokens ......................................... Line 89
+      1.3 Reset & Document Defaults ............................ Line 109
+      1.4 Typography ........................................... Line 128
+         1.4.1 Font Families ................................... Line 131
+         1.4.2 Base Text & Heading Hierarchy ................... Line 139
+         1.4.3 Links, Labels & Captions ........................ Line 273
+         1.4.4 Content Variants ................................ Line 338
+         1.4.5 Responsive Type Scale ........................... Line 391
+      1.5 Base Elements ........................................ Line 429
+      1.6 Focus Styles ......................................... Line 436
+
+   2. Shared Layout & Navigation .............................. Line 444
+      2.1 Shared Layout Utilities .............................. Line 447
+      2.2 Page Shell & Skip Link ............................... Line 474
+      2.3 Header & Primary Navigation .......................... Line 495
+      2.4 Arrow Link Interaction ............................... Line 524
+
+   3. Home Page ................................................ Line 537
+      3.1 Hero ................................................. Line 540
+      3.2 Project Listing & Section Heading .................... Line 595
+      3.3 Project Cards ........................................ Line 622
+      3.4 Project Grid ......................................... Line 726
+      3.5 Disciplines .......................................... Line 739
+      3.6 Closing Callout ...................................... Line 778
+      3.7 Footer ............................................... Line 810
+
+   4. Interior Pages ........................................... Line 829
+      4.1 Shared Page Intro .................................... Line 832
+      4.2 Work Page ............................................ Line 853
+      4.3 About Page ........................................... Line 863
+      4.4 Contact Page ......................................... Line 905
+      4.5 Case Study Header & Details .......................... Line 914
+      4.6 Case Study Feature & Content ......................... Line 941
+      4.7 Case Study Next Link ................................ Line 1022
+
+   5. Responsive Styles ....................................... Line 1029
+      5.1 Medium Screens (max-width: 1100px) .................. Line 1032
+      5.2 Small Screens (max-width: 800px) .................... Line 1049
+      5.3 Narrow Screens (max-width: 544px) ................... Line 1152
+
+   6. Accessibility ............................................ Line 1205
+      6.1 Reduced Motion ....................................... Line 1208
+   ========================================================================== */
+
+/* ========================================================================== 
+   1. FOUNDATIONS
+   ========================================================================== */
+
+/* 1.1 Font Faces
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Momo Trust Display';
+  src: url('/fonts/momo-trust-display-400.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('/fonts/plus-jakarta-sans-400.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope-500.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fonts/manrope-600.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* 1.2 Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --ink: #17221e;
+  --muted: #5e6862;
+  --paper: #f7f5ef;
+  --line: #d8d7d0;
+  --accent: #d66048;
+  --teal: #075056;
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+}
+
+/* 1.3 Reset & Document Defaults
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--paper);
+}
+
+/* 1.4 Typography
+   -------------------------------------------------------------------------- */
+
+/* 1.4.1 Font Families
+   -------------------------------------------------------------------------- */
+:root {
+  --display: 'Momo Trust Display', 'Arial Rounded MT Bold', sans-serif;
+  --body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --caption: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* 1.4.2 Base Text & Heading Hierarchy
+   -------------------------------------------------------------------------- */
+body {
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 100%;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 64px;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 48px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 32px;
+  letter-spacing: -1px;
+  line-height: 40px;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h5 {
+  font-family: var(--body);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+h6 {
+  font-family: var(--caption);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding-left: 20px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+small,
+dt {
+  font-family: var(--caption);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+dt {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+dd {
+  margin: var(--space-8) 0 0;
+}
+
+blockquote {
+  padding-left: var(--space-24);
+  border-left: 3px solid var(--accent);
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 32px;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+code,
+kbd,
+samp {
+  font-size: 14px;
+}
+
+pre {
+  overflow-x: auto;
+  padding: var(--space-16);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* 1.4.3 Links, Labels & Captions
+   -------------------------------------------------------------------------- */
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.wordmark {
+  font-family: var(--display);
+  font-size: 32px;
+  letter-spacing: -1px;
+  line-height: 40px;
+  text-decoration: none;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--caption);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.text-link,
+.contact-links a,
+.project-card__cta {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.text-link,
+.contact-links a,
+.project-card__link,
+.site-nav a,
+.site-footer a,
+.case-study__next a {
+  text-decoration: none;
+}
+
+.site-nav a {
+  color: var(--muted);
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current='page'],
+.site-footer a:hover {
+  color: var(--ink);
+}
+
+.meta-list,
+.site-footer {
+  color: var(--muted);
+  font-family: var(--caption);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* 1.4.4 Content Variants
+   -------------------------------------------------------------------------- */
+.hero__intro,
+.section-heading > p,
+.disciplines__intro p,
+.page-intro__copy,
+.case-study__lede {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.project-card__primary h2,
+.about-sections h2,
+.case-study__section-body .case-study__lead {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 40px;
+}
+
+.project-card__primary > p:last-child,
+.project-card__cta small,
+.disciplines__list p,
+.about-sections p,
+.case-study__section-body p,
+.case-study__section-body ul {
+  color: var(--muted);
+}
+
+.contact-links span {
+  color: var(--accent);
+}
+
+.closing-callout,
+.closing-callout .eyebrow,
+.skip-link {
+  color: var(--paper);
+}
+
+.case-study__section-body .case-study__lead {
+  color: var(--ink);
+}
+
+.section-details dd {
+  margin: 0;
+}
+
+.case-study__next a {
+  font-size: 20px;
+}
+
+/* 1.4.5 Responsive Type Scale
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  h1 {
+    font-size: clamp(52px, 6vw, 64px);
+  }
+}
+
+@media (max-width: 800px) {
+  .wordmark {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 544px) {
+  .wordmark {
+    font-size: 20px;
+  }
+
+  .site-nav {
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 44px;
+  }
+
+  .section-heading h2,
+  .disciplines h2,
+  .closing-callout h2 {
+    font-size: 36px;
+  }
+
+  .closing-callout h2 {
+    font-size: 32px;
+  }
+}
+
+/* 1.5 Base Elements
+   -------------------------------------------------------------------------- */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* 1.6 Focus Styles
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* ========================================================================== 
+   2. SHARED LAYOUT & NAVIGATION
+   ========================================================================== */
+
+/* 2.1 Shared Layout Utilities
+   -------------------------------------------------------------------------- */
+.list-reset {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.content-split {
+  display: grid;
+  gap: var(--space-32);
+  padding: var(--space-32) 0;
+  border-top: 1px solid var(--line);
+}
+
+.content-split--about {
+  grid-template-columns: minmax(208px, 1fr) 2fr;
+}
+
+.content-split--case-study {
+  grid-template-columns: minmax(192px, 1fr) 2fr;
+}
+
+.content-split:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+/* 2.2 Page Shell & Skip Link
+   -------------------------------------------------------------------------- */
+.shell {
+  width: min(calc(100% - 40px), 1280px);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--ink);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* 2.3 Header & Primary Navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  height: 89px;
+}
+
+.header-inner,
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+}
+
+.header-inner {
+  height: 89px;
+  border-bottom: 1px solid var(--line);
+}
+
+.wordmark {
+  width: 260px;
+}
+
+.site-nav,
+.site-footer ul {
+  display: flex;
+  gap: var(--space-32);
+}
+
+/* 2.4 Arrow Link Interaction
+   -------------------------------------------------------------------------- */
+.link-arrow {
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.text-link:hover .link-arrow,
+.project-card__link:hover .link-arrow {
+  transform: translateX(4px);
+}
+
+/* ========================================================================== 
+   3. HOME PAGE
+   ========================================================================== */
+
+/* 3.1 Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 736px) minmax(320px, 520px);
+  gap: var(--space-24);
+  height: 680px;
+  padding: var(--space-120) 0 var(--space-96);
+}
+
+.hero__copy {
+  display: flex;
+  min-width: 0;
+  height: 464px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero h1,
+.work-page__intro h1,
+.page-intro h1,
+.case-study__hero h1 {
+  max-width: 720px;
+  margin: 0 0 var(--space-24);
+}
+
+.hero__intro {
+  max-width: 600px;
+  margin: 0;
+}
+
+.hero__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.meta-list {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+}
+
+.meta-list span:not(:last-child)::after {
+  margin-inline: 6px;
+  content: '·';
+}
+
+.hero__portrait {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* 3.2 Project Listing & Section Heading
+   -------------------------------------------------------------------------- */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-64);
+  padding: var(--space-120) 0;
+}
+
+.section-heading {
+  display: grid;
+  min-height: 136px;
+  grid-template-columns: minmax(0, 844px) minmax(0, 412px);
+  gap: var(--space-24);
+  align-items: end;
+}
+
+.section-heading > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.section-heading > p {
+  margin: 0;
+}
+
+/* 3.3 Project Cards
+   -------------------------------------------------------------------------- */
+.project-card__link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+.project-card__gallery {
+  display: grid;
+  aspect-ratio: 1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24);
+  min-width: 0;
+}
+
+.project-card__image {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.project-card__gallery .project-card__image:first-child {
+  grid-column: 1 / -1;
+}
+
+.project-card--single-image .project-card__gallery {
+  display: block;
+}
+
+.project-card--single-image .project-card__image {
+  width: 100%;
+  height: 100%;
+}
+
+.project-card--wide-bottom .project-card__gallery .project-card__image:first-child {
+  grid-column: auto;
+}
+
+.project-card--wide-bottom .project-card__gallery .project-card__image:last-child {
+  grid-row: 2;
+  grid-column: 1 / -1;
+}
+
+.project-card__image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 320ms ease;
+}
+
+.project-card__link:hover .project-card__image img {
+  transform: scale(1.018);
+}
+
+.project-card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+}
+
+.project-card__primary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.project-card__primary > p:last-child {
+  margin: 0;
+}
+
+.project-card__cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.project-card--featured .project-card__link {
+  display: grid;
+  height: 520px;
+  grid-template-columns: minmax(0, 844px) minmax(0, 412px);
+  gap: var(--space-24);
+}
+
+.project-card--featured .project-card__gallery {
+  display: block;
+  height: 520px;
+  aspect-ratio: auto;
+}
+
+.project-card--featured .project-card__image {
+  width: 100%;
+  height: 100%;
+}
+
+.project-card--featured .project-card__copy {
+  height: 520px;
+  justify-content: space-between;
+}
+
+/* 3.4 Project Grid
+   -------------------------------------------------------------------------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-64);
+}
+
+.project-grid .project-card__copy {
+  min-height: 300px;
+  justify-content: space-between;
+}
+
+/* 3.5 Disciplines
+   -------------------------------------------------------------------------- */
+.disciplines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-64);
+  min-height: 988px;
+  padding: var(--space-120) 0;
+}
+
+.disciplines__intro {
+  display: grid;
+  min-height: 240px;
+  grid-template-columns: minmax(0, 412px) minmax(0, 736px);
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.disciplines__intro p {
+  margin: 0;
+}
+
+.disciplines__list {
+  border-top: 1px solid var(--line);
+}
+
+.disciplines__list li {
+  display: grid;
+  min-height: 121px;
+  grid-template-columns: 88px 388px minmax(0, 1fr);
+  gap: var(--space-24);
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.disciplines__list p {
+  margin: 0;
+}
+
+/* 3.6 Closing Callout
+   -------------------------------------------------------------------------- */
+.closing-callout {
+  display: flex;
+  height: 480px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-96);
+  background: linear-gradient(117deg, var(--teal) 7%, var(--ink) 54%);
+}
+
+.closing-callout > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.closing-callout h2 {
+  max-width: 920px;
+}
+
+.closing-callout__details {
+  display: grid;
+  grid-template-columns: 420px 360px;
+  gap: var(--space-24);
+  align-items: end;
+}
+
+.closing-callout__details p {
+  margin: 0;
+}
+
+/* 3.7 Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  height: 104px;
+}
+
+.footer-inner {
+  height: 100%;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+.site-footer ul {
+  gap: var(--space-24);
+}
+
+/* ========================================================================== 
+   4. INTERIOR PAGES
+   ========================================================================== */
+
+/* 4.1 Shared Page Intro
+   -------------------------------------------------------------------------- */
+.page-intro {
+  min-height: calc(100vh - 193px);
+  padding: var(--space-120) 0;
+}
+
+.page-intro > .eyebrow,
+.work-page__intro > .eyebrow,
+.case-study__hero > .eyebrow {
+  margin-bottom: var(--space-16);
+}
+
+.page-intro__copy {
+  max-width: 736px;
+}
+
+.page-intro__copy p {
+  margin: 0;
+}
+
+/* 4.2 Work Page
+   -------------------------------------------------------------------------- */
+.work-page {
+  padding: var(--space-120) 0;
+}
+
+.work-page__intro {
+  margin-bottom: var(--space-80);
+}
+
+/* 4.3 About Page
+   -------------------------------------------------------------------------- */
+.about-sections {
+  max-width: 960px;
+  margin-top: var(--space-80);
+}
+
+.about-section__content,
+.education-list,
+.education-card {
+  display: grid;
+}
+
+.about-section__content {
+  gap: var(--space-32);
+}
+
+.education-list {
+  gap: var(--space-24);
+}
+
+.education-card {
+  gap: var(--space-8);
+  padding-left: var(--space-24);
+  border-left: 3px solid var(--accent);
+}
+
+.about-sections .education-card__degree {
+  color: var(--accent);
+  font-family: var(--caption);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.education-card h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+/* 4.4 Contact Page
+   -------------------------------------------------------------------------- */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  margin: var(--space-48) 0 0;
+}
+
+/* 4.5 Case Study Header & Details
+   -------------------------------------------------------------------------- */
+.case-study {
+  padding-top: var(--space-120);
+}
+
+.case-study__hero {
+  padding-bottom: var(--space-96);
+}
+
+.case-study__lede {
+  max-width: 736px;
+  margin: 0;
+}
+
+.project-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-24);
+  margin: var(--space-64) 0 0;
+}
+
+.project-details div {
+  padding-top: var(--space-16);
+  border-top: 1px solid var(--line);
+}
+
+/* 4.6 Case Study Feature & Content
+   -------------------------------------------------------------------------- */
+.case-study__feature {
+  padding: clamp(var(--space-16), 3vw, var(--space-48));
+  background: var(--project-soft);
+}
+
+.case-study__gallery {
+  display: grid;
+  width: min(100%, 1280px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, var(--space-24));
+  margin-inline: auto;
+}
+
+.case-study__media {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.case-study__gallery .case-study__media:first-child {
+  grid-column: 1 / -1;
+}
+
+.case-study__gallery--wide-bottom .case-study__media:first-child {
+  grid-column: auto;
+}
+
+.case-study__gallery--wide-bottom .case-study__media:last-child {
+  grid-column: 1 / -1;
+}
+
+.case-study__gallery--single .case-study__media:first-child {
+  grid-column: 1 / -1;
+}
+
+.case-study__media img {
+  width: 100%;
+  height: auto;
+}
+
+.case-study__content {
+  padding: var(--space-120) 0;
+}
+
+.case-study__section-body {
+  max-width: 736px;
+}
+
+.case-study__section-body > :first-child {
+  margin-top: 0;
+}
+
+.case-study__section-body > :last-child {
+  margin-bottom: 0;
+}
+
+.case-study__section-body p {
+  margin: 0 0 var(--space-16);
+}
+
+.case-study__section-body ul {
+  display: grid;
+  gap: var(--space-8);
+  padding-left: 20px;
+  margin: var(--space-16) 0;
+}
+
+.section-details {
+  margin: var(--space-32) 0;
+  border-top: 1px solid var(--line);
+}
+
+.section-details div {
+  display: grid;
+  grid-template-columns: minmax(128px, 1fr) 2fr;
+  gap: var(--space-16);
+  padding: var(--space-16) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* 4.7 Case Study Next Link
+   -------------------------------------------------------------------------- */
+.case-study__next {
+  padding-bottom: var(--space-120);
+}
+
+/* ========================================================================== 
+   5. RESPONSIVE STYLES
+   ========================================================================== */
+
+/* 5.1 Medium Screens (max-width: 1100px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .hero {
+    grid-template-columns: minmax(0, 6fr) minmax(320px, 5fr);
+  }
+
+  .section-heading,
+  .project-card--featured .project-card__link {
+    grid-template-columns: minmax(0, 2fr) minmax(272px, 1fr);
+  }
+
+  .disciplines__list li {
+    grid-template-columns: 64px minmax(240px, 1fr) minmax(0, 2fr);
+  }
+}
+
+/* 5.2 Small Screens (max-width: 800px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 800px) {
+  :root {
+    --space-64: 48px;
+    --space-80: 64px;
+    --space-96: 64px;
+    --space-120: 80px;
+  }
+
+  .wordmark {
+    width: auto;
+  }
+
+  .site-nav {
+    gap: var(--space-16);
+  }
+
+  .hero {
+    height: auto;
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .hero__copy {
+    height: auto;
+    gap: var(--space-64);
+  }
+
+  .hero__portrait {
+    width: min(100%, 400px);
+    justify-self: center;
+  }
+
+  .section-heading {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+    align-items: start;
+  }
+
+  .project-card--featured .project-card__link {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .project-card--featured .project-card__gallery {
+    height: auto;
+    aspect-ratio: 844 / 520;
+  }
+
+  .project-card--featured .project-card__copy {
+    height: auto;
+    min-height: 0;
+  }
+
+  .project-grid .project-card__copy {
+    min-height: 0;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .disciplines {
+    min-height: 0;
+  }
+
+  .disciplines__intro {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+  }
+
+  .disciplines__list li {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: var(--space-16);
+    padding: var(--space-24) 0;
+  }
+
+  .disciplines__list li > p {
+    grid-column: 2;
+  }
+
+  .closing-callout {
+    height: auto;
+    min-height: 480px;
+    padding: var(--space-64);
+    gap: var(--space-64);
+  }
+
+  .closing-callout__details {
+    grid-template-columns: 1fr;
+  }
+
+  .project-details {
+    grid-template-columns: 1fr;
+  }
+
+  .content-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 5.3 Narrow Screens (max-width: 544px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 544px) {
+  .shell {
+    width: calc(100% - 32px);
+  }
+
+  .header-inner {
+    gap: 12px;
+  }
+
+  .site-nav {
+    gap: 12px;
+  }
+
+  .project-card__gallery {
+    gap: 12px;
+  }
+
+  .closing-callout {
+    padding: var(--space-32);
+  }
+
+  .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .site-footer ul {
+    gap: var(--space-16);
+  }
+
+  .section-details div {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__portrait {
+    width: min(100%, 328px);
+  }
+
+  .case-study__gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .case-study__gallery .case-study__media,
+  .case-study__gallery--wide-bottom .case-study__media:first-child,
+  .case-study__gallery--wide-bottom .case-study__media:last-child {
+    grid-column: auto;
+  }
+}
+
+/* ========================================================================== 
+   6. ACCESSIBILITY
+   ========================================================================== */
+
+/* 6.1 Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

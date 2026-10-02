@@ -1,0 +1,29 @@
+---
+import { emailLink, site } from '../data/site.ts';
+
+const year = new Date().getFullYear();
+const links = [...site.socialLinks, emailLink];
+---
+
+<footer class="site-footer">
+	<div class="shell footer-inner">
+		<p>© {year} {site.name}</p>
+		<nav aria-label="Social links">
+			<ul class="list-reset">
+				{
+					links.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								target={link.href.startsWith('http') ? '_blank' : undefined}
+								rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</footer>

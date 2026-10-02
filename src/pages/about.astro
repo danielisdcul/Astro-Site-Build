@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { about } from '../data/pages/about.ts';
+---
+
+<BaseLayout title={about.metadata.title} description={about.metadata.description}>
+	<section class="shell page-intro">
+		<p class="eyebrow">{about.eyebrow}</p>
+		<h1>{about.title}</h1>
+		<div class="page-intro__copy">
+			<p>{about.intro}</p>
+		</div>
+		<div class="about-sections">
+			{
+				about.sections.map((section) => (
+					<section class="content-split content-split--about">
+						<h2>{section.title}</h2>
+
+						<div class="about-section__content">
+							<p>{section.body}</p>
+
+							{'degrees' in section && section.degrees && (
+								<div class="education-list" aria-label="Degrees">
+									{section.degrees.map((degree) => (
+										<article class="education-card">
+											<p class="education-card__degree">{degree.degree}</p>
+											<h3>{degree.major}</h3>
+											<p>
+												{[degree.concentration, degree.school, degree.year].filter(Boolean).join(' · ')}
+											</p>
+											{degree.honors && (
+												<p class="education-card__honors"><em>{degree.honors}</em></p>
+											)}
+										</article>
+									))}
+								</div>
+							)}
+						</div>
+					</section>
+				))
+			}
+		</div>
+	</section>
+</BaseLayout>

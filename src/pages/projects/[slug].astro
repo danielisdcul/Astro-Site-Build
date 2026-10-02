@@ -1,0 +1,23 @@
+---
+import ProjectCaseStudy from '../../components/ProjectCaseStudy.astro';
+import { projects } from '../../data/projects/index.ts';
+import type { Project } from '../../data/projects/types.ts';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: { project },
+	}));
+}
+
+type Props = {
+	project: Project;
+};
+
+const { project } = Astro.props;
+---
+
+<BaseLayout title={project.title} description={project.summary}>
+	<ProjectCaseStudy project={project} />
+</BaseLayout>

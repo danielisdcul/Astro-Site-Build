@@ -1,0 +1,32 @@
+---
+import { site } from '../data/site.ts';
+
+const currentPath = Astro.url.pathname;
+const isCurrentLink = (href: string) =>
+	currentPath === href ||
+	(href === '/work/' && currentPath.startsWith('/projects/'));
+---
+
+<header class="site-header">
+	<div class="shell header-inner">
+		<a class="wordmark" href="/" aria-label={`${site.brand} home`}>
+			{site.brand}.
+		</a>
+		<nav aria-label="Primary navigation">
+			<ul class="site-nav list-reset">
+				{
+					site.navigation.map((link) => (
+						<li>
+							<a
+								href={link.href}
+								aria-current={isCurrentLink(link.href) ? 'page' : undefined}
+							>
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</header>
