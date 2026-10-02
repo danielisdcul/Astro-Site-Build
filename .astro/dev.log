@@ -1,0 +1,8 @@
+{"message":"connected.","label":"vite","level":"info"}
+{"message":"Generated 0ms","label":"types","level":"info"}
+{"message":"connected.","label":"vite","level":"info"}
+{"message":"Re-optimizing dependencies because vite config has changed","label":"vite","level":"info"}
+{"message":"Port 4325 is in use, trying another one...","label":"vite","level":"info"}
+{"message":" astro  v7.3.2 ready in 999 ms\n┃ Local    http://localhost:4326/Astro-Site-Build/\n┃ Network  use --host to expose","label":"SKIP_FORMAT","level":"info"}
+{"message":"watching for file changes...","label":null,"level":"info"}
+{"message":"[200] / 20ms","label":null,"level":"info"}

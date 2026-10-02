@@ -543,8 +543,8 @@ img {
   display: grid;
   grid-template-columns: minmax(0, 736px) minmax(320px, 520px);
   gap: var(--space-24);
-  height: 680px;
-  padding: var(--space-120) 0 var(--space-96);
+  height: auto;
+  padding: var(--space-120) 0 0;
 }
 
 .hero__copy {
@@ -598,7 +598,7 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--space-64);
-  padding: var(--space-120) 0;
+  padding: var(--space-120) 0 0;
 }
 
 .section-heading {
@@ -742,8 +742,8 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--space-64);
-  min-height: 988px;
-  padding: var(--space-120) 0;
+  min-height: 0;
+  padding: var(--space-120) 0 0;
 }
 
 .disciplines__intro {
