@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../data/projects/types.ts';
+import { withBase } from '../utils/paths.ts';
 
 type Props = {
 	project: Project;
@@ -43,7 +44,7 @@ const { project } = Astro.props;
 				project.cardImages.map((image, index) => (
 					<div class="case-study__media">
 						<img
-							src={image}
+							src={withBase(image)}
 							alt={`${project.title} project image ${index + 1}`}
 							loading={index === 0 ? 'eager' : 'lazy'}
 							decoding="async"
@@ -108,6 +109,6 @@ const { project } = Astro.props;
 	</div>
 
 	<div class="shell case-study__next">
-		<a href="/">← Back to selected work</a>
+		<a href={withBase('/')}>← Back to selected work</a>
 	</div>
 </article>

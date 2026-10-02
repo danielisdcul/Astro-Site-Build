@@ -2,6 +2,7 @@
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { site } from '../data/site.ts';
+import { withBase } from '../utils/paths.ts';
 import '../styles/global.css';
 
 type Props = {
@@ -26,8 +27,8 @@ const pageTitle = title
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta name="twitter:card" content="summary" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+		<link rel="icon" href={withBase('/favicon.ico')} />
 		<title>{pageTitle}</title>
 	</head>
 	<body>
