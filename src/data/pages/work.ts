@@ -6,7 +6,7 @@ export const work = {
 			'Explore branding, editorial, web design, and user experience projects by Daniel Culley.',
 	},
 	eyebrow: 'Work',
-	title: 'More work, made with care.',
+	title: 'More of my work',
 	intro:
 		'A broader collection of identity, editorial, web, and user experience projects shaped by thoughtful problem-solving and attention to detail.',
 };

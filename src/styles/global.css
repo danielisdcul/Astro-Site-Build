@@ -56,7 +56,7 @@
    -------------------------------------------------------------------------- */
 @font-face {
   font-family: 'Momo Trust Display';
-  src: url('/fonts/momo-trust-display-400.ttf') format('truetype');
+  src: url('../assets/fonts/momo-trust-display-400.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -64,7 +64,7 @@
 
 @font-face {
   font-family: 'Plus Jakarta Sans';
-  src: url('/fonts/plus-jakarta-sans-400.ttf') format('truetype');
+  src: url('../assets/fonts/plus-jakarta-sans-400.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -72,7 +72,7 @@
 
 @font-face {
   font-family: 'Manrope';
-  src: url('/fonts/manrope-500.ttf') format('truetype');
+  src: url('../assets/fonts/manrope-500.ttf') format('truetype');
   font-style: normal;
   font-weight: 500;
   font-display: swap;
@@ -80,7 +80,7 @@
 
 @font-face {
   font-family: 'Manrope';
-  src: url('/fonts/manrope-600.ttf') format('truetype');
+  src: url('../assets/fonts/manrope-600.ttf') format('truetype');
   font-style: normal;
   font-weight: 600;
   font-display: swap;
