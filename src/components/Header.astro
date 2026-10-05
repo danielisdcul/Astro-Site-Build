@@ -56,6 +56,73 @@ const isCurrentLink = (href: string) =>
 		header.classList.add('has-mobile-menu');
 		const handedness = header.querySelector<HTMLButtonElement>('.nav-handedness')!;
 		const cornerOpen = header.querySelector<HTMLButtonElement>('.nav-corner-open')!;
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		let driftAnimation: Animation | undefined;
+		let driftTimer: number | undefined;
+		let tiltAvailable = false;
+		let tiltOrigin: { beta: number; gamma: number; angle: number } | null = null;
+		let tiltFrame = 0;
+		let tiltX = 0;
+		let tiltY = 0;
+		const stopDrift = () => {
+			window.clearTimeout(driftTimer);
+			driftAnimation?.cancel();
+			cancelAnimationFrame(tiltFrame);
+			tiltFrame = 0;
+			tiltOrigin = null;
+			tiltX = 0;
+			tiltY = 0;
+			handedness.style.transform = '';
+		};
+		const startDrift = () => {
+			stopDrift();
+			if (tiltAvailable || reducedMotion.matches || !header.classList.contains('is-menu-open') || header.classList.contains('is-switching-hands') || document.activeElement === handedness || handedness.matches(':hover')) return;
+			const drift = () => {
+				const x = (Math.random() - 0.5) * 10;
+				const y = (Math.random() - 0.5) * 10;
+				const duration = 3500 + Math.random() * 2000;
+				driftAnimation = handedness.animate([
+					{ transform: 'translate(0, 0)' },
+					{ transform: `translate(${x}px, ${y}px)` },
+					{ transform: 'translate(0, 0)' },
+				], { duration, easing: 'ease-in-out' });
+				driftTimer = window.setTimeout(drift, duration + 1500 + Math.random() * 2000);
+			};
+			driftTimer = window.setTimeout(drift, 1500);
+		};
+		const handleTilt = (event: DeviceOrientationEvent) => {
+			if (event.beta === null || event.gamma === null || !Number.isFinite(event.beta) || !Number.isFinite(event.gamma)) return;
+			if (!tiltAvailable) { stopDrift(); tiltAvailable = true; }
+			if (reducedMotion.matches || document.hidden || !header.classList.contains('is-menu-open') || header.classList.contains('is-switching-hands') || document.activeElement === handedness || handedness.matches(':hover')) return;
+			const angle = screen.orientation?.angle ?? Number((window as Window & { orientation?: number }).orientation ?? 0);
+			if (!tiltOrigin || tiltOrigin.angle !== angle) tiltOrigin = { beta: event.beta, gamma: event.gamma, angle };
+			const radians = angle * Math.PI / 180;
+			const dx = event.gamma - tiltOrigin.gamma;
+			const dy = event.beta - tiltOrigin.beta;
+			const clamp = (value: number) => Math.max(-5, Math.min(5, value));
+			tiltX += (clamp(-(dx * Math.cos(radians) + dy * Math.sin(radians)) * 0.25) - tiltX) * 0.15;
+			tiltY += (clamp(-(dy * Math.cos(radians) - dx * Math.sin(radians)) * 0.25) - tiltY) * 0.15;
+			if (!tiltFrame) tiltFrame = requestAnimationFrame(() => {
+				handedness.style.transform = `translate(${tiltX}px, ${tiltY}px)`;
+				tiltFrame = 0;
+			});
+		};
+		let sensorListening = false;
+		const listenForTilt = () => {
+			if (!sensorListening) {
+				window.addEventListener('deviceorientation', handleTilt, { passive: true });
+				sensorListening = true;
+			}
+		};
+		const orientationAPI = window.DeviceOrientationEvent as typeof DeviceOrientationEvent & { requestPermission?: () => Promise<string> };
+		// Use the random float rather than prompting for sensor access.
+		if (orientationAPI && !orientationAPI.requestPermission && window.isSecureContext) listenForTilt();
+		handedness.addEventListener('pointerenter', stopDrift);
+		handedness.addEventListener('pointerdown', stopDrift);
+		handedness.addEventListener('focus', stopDrift);
+		handedness.addEventListener('pointerleave', startDrift);
+		handedness.addEventListener('blur', startDrift);
+		reducedMotion.addEventListener('change', startDrift);
 		let isLefty = false;
 		try { isLefty = localStorage.getItem('isLefty') === 'true'; } catch {}
 		const applyHandedness = () => {
@@ -70,6 +137,14 @@ const isCurrentLink = (href: string) =>
 		updateHandednessLabel();
 		handedness.addEventListener('click', () => {
 			if (handedness.getAttribute('aria-disabled') === 'true') return;
+			if (!reducedMotion.matches) {
+				handedness.animate([
+					{ boxShadow: '0 0 0 0 rgb(255 255 255 / 0)' },
+					{ boxShadow: '0 0 16px 5px rgb(255 255 255 / 35%)', offset: 0.25 },
+					{ boxShadow: '0 0 22px 8px rgb(255 255 255 / 0)' },
+				], { duration: 400, easing: 'ease-out' });
+			}
+			stopDrift();
 			// Keep focus on the toggle while moving; disabling it triggers focusout.
 			handedness.setAttribute('aria-disabled', 'true');
 			header.classList.add('is-switching-hands');
@@ -80,7 +155,8 @@ const isCurrentLink = (href: string) =>
 				updateHandednessLabel();
 				header.classList.remove('is-switching-hands');
 				handedness.removeAttribute('aria-disabled');
-			}, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 640);
+				startDrift();
+			}, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 720);
 		});
 		const setOpen = (open: boolean) => {
 			cornerOpen.setAttribute('aria-expanded', String(open));
@@ -90,6 +166,7 @@ const isCurrentLink = (href: string) =>
 			header.classList.toggle('is-menu-open', open);
 			document.documentElement.classList.toggle('is-mobile-menu-open', open);
 			for (const content of document.querySelectorAll<HTMLElement>('main, .site-footer')) content.inert = open;
+			if (open) startDrift(); else stopDrift();
 		};
 		cornerOpen.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
 		navigation.querySelector('.nav-corner-close')?.addEventListener('click', () => {

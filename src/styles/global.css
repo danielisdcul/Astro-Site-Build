@@ -561,7 +561,9 @@ img {
     position: fixed;
     left: calc(100% - 52px - max(16px, env(safe-area-inset-right)));
     right: auto;
-    bottom: max(16px, env(safe-area-inset-bottom));
+    top: calc(50dvh - 26px);
+    bottom: auto;
+    touch-action: manipulation;
     z-index: 3;
     display: grid;
     place-items: center;
@@ -575,7 +577,7 @@ img {
     font-size: 24px;
     cursor: pointer;
     isolation: isolate;
-    transition: left 640ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease, border-color 160ms ease;
+    transition: left 720ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease, border-color 160ms ease;
   }
 
   .nav-corner-open::before,
@@ -717,46 +719,46 @@ img {
   }
 
   .has-mobile-menu #primary-navigation {
-    --thumb-menu-size: min(94vw, 420px, 78dvh);
+    --thumb-menu-size: min(80vw, 400px, 44dvh);
     position: fixed;
-    top: auto;
+    top: calc(50dvh - var(--thumb-menu-size));
     left: calc(100% - var(--thumb-menu-size));
     right: auto;
-    bottom: 0;
+    bottom: auto;
     --menu-origin: 100%;
     width: var(--thumb-menu-size);
-    height: var(--thumb-menu-size);
-    border-radius: 100% 0 0 0;
+    height: calc(var(--thumb-menu-size) * 2);
+    border-radius: 100% 0 0 100% / 50% 0 0 50%;
     border: 1px solid rgb(255 255 255 / 10%);
     background:
       radial-gradient(ellipse at var(--menu-origin) 12%, rgb(255 255 255 / 24%), transparent 48%),
-      radial-gradient(circle at var(--menu-origin) 100%, rgb(247 245 239 / 40%) 0%, rgb(247 245 239 / 30%) 48%, rgb(247 245 239 / 3%) 78%, transparent 100%);
+      radial-gradient(circle at var(--menu-origin) 50%, rgb(247 245 239 / 40%) 0%, rgb(247 245 239 / 30%) 48%, rgb(247 245 239 / 3%) 78%, transparent 100%);
     backdrop-filter: blur(16px) saturate(150%);
     -webkit-backdrop-filter: blur(16px) saturate(150%);
-    mask-image: radial-gradient(circle at var(--menu-origin) 100%, #000 0%, #000 68%, rgb(0 0 0 / 8%) 92%, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle at var(--menu-origin) 100%, #000 0%, #000 68%, rgb(0 0 0 / 8%) 92%, transparent 100%);
+    mask-image: radial-gradient(circle at var(--menu-origin) 50%, #000 0%, #000 68%, rgb(0 0 0 / 8%) 92%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at var(--menu-origin) 50%, #000 0%, #000 68%, rgb(0 0 0 / 8%) 92%, transparent 100%);
     box-shadow: inset 2px 3px 8px rgb(255 255 255 / 30%), inset -3px -3px 10px rgb(23 34 30 / 8%), 0 3px 16px rgb(23 34 30 / 5%);
     visibility: hidden;
     opacity: 0;
-    clip-path: circle(0% at var(--menu-origin) 100%);
-    transition: clip-path 640ms cubic-bezier(0.16, 1, 0.3, 1), opacity 640ms cubic-bezier(0.16, 1, 0.3, 1), visibility 640ms, left 640ms cubic-bezier(0.16, 1, 0.3, 1), border-radius 640ms ease;
+    clip-path: circle(0% at var(--menu-origin) 50%);
+    transition: clip-path 720ms cubic-bezier(0.16, 1, 0.3, 1), opacity 720ms cubic-bezier(0.16, 1, 0.3, 1), visibility 720ms, left 720ms cubic-bezier(0.16, 1, 0.3, 1), border-radius 720ms ease;
   }
 
   .has-mobile-menu.is-menu-open #primary-navigation {
     visibility: visible;
     opacity: 1;
-    clip-path: circle(145% at var(--menu-origin) 100%);
+    clip-path: circle(145% at var(--menu-origin) 50%);
   }
 
   .has-mobile-menu #primary-navigation .site-nav {
     position: absolute;
-    top: auto;
-    left: calc(100% - max(24px, env(safe-area-inset-right)));
+    top: 50%;
+    left: calc(100% - max(88px, env(safe-area-inset-right)));
     right: auto;
     width: max-content;
-    transform: translateX(-100%);
-    transition: left 640ms cubic-bezier(0.16, 1, 0.3, 1), transform 640ms cubic-bezier(0.16, 1, 0.3, 1);
-    bottom: max(84px, calc(env(safe-area-inset-bottom) + 68px));
+    transform: translate(-100%, -50%);
+    transition: left 720ms cubic-bezier(0.16, 1, 0.3, 1), transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
+    bottom: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -809,13 +811,13 @@ img {
   .has-mobile-menu.is-lefty #primary-navigation {
     left: 0;
     --menu-origin: 0%;
-    border-radius: 0 100% 0 0;
+    border-radius: 0 100% 100% 0 / 0 50% 50% 0;
   }
 
   .has-mobile-menu.is-lefty #primary-navigation .site-nav {
     right: auto;
-    left: max(24px, env(safe-area-inset-left));
-    transform: translateX(0);
+    left: max(88px, env(safe-area-inset-left));
+    transform: translate(0, -50%);
     align-items: flex-start;
   }
 
@@ -830,19 +832,21 @@ img {
   }
 
   .has-mobile-menu .nav-handedness {
-    --thumb-menu-size: min(94vw, 420px, 78dvh);
+    --thumb-menu-size: min(80vw, 400px, 44dvh);
     position: fixed;
-    left: calc(100% - var(--thumb-menu-size) + 24px);
-    bottom: max(16px, env(safe-area-inset-bottom));
+    left: max(16px, env(safe-area-inset-left));
+    top: calc(50dvh + var(--thumb-menu-size) - 52px);
+    bottom: auto;
     z-index: 3;
     display: grid;
     place-items: center;
     width: 52px;
     height: 52px;
     padding: 4px;
-    border: 1px solid rgb(255 255 255 / 65%);
+    border: 1px solid rgb(255 255 255 / 80%);
     border-radius: 50%;
-    background: transparent;
+    background: rgb(247 245 239 / 25%);
+    isolation: isolate;
     color: var(--ink);
     font: inherit;
     font-size: 10px;
@@ -851,7 +855,32 @@ img {
     cursor: pointer;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 160ms ease, visibility 640ms;
+    transition: opacity 160ms ease, visibility 720ms;
+  }
+
+  .nav-handedness::before,
+  .nav-handedness::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 50%;
+  }
+
+  .nav-handedness::before {
+    inset: -10px;
+    backdrop-filter: blur(10px) saturate(135%);
+    -webkit-backdrop-filter: blur(10px) saturate(135%);
+    mask-image: radial-gradient(circle, #000 35%, transparent 72%);
+    -webkit-mask-image: radial-gradient(circle, #000 35%, transparent 72%);
+  }
+
+  .nav-handedness::after {
+    inset: 0;
+    backdrop-filter: blur(3px) saturate(160%);
+    -webkit-backdrop-filter: blur(3px) saturate(160%);
+    background: radial-gradient(ellipse at 22% 16%, rgb(255 255 255 / 60%), transparent 48%);
+    box-shadow: inset 1px 2px 3px rgb(255 255 255 / 65%), inset -2px -2px 4px rgb(23 34 30 / 14%), 0 3px 12px rgb(23 34 30 / 8%);
   }
 
   .is-menu-open .nav-handedness {
@@ -859,14 +888,17 @@ img {
     opacity: 1;
   }
 
+  .nav-handedness:active {
+    box-shadow: 0 0 16px 5px rgb(255 255 255 / 35%);
+  }
+
   .nav-handedness.is-lefty-position {
-    left: calc(var(--thumb-menu-size) - 76px);
+    left: calc(100% - 52px - max(16px, env(safe-area-inset-right)));
   }
 
   .is-switching-hands .nav-handedness {
     opacity: 0;
     pointer-events: none;
-    transition: none;
   }
 
   .home-section-label:not([hidden]) {
