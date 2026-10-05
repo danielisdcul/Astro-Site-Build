@@ -1,6 +1,7 @@
 ---
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import SectionTracker from '../components/SectionTracker.astro';
 import { site } from '../data/site.ts';
 import { withBase } from '../utils/paths.ts';
 import '../styles/global.css';
@@ -37,6 +38,7 @@ const pageTitle = title
 		<main id="main-content">
 			<slot />
 		</main>
+		<SectionTracker />
 		<Footer />
 	</body>
 </html>

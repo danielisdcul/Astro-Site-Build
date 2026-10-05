@@ -13,7 +13,10 @@ const isCurrentLink = (href: string) =>
 		<a class="wordmark" href={withBase('/')} aria-label={`${site.brand} home`}>
 			{site.brand}.
 		</a>
-		<nav aria-label="Primary navigation">
+		<button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+			<span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+		</button>
+		<nav id="primary-navigation" aria-label="Primary navigation">
 			<ul class="site-nav list-reset">
 				{
 					site.navigation.map((link) => (
@@ -28,14 +31,114 @@ const isCurrentLink = (href: string) =>
 					))
 				}
 			</ul>
+			<button class="nav-corner-close" type="button" aria-label="Close menu">
+				<span aria-hidden="true">×</span>
+			</button>
 		</nav>
 		<div class="scroll-progress" aria-hidden="true">
 			<div class="scroll-progress__fill"></div>
 		</div>
 	</div>
+	<button class="nav-handedness" type="button" aria-pressed="false"><span>I'm Left Handed</span></button>
 </header>
 
 <script>
+	const header = document.querySelector<HTMLElement>('.site-header');
+	const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+	const navigation = document.querySelector<HTMLElement>('#primary-navigation');
+	if (header && toggle && navigation) {
+		header.classList.add('has-mobile-menu');
+		const handedness = header.querySelector<HTMLButtonElement>('.nav-handedness')!;
+		let isLefty = false;
+		try { isLefty = localStorage.getItem('isLefty') === 'true'; } catch {}
+		const applyHandedness = () => {
+			header.classList.toggle('is-lefty', isLefty);
+			handedness.setAttribute('aria-pressed', String(isLefty));
+		};
+		const updateHandednessLabel = () => {
+			handedness.classList.toggle('is-lefty-position', isLefty);
+			handedness.querySelector('span')!.textContent = isLefty ? "I'm Right Handed" : "I'm Left Handed";
+		};
+		applyHandedness();
+		updateHandednessLabel();
+		handedness.addEventListener('click', () => {
+			if (handedness.getAttribute('aria-disabled') === 'true') return;
+			// Keep focus on the toggle while moving; disabling it triggers focusout.
+			handedness.setAttribute('aria-disabled', 'true');
+			header.classList.add('is-switching-hands');
+			isLefty = !isLefty;
+			applyHandedness();
+			try { localStorage.setItem('isLefty', String(isLefty)); } catch {}
+			window.setTimeout(() => {
+				updateHandednessLabel();
+				header.classList.remove('is-switching-hands');
+				handedness.removeAttribute('aria-disabled');
+			}, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 640);
+		});
+		const setOpen = (open: boolean) => {
+			toggle.setAttribute('aria-expanded', String(open));
+			toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+			header.classList.toggle('is-menu-open', open);
+			document.documentElement.classList.toggle('is-mobile-menu-open', open);
+			for (const content of document.querySelectorAll<HTMLElement>('main, .site-footer')) content.inert = open;
+		};
+		navigation.querySelector('.nav-corner-close')?.addEventListener('click', () => {
+			setOpen(false);
+			toggle.focus();
+		});
+		toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+		navigation.addEventListener('click', (event) => {
+			if ((event.target as Element).closest('a')) setOpen(false);
+		});
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Tab' && toggle.getAttribute('aria-expanded') === 'true') {
+				const controls = [toggle, ...navigation.querySelectorAll<HTMLElement>('a, button'), handedness];
+				const first = controls[0];
+				const last = controls[controls.length - 1];
+				if (event.shiftKey && document.activeElement === first) {
+					event.preventDefault(); last.focus();
+				} else if (!event.shiftKey && document.activeElement === last) {
+					event.preventDefault(); first.focus();
+				}
+			}
+			if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+				setOpen(false);
+				toggle.focus();
+			}
+		});
+		document.addEventListener('click', (event) => {
+			const target = event.target as Node;
+			if (!navigation.contains(target) && !toggle.contains(target) && !handedness.contains(target)) setOpen(false);
+		});
+		// Capture outside taps even when the page content is inert while open.
+		document.addEventListener('pointerdown', (event) => {
+			const target = event.target as Node;
+			if (!navigation.contains(target) && !toggle.contains(target) && !handedness.contains(target)) setOpen(false);
+		}, { passive: true });
+		document.addEventListener('wheel', () => setOpen(false), { passive: true });
+		let touchStart: { x: number; y: number } | null = null;
+		document.addEventListener('touchstart', (event) => {
+			const touch = event.touches[0];
+			touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+		}, { passive: true });
+		document.addEventListener('touchmove', (event) => {
+			const touch = event.touches[0];
+			if (touch && touchStart && Math.hypot(touch.clientX - touchStart.x, touch.clientY - touchStart.y) > 10) {
+				setOpen(false);
+				touchStart = null;
+			}
+		}, { passive: true });
+		document.addEventListener('touchend', () => { touchStart = null; }, { passive: true });
+		document.addEventListener('touchcancel', () => { touchStart = null; }, { passive: true });
+		window.addEventListener('scroll', () => {
+			if (toggle.getAttribute('aria-expanded') === 'true') setOpen(false);
+		}, { passive: true });
+		header.addEventListener('focusout', (event) => {
+			if (!header.contains(event.relatedTarget as Node)) setOpen(false);
+		});
+		window.matchMedia('(max-width: 800px)').addEventListener('change', () => setOpen(false));
+	}
+
 	const progress = document.querySelector<HTMLElement>('.scroll-progress__fill');
 	if (progress) {
 		let framePending = false;
