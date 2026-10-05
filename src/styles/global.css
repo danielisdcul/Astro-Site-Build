@@ -561,7 +561,7 @@ img {
     position: fixed;
     left: calc(100% - 52px - max(16px, env(safe-area-inset-right)));
     right: auto;
-    top: calc(50svh - 26px);
+    top: calc((89px + (100svh - 89px) / 2) - 26px);
     bottom: auto;
     touch-action: manipulation;
     z-index: 3;
@@ -719,9 +719,9 @@ img {
   }
 
   .has-mobile-menu #primary-navigation {
-    --thumb-menu-size: min(80vw, 400px, 44svh);
+    --thumb-menu-size: min(80vw, 400px, calc((100svh - 89px) * 0.44));
     position: fixed;
-    top: calc(50svh - var(--thumb-menu-size));
+    top: calc((89px + (100svh - 89px) / 2) - var(--thumb-menu-size));
     left: calc(100% - var(--thumb-menu-size));
     right: auto;
     bottom: auto;
@@ -832,10 +832,10 @@ img {
   }
 
   .has-mobile-menu .nav-handedness {
-    --thumb-menu-size: min(80vw, 400px, 44svh);
+    --thumb-menu-size: min(80vw, 400px, calc((100svh - 89px) * 0.44));
     position: fixed;
     left: max(16px, env(safe-area-inset-left));
-    top: calc(50svh - 26px);
+    top: calc((89px + (100svh - 89px) / 2) - 26px);
     bottom: auto;
     z-index: 3;
     display: grid;
