@@ -18,6 +18,9 @@ const isCurrentLink = (href: string) =>
 		</button>
 		<nav id="primary-navigation" aria-label="Primary navigation">
 			<ul class="site-nav list-reset">
+				<li class="mobile-home-link">
+					<a href={withBase('/')} aria-current={currentPath === '/' ? 'page' : undefined}>Home</a>
+				</li>
 				{
 					site.navigation.map((link) => (
 						<li>
@@ -39,6 +42,9 @@ const isCurrentLink = (href: string) =>
 			<div class="scroll-progress__fill"></div>
 		</div>
 	</div>
+	<button class="nav-corner-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+		<span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span><span></span><i class="nav-toggle__close-mark">×</i></span>
+	</button>
 	<button class="nav-handedness" type="button" aria-pressed="false"><span>I'm Left Handed</span></button>
 </header>
 
@@ -49,6 +55,7 @@ const isCurrentLink = (href: string) =>
 	if (header && toggle && navigation) {
 		header.classList.add('has-mobile-menu');
 		const handedness = header.querySelector<HTMLButtonElement>('.nav-handedness')!;
+		const cornerOpen = header.querySelector<HTMLButtonElement>('.nav-corner-open')!;
 		let isLefty = false;
 		try { isLefty = localStorage.getItem('isLefty') === 'true'; } catch {}
 		const applyHandedness = () => {
@@ -76,12 +83,15 @@ const isCurrentLink = (href: string) =>
 			}, window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 640);
 		});
 		const setOpen = (open: boolean) => {
+			cornerOpen.setAttribute('aria-expanded', String(open));
+			cornerOpen.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 			toggle.setAttribute('aria-expanded', String(open));
 			toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
 			header.classList.toggle('is-menu-open', open);
 			document.documentElement.classList.toggle('is-mobile-menu-open', open);
 			for (const content of document.querySelectorAll<HTMLElement>('main, .site-footer')) content.inert = open;
 		};
+		cornerOpen.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
 		navigation.querySelector('.nav-corner-close')?.addEventListener('click', () => {
 			setOpen(false);
 			toggle.focus();
@@ -92,7 +102,7 @@ const isCurrentLink = (href: string) =>
 		});
 		document.addEventListener('keydown', (event) => {
 			if (event.key === 'Tab' && toggle.getAttribute('aria-expanded') === 'true') {
-				const controls = [toggle, ...navigation.querySelectorAll<HTMLElement>('a, button'), handedness];
+				const controls = [toggle, ...navigation.querySelectorAll<HTMLElement>('a'), cornerOpen, handedness];
 				const first = controls[0];
 				const last = controls[controls.length - 1];
 				if (event.shiftKey && document.activeElement === first) {
@@ -108,12 +118,12 @@ const isCurrentLink = (href: string) =>
 		});
 		document.addEventListener('click', (event) => {
 			const target = event.target as Node;
-			if (!navigation.contains(target) && !toggle.contains(target) && !handedness.contains(target)) setOpen(false);
+			if (!navigation.contains(target) && !toggle.contains(target) && !handedness.contains(target) && !cornerOpen.contains(target)) setOpen(false);
 		});
 		// Capture outside taps even when the page content is inert while open.
 		document.addEventListener('pointerdown', (event) => {
 			const target = event.target as Node;
-			if (!navigation.contains(target) && !toggle.contains(target) && !handedness.contains(target)) setOpen(false);
+			if (!navigation.contains(target) && !toggle.contains(target) && !handedness.contains(target) && !cornerOpen.contains(target)) setOpen(false);
 		}, { passive: true });
 		document.addEventListener('wheel', () => setOpen(false), { passive: true });
 		let touchStart: { x: number; y: number } | null = null;
