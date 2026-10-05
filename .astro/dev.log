@@ -233,3 +233,6 @@
 {"message":"[200] / 20ms","label":null,"level":"info"}
 {"message":"[200] / 20ms","label":null,"level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /about/ 20ms","label":null,"level":"info"}
+{"message":"[200] /contact/ 13ms","label":null,"level":"info"}
+{"message":"[200] /about/ 10ms","label":null,"level":"info"}
