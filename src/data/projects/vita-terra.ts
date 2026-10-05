@@ -8,8 +8,8 @@ export const vitaTerra: Project = {
 	galleryLayout: 'wide-top',
 	type: 'Standard case study',
 	cardTitle: 'Vita',
-	cardSummary: 'A sustainable clothing brand identity built around transparency, ethical production, and quality craftsmanship. The project explores how thoughtful branding and a clear labeling system can communicate Vita Terra’s commitment to renewable materials, fair production, and creating high-quality apparel that benefits both people and the planet.',
-	cardLabel: '02 / Brand identity + Campaign',
+	cardSummary: 'A sustainable clothing brand identity shaped around transparency, ethical production, and thoughtful craftsmanship.',
+	cardLabel: '02 / Brand Identity + Campaign',
 	cardMeta: 'Brand strategy · Identity · Campaign',
 	cardImages: [
 		'/images/portfolio/vita-sign.png',

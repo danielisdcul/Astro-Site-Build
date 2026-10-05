@@ -117,11 +117,16 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--paper);
 }
 
@@ -495,7 +500,11 @@ img {
 /* 2.3 Header & Primary Navigation
    -------------------------------------------------------------------------- */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   height: 89px;
+  background: var(--paper);
 }
 
 .header-inner,
@@ -507,8 +516,22 @@ img {
 }
 
 .header-inner {
+  position: relative;
   height: 89px;
   border-bottom: 1px solid var(--line);
+}
+
+.scroll-progress {
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  pointer-events: none;
+}
+
+.scroll-progress__fill {
+  width: 0;
+  height: 100%;
+  background: var(--accent);
 }
 
 .wordmark {
@@ -544,13 +567,13 @@ img {
   grid-template-columns: minmax(0, 736px) minmax(320px, 520px);
   gap: var(--space-24);
   height: auto;
-  padding: var(--space-120) 0 0;
+  padding: var(--space-64) 0 0;
 }
 
 .hero__copy {
   display: flex;
   min-width: 0;
-  height: 464px;
+  height: auto;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -563,9 +586,58 @@ img {
   margin: 0 0 var(--space-24);
 }
 
+.hero__title {
+  display: inline-block;
+  min-height: 1.1em;
+  margin: 0 0 var(--space-24);
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.hero h1 {
+  margin-bottom: var(--space-48);
+}
+
+.hero__title.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.hero__title.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 0.08em;
+  height: 0.9em;
+  margin-left: 0.08em;
+  background: var(--ink);
+  vertical-align: text-bottom;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+.hero__intro,
+.hero__link {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+
 .hero__intro {
   max-width: 600px;
   margin: 0;
+}
+
+.hero__intro.is-visible,
+.hero__link.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero__intro.is-hidden,
+.hero__link.is-hidden {
+  opacity: 0;
+  transform: translateY(12px);
 }
 
 .hero__footer {
@@ -589,16 +661,29 @@ img {
 .hero__portrait {
   width: 100%;
   aspect-ratio: 1;
+  border-radius: 50%;
   object-fit: cover;
 }
 
 /* 3.2 Project Listing & Section Heading
    -------------------------------------------------------------------------- */
+[data-scroll-reveal] {
+  transition: opacity 280ms ease-out;
+}
+
+[data-scroll-reveal].is-reveal-pending {
+  opacity: 0;
+}
+
 .projects {
   display: flex;
   flex-direction: column;
   gap: var(--space-64);
   padding: var(--space-120) 0 0;
+}
+
+.projects > .section-heading {
+  margin-bottom: calc(80px - var(--space-64));
 }
 
 .section-heading {
@@ -833,7 +918,7 @@ img {
    -------------------------------------------------------------------------- */
 .page-intro {
   min-height: calc(100vh - 193px);
-  padding: var(--space-120) 0;
+  padding: var(--space-64) 0 var(--space-120);
 }
 
 .page-intro > .eyebrow,
@@ -853,7 +938,7 @@ img {
 /* 4.2 Work Page
    -------------------------------------------------------------------------- */
 .work-page {
-  padding: var(--space-120) 0;
+  padding: var(--space-64) 0 var(--space-120);
 }
 
 .work-page__intro {
@@ -1205,6 +1290,18 @@ img {
    6. ACCESSIBILITY
    ========================================================================== */
 
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
 /* 6.1 Reduced Motion
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
@@ -1216,6 +1313,20 @@ img {
   *::before,
   *::after {
     scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .hero__title,
+  .hero__intro,
+  .hero__link,
+  [data-scroll-reveal].is-reveal-pending {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__title::after {
+    display: none;
   }
 }

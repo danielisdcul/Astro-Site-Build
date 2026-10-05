@@ -29,5 +29,32 @@ const isCurrentLink = (href: string) =>
 				}
 			</ul>
 		</nav>
+		<div class="scroll-progress" aria-hidden="true">
+			<div class="scroll-progress__fill"></div>
+		</div>
 	</div>
 </header>
+
+<script>
+	const progress = document.querySelector<HTMLElement>('.scroll-progress__fill');
+	if (progress) {
+		let framePending = false;
+		const updateProgress = () => {
+			const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+			const fraction = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+			progress.style.width = `${Math.max(0, Math.min(1, fraction)) * 100}%`;
+			framePending = false;
+		};
+		const scheduleUpdate = () => {
+			if (!framePending) {
+				framePending = true;
+				requestAnimationFrame(updateProgress);
+			}
+		};
+		window.addEventListener('scroll', scheduleUpdate, { passive: true });
+		window.addEventListener('resize', scheduleUpdate);
+		window.addEventListener('pageshow', scheduleUpdate);
+		new ResizeObserver(scheduleUpdate).observe(document.body);
+		updateProgress();
+	}
+</script>

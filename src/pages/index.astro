@@ -12,14 +12,14 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 ---
 
 <BaseLayout description={home.intro}>
-	<section class="shell hero">
+	<section class="shell hero" data-scroll-reveal>
 		<div class="hero__copy">
 			<div>
-				<h1>{home.title}</h1>
+				<h1 class="hero__title" data-typed-text={home.title}>{home.title}</h1>
 				<p class="hero__intro">{home.intro}</p>
 			</div>
 			<div class="hero__footer">
-				<a class="text-link" href={withBase(home.aboutLink.href)}>
+				<a class="text-link hero__link" href={withBase(home.aboutLink.href)}>
 					{home.aboutLink.label} <span class="link-arrow" aria-hidden="true">→</span>
 				</a>
 				<p class="meta-list">
@@ -36,7 +36,47 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 		/>
 	</section>
 
-	<section class="shell projects" aria-labelledby="selected-work">
+	<script is:inline>
+		const heroTitle = document.querySelector('.hero__title');
+		const heroIntro = document.querySelector('.hero__intro');
+		const heroLink = document.querySelector('.hero__link');
+
+		if (heroTitle && heroIntro && heroLink && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			const fullText = heroTitle.dataset.typedText || heroTitle.textContent || '';
+			heroTitle.setAttribute('aria-label', fullText);
+			heroTitle.textContent = '';
+			heroTitle.classList.add('is-typing');
+			heroIntro.classList.add('is-hidden');
+			heroLink.classList.add('is-hidden');
+
+			const characters = Array.from(fullText);
+			let index = 0;
+
+			const typeTitle = () => {
+				if (index < characters.length) {
+					heroTitle.textContent = characters.slice(0, index + 1).join('');
+					index += 1;
+					setTimeout(typeTitle, 22);
+					return;
+				}
+
+				heroTitle.classList.remove('is-typing');
+				heroTitle.classList.add('is-visible');
+				setTimeout(() => {
+					heroIntro.classList.remove('is-hidden');
+					heroIntro.classList.add('is-visible');
+				}, 80);
+				setTimeout(() => {
+					heroLink.classList.remove('is-hidden');
+					heroLink.classList.add('is-visible');
+				}, 180);
+			};
+
+			typeTitle();
+		}
+	</script>
+
+	<section class="shell projects" aria-labelledby="selected-work" data-scroll-reveal>
 		<header class="section-heading">
 			<div>
 				<p class="eyebrow">{home.workLabel}</p>
@@ -50,7 +90,7 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 		</div>
 	</section>
 
-	<section class="shell disciplines" aria-labelledby="disciplines-heading">
+	<section class="shell disciplines" aria-labelledby="disciplines-heading" data-scroll-reveal>
 		<p class="eyebrow">{home.disciplinesLabel}</p>
 		<div class="disciplines__intro">
 			<h2 id="disciplines-heading">{home.disciplinesHeading}</h2>
@@ -69,7 +109,7 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 		</ol>
 	</section>
 
-	<section class="shell closing-callout">
+	<section class="shell closing-callout" data-scroll-reveal>
 		<div>
 			<p class="eyebrow">{home.calloutLabel}</p>
 			<h2>{home.calloutHeading}</h2>
@@ -81,4 +121,31 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 			<p>{home.availability}</p>
 		</div>
 	</section>
+
+	<script is:inline>
+		if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			// Reveal tall sections in smaller pieces so each part responds to scrolling.
+			for (const section of document.querySelectorAll('.projects[data-scroll-reveal], .disciplines[data-scroll-reveal]')) {
+				section.removeAttribute('data-scroll-reveal');
+				for (const child of section.children) {
+					if (child.matches('.project-grid, .disciplines__list')) {
+						for (const item of child.children) item.setAttribute('data-scroll-reveal', '');
+					} else {
+						child.setAttribute('data-scroll-reveal', '');
+					}
+				}
+			}
+
+			const observer = new IntersectionObserver((entries) => {
+				for (const entry of entries) {
+					entry.target.classList.toggle('is-reveal-pending', !entry.isIntersecting);
+				}
+			}, { threshold: 0, rootMargin: `0px 0px -${Math.round(window.innerHeight * 0.18)}px 0px` });
+
+			for (const section of document.querySelectorAll('[data-scroll-reveal]')) {
+				section.classList.add('is-reveal-pending');
+				observer.observe(section);
+			}
+		}
+	</script>
 </BaseLayout>

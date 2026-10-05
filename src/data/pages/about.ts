@@ -9,7 +9,7 @@ export const about = {
 	eyebrow: 'About',
 	title: 'Hi, I’m Daniel',
 	intro:
-		'I’m a multidisciplinary designer based in San Diego. I believe thoughtful design begins with curiosity, empathy, and a clear understanding of the people it serves. I value simplicity, honest communication, and purposeful decisions, creating work that is not only visually engaging but also useful, intuitive, and built to last.',
+		'I’m a multidisciplinary designer based in San Diego. I believe thoughtful design begins with curiosity, empathy, and a clear understanding of the people it serves. I value simplicity, honest communication, and purposeful decisions, creating work that is visually engaging, useful, intuitive, and built to last.',
 	sections: [
 		{
 			title: 'My Approach to Design',
@@ -28,7 +28,7 @@ export const about = {
 					year: 2026,
 				},
 				{
-					degree: 'Associate in Arts',
+					degree: 'Associate of Arts',
 					major: 'Web Development and Design',
 					concentration: null,
 					school: 'MiraCosta College',
@@ -36,7 +36,7 @@ export const about = {
 					year: 2022,
 				},
 				{
-					degree: 'Associate in Arts',
+					degree: 'Associate of Arts',
 					major: 'Communications',
 					concentration: null,
 					school: 'MiraCosta College',
@@ -44,7 +44,7 @@ export const about = {
 					year: 2023,
 				},
 				{
-					degree: 'Associate in Arts',
+					degree: 'Associate of Arts',
 					major: 'Liberal Arts',
 					concentration: 'Social and Behavioral Sciences',
 					school: 'MiraCosta College',

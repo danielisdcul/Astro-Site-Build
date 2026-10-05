@@ -14,9 +14,9 @@ export const home = {
 	},
 
 	// Selected work (the cards use data/projects/)
-	workLabel: '01 — Selected work',
-	workHeading: 'My selected work',
-	workIntro: 'A mix of identity, editorial, and UI/UX designed to make the next interaction feel more considered.',
+	workLabel: '01 — Selected Work',
+	workHeading: 'My Selected Work',
+	workIntro: 'A mix of identity, editorial, and UI/UX work designed to make each interaction feel more considered.',
 
 	// Disciplines
 	disciplinesLabel: '02 — Disciplines',
@@ -40,5 +40,5 @@ export const home = {
 	// Closing callout (the email address comes from site.ts)
 	calloutLabel: '03 — Start a conversation',
 	calloutHeading: 'Have an idea in mind? Let’s make something clear, useful, and memorable.',
-	availability: 'Available for freelance and open to long term opportunities.',
+	availability: 'Available for freelance work and open to long-term opportunities.',
 };
