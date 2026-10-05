@@ -1,0 +1,110 @@
+---
+import type { GalleryOptions } from '../data/gallery.ts';
+import { withBase } from '../utils/paths.ts';
+
+type Props = GalleryOptions & {
+	label?: string;
+	/** Load the first image eagerly when the gallery is near the top of a page. */
+	eager?: boolean;
+};
+
+const {
+	images,
+	layout = 'grid',
+	columns = 2,
+	lightbox = true,
+	label = 'Image gallery',
+	eager = false,
+} = Astro.props;
+---
+
+{images.length > 0 && (
+	<image-gallery class="gallery" role="group" aria-label={label}>
+		<div class:list={['gallery__grid', `gallery__grid--${layout}`]} style={`--gallery-columns: ${columns};`}>
+			{images.map((image, index) => (
+				<figure class="gallery__item">
+					{lightbox ? (
+						<a class="gallery__trigger" href={withBase(image.src)} aria-label={`View larger image: ${image.alt}`}>
+							<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" />
+						</a>
+					) : (
+						<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" />
+					)}
+					{image.caption && <figcaption class="gallery__caption">{image.caption}</figcaption>}
+				</figure>
+			))}
+		</div>
+		{lightbox && (
+			<dialog class="gallery__viewer" aria-label={`${label} image viewer`}>
+				<div class="gallery__viewer-content">
+					<div class="gallery__toolbar">
+						<p class="gallery__count" aria-live="polite" aria-atomic="true"></p>
+						<button class="gallery__control" type="button" data-gallery-close autofocus>Close <span aria-hidden="true">×</span></button>
+					</div>
+					<img class="gallery__full-image" src={withBase(images[0].src)} alt={images[0].alt} loading="lazy" decoding="async" />
+					<div class="gallery__viewer-footer">
+						<p class="gallery__viewer-caption"></p>
+						{images.length > 1 && (
+							<div class="gallery__navigation">
+								<button class="gallery__control" type="button" data-gallery-prev aria-label="Previous image">←</button>
+								<button class="gallery__control" type="button" data-gallery-next aria-label="Next image">→</button>
+							</div>
+						)}
+					</div>
+				</div>
+			</dialog>
+		)}
+	</image-gallery>
+)}
+
+<script>
+	class ImageGallery extends HTMLElement {
+		private initialized = false;
+
+		connectedCallback() {
+			if (this.initialized) return;
+			const dialog = this.querySelector<HTMLDialogElement>('dialog');
+			const fullImage = this.querySelector<HTMLImageElement>('.gallery__full-image');
+			const caption = this.querySelector<HTMLElement>('.gallery__viewer-caption');
+			const count = this.querySelector<HTMLElement>('.gallery__count');
+			const triggers = Array.from(this.querySelectorAll<HTMLAnchorElement>('.gallery__trigger'));
+			if (!dialog || !fullImage || !caption || !count || !triggers.length || !dialog.showModal) return;
+			this.initialized = true;
+			let activeIndex = 0;
+
+			const showImage = (index: number) => {
+				activeIndex = (index + triggers.length) % triggers.length;
+				const trigger = triggers[activeIndex];
+				const thumbnail = trigger.querySelector('img')!;
+				fullImage.src = trigger.href;
+				fullImage.alt = thumbnail.alt;
+				caption.textContent = trigger.closest('figure')?.querySelector('figcaption')?.textContent || thumbnail.alt;
+				count.textContent = `Image ${activeIndex + 1} of ${triggers.length}`;
+			};
+
+			triggers.forEach((trigger, index) => {
+				trigger.addEventListener('click', (event) => {
+					// Preserve normal browser actions such as opening an image in a new tab.
+					if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+					event.preventDefault();
+					showImage(index);
+					dialog.showModal();
+				});
+			});
+			this.querySelector('[data-gallery-close]')?.addEventListener('click', () => dialog.close());
+			this.querySelector('[data-gallery-prev]')?.addEventListener('click', () => showImage(activeIndex - 1));
+			this.querySelector('[data-gallery-next]')?.addEventListener('click', () => showImage(activeIndex + 1));
+			dialog.addEventListener('keydown', (event) => {
+				if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+					event.preventDefault();
+					showImage(activeIndex + (event.key === 'ArrowRight' ? 1 : -1));
+				}
+			});
+			dialog.addEventListener('click', (event) => {
+				if (event.target === dialog) dialog.close();
+			});
+		}
+	}
+
+	if (!customElements.get('image-gallery')) customElements.define('image-gallery', ImageGallery);
+</script>

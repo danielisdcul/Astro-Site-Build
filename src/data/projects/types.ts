@@ -1,7 +1,14 @@
+import type { GalleryOptions } from '../gallery.ts';
+
 // The fields available when editing a project file.
 export type Detail = {
 	label: string;
 	value: string;
+};
+
+export type ProjectLink = {
+	label: string;
+	href: string;
 };
 
 export type ProjectSection = {
@@ -11,10 +18,7 @@ export type ProjectSection = {
 	list?: string[];
 	listBeforeParagraphs?: boolean;
 	details?: Detail[];
-	link?: {
-		label: string;
-		href: string;
-	};
+	link?: ProjectLink;
 };
 
 export type Project = {
@@ -29,7 +33,9 @@ export type Project = {
 	cardLabel: string;
 	cardMeta: string;
 	cardImages: string[];
+	gallery?: GalleryOptions;
 	summary: string;
+	links?: ProjectLink[];
 	accent: string;
 	accentSoft: string;
 	details: Detail[];

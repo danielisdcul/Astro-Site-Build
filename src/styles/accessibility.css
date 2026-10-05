@@ -1,0 +1,32 @@
+/* Reduced-motion overrides
+   Location index: ./global.css
+   ========================================================================== */
+
+/* Honor reduced motion for CSS animations and script-controlled reveal states. */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero__title,
+  .hero__intro,
+  .hero__link,
+  [data-scroll-reveal].is-reveal-pending {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero__title::after {
+    display: none;
+  }
+}

@@ -1,0 +1,151 @@
+/* Shared page intro, Work, About, education, and Contact
+   Location index: ./global.css
+   ========================================================================== */
+
+.contact-links a {
+  font-size: 20px;
+  line-height: 32px;
+  text-decoration: none;
+}
+
+.page-intro__copy {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 32px;
+  max-width: 736px;
+}
+
+.about-sections h2 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.about-sections p {
+  color: var(--muted);
+}
+
+.contact-links span {
+  color: var(--accent);
+}
+
+.work-page__intro h1,
+.page-intro h1 {
+  max-width: 720px;
+  margin: 0 0 var(--space-24);
+}
+
+/* Shared page intro */
+
+.page-intro {
+  min-height: calc(100vh - var(--header-height) - var(--footer-height));
+  padding: var(--space-64) 0 var(--space-120);
+}
+
+.page-intro > .eyebrow,
+.about-intro__copy > .eyebrow,
+.work-page__intro > .eyebrow {
+  margin-bottom: var(--space-16);
+}
+
+/* Work */
+
+.work-page {
+  padding: var(--space-64) 0 var(--space-120);
+}
+
+.work-page__intro {
+  margin-bottom: var(--space-80);
+}
+
+/* About and education */
+
+.about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 736px) minmax(320px, 520px);
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.about-intro__copy {
+  min-width: 0;
+}
+
+.about-intro__portrait {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about-sections {
+  max-width: 960px;
+  margin-top: var(--space-80);
+}
+
+.about-section__content,
+.education-list,
+.education-card {
+  display: grid;
+}
+
+.about-section__content {
+  gap: var(--space-32);
+}
+
+.education-list {
+  gap: var(--space-24);
+}
+
+.education-card {
+  gap: var(--space-8);
+  padding-left: var(--space-24);
+  border-left: 3px solid var(--accent);
+}
+
+.about-sections .education-card__degree {
+  color: var(--accent);
+  font-family: var(--caption);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.education-card h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+/* Contact */
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  margin: var(--space-48) 0 0;
+}
+
+/* Responsive: (max-width: 1100px) */
+
+@media (max-width: 1100px) {
+  .about-intro {
+    grid-template-columns: minmax(0, 6fr) minmax(320px, 5fr);
+  }
+}
+
+/* Responsive: (max-width: 800px) */
+
+@media (max-width: 800px) {
+  .about-intro {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-48);
+  }
+
+  .about-intro__portrait {
+    grid-row: 1;
+    width: 50vw;
+    justify-self: center;
+  }
+}

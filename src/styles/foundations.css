@@ -1,0 +1,213 @@
+/* Fonts, design tokens, reset, and shared typography
+   Location index: ./global.css
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Momo Trust Display';
+  src: url('../assets/fonts/momo-trust-display-400.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  src: url('../assets/fonts/plus-jakarta-sans-400.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../assets/fonts/manrope-500.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../assets/fonts/manrope-600.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* Design tokens — spacing values adapt at the small-screen breakpoint. */
+
+:root {
+  --ink: #17221e;
+  --muted: #5e6862;
+  --paper: #f7f5ef;
+  --line: #d8d7d0;
+  --accent: #d66048;
+  --teal: #075056;
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --space-120: 120px;
+  --display: 'Momo Trust Display', 'Arial Rounded MT Bold', sans-serif;
+  --body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --caption: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --header-height: 89px;
+  --footer-height: 104px;
+}
+
+/* Document defaults */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 100%;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: inherit;
+  font-family: var(--display);
+  font-weight: 400;
+}
+
+/* Heading scale */
+
+h1 {
+  font-size: 64px;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+
+h2 {
+  font-size: 48px;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 32px;
+  letter-spacing: -1px;
+  line-height: 40px;
+}
+
+p,
+ul,
+ol,
+dl {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding-left: 20px;
+}
+
+small,
+dt {
+  font-family: var(--caption);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+dt {
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+dd {
+  margin: var(--space-8) 0 0;
+}
+
+/* Base links */
+
+a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-family: var(--caption);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Keyboard focus */
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Responsive: (max-width: 1100px) */
+
+@media (max-width: 1100px) {
+  h1 {
+    font-size: clamp(52px, 6vw, 64px);
+  }
+}
+
+/* Responsive: (max-width: 800px) */
+
+@media (max-width: 800px) {
+  h1 {
+    font-size: 48px;
+  }
+
+  :root {
+    --space-64: 48px;
+    --space-80: 64px;
+    --space-96: 64px;
+    --space-120: 80px;
+  }
+}
+
+/* Responsive: (max-width: 544px) */
+
+@media (max-width: 544px) {
+  h1 {
+    font-size: 40px;
+  }
+}

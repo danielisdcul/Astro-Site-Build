@@ -16,6 +16,14 @@ export const vitaTerra: Project = {
 		'/images/portfolio/vita-fabric.png',
 		'/images/portfolio/vita-tags.png',
 	],
+	gallery: {
+		layout: 'wide-top',
+		images: [
+			{ src: '/images/portfolio/vita-sign.png', alt: 'Vita Terra brand sign', caption: 'Brand signage', width: 1600, height: 1066 },
+			{ src: '/images/portfolio/vita-fabric.png', alt: 'Vita Terra branding on fabric', caption: 'Fabric branding', width: 1044, height: 1044 },
+			{ src: '/images/portfolio/vita-tags.png', alt: 'Vita Terra clothing tags', caption: 'Clothing tags', width: 1600, height: 1200 },
+		],
+	},
 	summary:
 		'Vita Terra is a sustainable clothing brand committed to producing high-quality apparel while supporting the farmers who grow its cotton.',
 	accent: '#54735a',

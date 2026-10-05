@@ -1,0 +1,136 @@
+/* Image gallery layouts, captions, and dialog viewer
+   Location index: ./global.css
+   ========================================================================== */
+
+/* Gallery layout — --gallery-columns is supplied by Gallery.astro. */
+
+.gallery {
+  display: block;
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-columns, 2), minmax(0, 1fr));
+  gap: clamp(12px, 2vw, var(--space-24));
+  align-items: start;
+}
+
+.gallery__item {
+  min-width: 0;
+  margin: 0;
+}
+
+.gallery__grid--wide-top .gallery__item:first-child,
+.gallery__grid--wide-bottom .gallery__item:last-child {
+  grid-column: 1 / -1;
+}
+
+/* Keep all supported layouts, including options not selected by current project data. */
+
+.gallery__grid--stack {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.gallery__trigger {
+  display: block;
+  cursor: zoom-in;
+}
+
+.gallery__item img {
+  width: 100%;
+  height: auto;
+}
+
+.gallery__caption {
+  margin-top: var(--space-8);
+}
+
+/* Native dialog viewer — showModal() places it above the sticky header. */
+
+.gallery__viewer {
+  width: min(calc(100% - 32px), 1280px);
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: var(--space-16);
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.gallery__viewer::backdrop {
+  background: rgb(23 34 30 / 85%);
+}
+
+/* Lock page scrolling while the image viewer is open. */
+
+html:has(.gallery__viewer[open]) {
+  overflow: hidden;
+}
+
+.gallery__viewer-content {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.gallery__toolbar,
+.gallery__viewer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.gallery__full-image {
+  width: 100%;
+  height: auto;
+  max-height: min(70dvh, 800px);
+  object-fit: contain;
+}
+
+.gallery__caption,
+.gallery__count,
+.gallery__viewer-caption {
+  color: var(--muted);
+  font-family: var(--caption);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.gallery__viewer-caption {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.gallery__navigation {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-8);
+}
+
+.gallery__control {
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--space-8) var(--space-16);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+
+.gallery__control:hover {
+  border-color: var(--ink);
+}
+
+/* Responsive: (max-width: 544px) */
+
+@media (max-width: 544px) {
+  .gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery__grid .gallery__item {
+    grid-column: auto;
+  }
+}

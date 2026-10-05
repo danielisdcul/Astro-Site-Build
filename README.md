@@ -16,7 +16,9 @@ This is an Astro site that builds into static HTML and CSS. Edit the files in
 | Vita Terra card and case study | [`src/data/projects/vita-terra.ts`](src/data/projects/vita-terra.ts) |
 | Hum card and case study | [`src/data/projects/hum.ts`](src/data/projects/hum.ts) |
 | Which projects appear, and their order | [`src/data/projects/index.ts`](src/data/projects/index.ts) |
-| Fonts, typography, colors, spacing, or responsive styles | [`src/styles/global.css`](src/styles/global.css) |
+| CSS location index and imports | [`src/styles/global.css`](src/styles/global.css) |
+| Fonts, typography, colors, and spacing | [`src/styles/foundations.css`](src/styles/foundations.css) |
+| Component, page, and responsive styles | Feature modules in [`src/styles/`](src/styles/) |
 | A page's HTML structure | [`src/pages/`](src/pages/) |
 | Header, footer, card, or case-study markup | [`src/components/`](src/components/) |
 | Shared document shell, metadata tags, and global CSS import | [`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro) |
@@ -55,7 +57,17 @@ src/
 │   ├── ProjectCard.astro         Home-page project preview
 │   └── ProjectCaseStudy.astro    Full project-page structure
 ├── layouts/BaseLayout.astro     Shared page shell
-└── styles/global.css            Indexed stylesheet
+└── styles/
+    ├── global.css                CSS location index and ordered imports
+    ├── foundations.css           Fonts, tokens, defaults, and typography
+    ├── layout.css                Shared layout, links, and footer
+    ├── navigation.css            Header, mobile menu, and section tracker
+    ├── home.css                  Home-page sections and animations
+    ├── project-cards.css         Card layouts and project grid
+    ├── pages.css                 Work, About, and Contact
+    ├── case-study.css            Project details and case-study content
+    ├── gallery.css               Image galleries and dialog viewer
+    └── accessibility.css         Reduced-motion overrides
 
 public/
 ├── fonts/
@@ -115,6 +127,67 @@ Sections appear in their array order. A section can contain a `lead`,
 `paragraphs`, a `list`, `details`, and a `link`. Set `listBeforeParagraphs: true`
 when the list should appear before the paragraphs.
 
+Add an optional `links` array to a project to show a **Project links** section
+below its opening details and above the gallery. Use it for websites, prototypes,
+repositories, or other project resources:
+
+```ts
+links: [
+  { label: 'View the website', href: 'https://example.com' },
+  { label: 'View the prototype', href: 'https://www.figma.com/...' },
+],
+```
+
+Projects with no links omit this section.
+
+## Reusable image galleries
+
+Every project page uses `src/components/Gallery.astro`. Edit a project's `gallery`
+in `src/data/projects/` to adjust its case-study images independently of `cardImages`.
+If `gallery` is omitted, the page uses its card images and `galleryLayout`.
+
+```ts
+gallery: {
+  layout: 'wide-top',
+  columns: 2,
+  lightbox: true,
+  images: [
+    {
+      src: '/images/portfolio/new-project.png',
+      alt: 'Description of the image',
+      caption: 'Optional visible caption',
+      width: 1600,
+      height: 1066,
+    },
+  ],
+},
+```
+
+Layouts are `grid`, `wide-top` (first image spans the row), `wide-bottom` (last
+image spans the row), and `stack`. `columns` accepts 1–4 and defaults to 2;
+all layouts become one column on narrow screens. Images retain their original
+proportions. Captions and dimensions are optional; use actual image dimensions
+to reserve space while loading.
+
+Click an image to open the viewer. Use its buttons or left/right arrow keys to
+browse, and Escape, Close, or the backdrop to dismiss it. Set `lightbox: false`
+for a static gallery. Without JavaScript, image links open the original file.
+
+To use the component on any other page:
+
+```astro
+---
+import Gallery from '../components/Gallery.astro';
+const images = [
+  { src: '/images/portfolio/new-project.png', alt: 'Description of the image' },
+];
+---
+<Gallery images={images} layout="grid" columns={2} label="Project images" />
+```
+
+Add `eager` when the gallery is near the top of a page. Gallery styles and viewer
+controls are in `src/styles/gallery.css`.
+
 ## Shared settings and assets
 
 Edit the email address once in `site.ts`. The `emailLink` export builds its
@@ -127,9 +200,14 @@ Files in `public/` are available from the site root. For example:
 public/images/portfolio/new-project.png → /images/portfolio/new-project.png
 ```
 
-Use the path on the right in project data. Keep the indexed stylesheet in
-`src/styles/global.css`; refresh its index line references when adding or removing
-lines. Avoid editing `dist/`, which is replaced when Astro builds.
+Use the path on the right in project data.
+
+Use `src/styles/global.css` as the CSS entry point and location index. Edit styles
+in the corresponding feature module; keep its responsive overrides at the end of
+that file, ordered from wider to narrower breakpoints. Shared tokens and responsive
+spacing live in `foundations.css`; reduced-motion overrides live in
+`accessibility.css`, which is imported last. Update the location index when adding
+or renaming a module. Avoid editing `dist/`, which is replaced when Astro builds.
 
 ## Local development and builds
 

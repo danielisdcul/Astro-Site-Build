@@ -1,18 +1,20 @@
 ---
 import type { Project } from '../data/projects/types.ts';
 import { withBase } from '../utils/paths.ts';
+import Gallery from './Gallery.astro';
 
 type Props = {
 	project: Project;
 };
 
 const { project } = Astro.props;
+const gallery = project.gallery ?? {
+	layout: project.galleryLayout,
+	images: project.cardImages.map((src, index) => ({ src, alt: `${project.title} project image ${index + 1}` })),
+};
 ---
 
-<article
-	class="case-study"
-	style={`--project-accent: ${project.accent}; --project-soft: ${project.accentSoft};`}
->
+<article class="case-study">
 	<header class="case-study__hero shell">
 		<p class="eyebrow">{project.type}</p>
 		<h1>{project.title}</h1>
@@ -27,32 +29,24 @@ const { project } = Astro.props;
 				))
 			}
 		</dl>
+		{project.links && project.links.length > 0 && (
+			<section class="project-links" aria-labelledby="project-links-heading">
+				<h2 class="eyebrow" id="project-links-heading">Project links</h2>
+				<ul class="project-links__list list-reset">
+					{project.links.map((link) => (
+						<li>
+							<a class="text-link" href={withBase(link.href)} target="_blank" rel="noreferrer">
+								{link.label} <span class="link-arrow" aria-hidden="true">↗</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		)}
 	</header>
 
-	<div class="case-study__feature">
-		<div
-			class:list={[
-				'case-study__gallery',
-				{
-					'case-study__gallery--single': project.cardImages.length === 1,
-					'case-study__gallery--wide-bottom': project.galleryLayout === 'wide-bottom',
-				},
-			]}
-			aria-label={`${project.title} project gallery`}
-		>
-			{
-				project.cardImages.map((image, index) => (
-					<div class="case-study__media">
-						<img
-							src={withBase(image)}
-							alt={`${project.title} project image ${index + 1}`}
-							loading={index === 0 ? 'eager' : 'lazy'}
-							decoding="async"
-						/>
-					</div>
-				))
-			}
-		</div>
+	<div class="shell case-study__feature">
+		<Gallery {...gallery} label={`${project.title} project gallery`} eager />
 	</div>
 
 	<div class="shell case-study__content">

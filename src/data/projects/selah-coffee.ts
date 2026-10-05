@@ -12,8 +12,17 @@ export const selahCoffee: Project = {
 	cardLabel: '01 / Brand identity + Digital',
 	cardMeta: 'Brand strategy · Identity · Web',
 	cardImages: ['/images/portfolio/selah-storefront.png'],
+	gallery: {
+		layout: 'wide-top',
+		images: [
+			{ src: '/images/portfolio/selah-storefront.png', alt: 'Selah Coffee storefront branding', caption: 'Selah Coffee — storefront concept', width: 1600, height: 1066 },
+		],
+	},
 	summary:
 		'Selah Coffee is a self-initiated concept project inspired by the kind of community-focused café I would one day like to create if given the opportunity.',
+	links: [
+		{ label: 'View the Selah Coffee website', href: 'https://danielisdcul.github.io/selah-coffee-website' },
+	],
 	accent: '#d66048',
 	accentSoft: '#f7e0d9',
 	details: [
@@ -27,7 +36,6 @@ export const selahCoffee: Project = {
 			paragraphs: [
 				'Selah Coffee is a self-initiated concept project inspired by the kind of community-focused café that I would one day like to create if given the opportunity. I developed the project as a comprehensive case study to demonstrate the breadth of my abilities as a multidisciplinary designer, from early concept development and brand strategy to digital design and implementation.',
 			],
-			link: { label: 'View the Selah Coffee website', href: 'https://danielisdcul.github.io/selah-coffee-website' },
 		},
 		{
 			title: 'Tools Used',

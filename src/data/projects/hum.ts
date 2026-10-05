@@ -16,6 +16,14 @@ export const hum: Project = {
 		'/images/portfolio/hum-jacket.png',
 		'/images/portfolio/hum-layout.png',
 	],
+	gallery: {
+		layout: 'wide-bottom',
+		images: [
+			{ src: '/images/portfolio/hum-book.png', alt: 'Hum book cover design', caption: 'Book cover design', width: 1600, height: 1200 },
+			{ src: '/images/portfolio/hum-jacket.png', alt: 'Hum dust jacket design', caption: 'Dust jacket', width: 1600, height: 1200 },
+			{ src: '/images/portfolio/hum-layout.png', alt: 'Hum interior page layouts', caption: 'Interior layouts and typography', width: 3588, height: 1600 },
+		],
+	},
 	summary: 'A complete book design system for a speculative science-fiction novel set in a dystopian near future where technology has disappeared. The project includes a vintage-inspired cover illustration, dust jacket, hardcover concept, expressive typography, typesetting, and interior layouts designed to create a cohesive reading experience.',
 	accent: '#526685',
 	accentSoft: '#dee6f2',

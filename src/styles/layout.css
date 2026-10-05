@@ -1,0 +1,127 @@
+/* Layout utilities, shared links, skip link, and footer
+   Location index: ./global.css
+   ========================================================================== */
+
+.text-link {
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.text-link,
+.site-footer a {
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--ink);
+}
+
+/* Footer */
+
+.site-footer {
+  color: var(--muted);
+  font-family: var(--caption);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  height: var(--footer-height);
+}
+
+.skip-link {
+  color: var(--paper);
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 100;
+  padding: 10px 14px;
+  background: var(--ink);
+  transform: translateY(-200%);
+}
+
+/* Layout utilities */
+
+.list-reset {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.content-split {
+  display: grid;
+  gap: var(--space-32);
+  padding: var(--space-32) 0;
+  border-top: 1px solid var(--line);
+}
+
+.content-split--about {
+  grid-template-columns: minmax(208px, 1fr) 2fr;
+}
+
+.content-split--case-study {
+  grid-template-columns: minmax(192px, 1fr) 2fr;
+}
+
+.content-split:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+/* Page shell and skip link */
+
+.shell {
+  width: min(calc(100% - 40px), 1280px);
+  margin-inline: auto;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  height: 100%;
+}
+
+.site-footer ul {
+  display: flex;
+  gap: var(--space-24);
+}
+
+/* Shared link interaction */
+
+.link-arrow {
+  display: inline-block;
+  transition: transform 180ms ease;
+}
+
+.text-link:hover .link-arrow {
+  transform: translateX(4px);
+}
+
+/* Responsive: (max-width: 800px) */
+
+@media (max-width: 800px) {
+  .content-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive: (max-width: 544px) */
+
+@media (max-width: 544px) {
+  .shell {
+    width: calc(100% - 32px);
+  }
+
+  .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .site-footer ul {
+    gap: var(--space-16);
+  }
+}
