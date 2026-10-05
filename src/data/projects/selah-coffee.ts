@@ -27,6 +27,7 @@ export const selahCoffee: Project = {
 			paragraphs: [
 				'Selah Coffee is a self-initiated concept project inspired by the kind of community-focused café that I would one day like to create if given the opportunity. I developed the project as a comprehensive case study to demonstrate the breadth of my abilities as a multidisciplinary designer, from early concept development and brand strategy to digital design and implementation.',
 			],
+			link: { label: 'View the Selah Coffee website', href: 'https://danielisdcul.github.io/selah-coffee-website' },
 		},
 		{
 			title: 'Tools Used',
@@ -132,7 +133,6 @@ export const selahCoffee: Project = {
 				'This modular structure will also make the site easier to convert into a dynamic CMS template.',
 			],
 			paragraphs: ['The final result is a responsive, single-page static website that functions as an advanced, interactive prototype.'],
-			link: { label: 'View the Selah Coffee website', href: 'https://danielisdcul.github.io/selah-coffee-website' },
 		},
 		{
 			title: 'Key Takeaways',

@@ -1,14 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { about } from '../data/pages/about.ts';
+import { withBase } from '../utils/paths.ts';
 ---
 
 <BaseLayout title={about.metadata.title} description={about.metadata.description}>
 	<section class="shell page-intro">
-		<p class="eyebrow">{about.eyebrow}</p>
-		<h1>{about.title}</h1>
-		<div class="page-intro__copy">
-			<p>{about.intro}</p>
+		<div class="about-intro">
+			<div class="about-intro__copy">
+				<p class="eyebrow">{about.eyebrow}</p>
+				<h1>{about.title}</h1>
+				<div class="page-intro__copy">
+					<p>{about.intro}</p>
+				</div>
+			</div>
+			<img
+				class="about-intro__portrait"
+				src={withBase(about.portrait.src)}
+				alt={about.portrait.alt}
+				width="520"
+				height="520"
+			/>
 		</div>
 		<div class="about-sections">
 			{

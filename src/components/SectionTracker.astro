@@ -13,7 +13,7 @@
 			const subheading = bar?.querySelector('.home-section-label__subheading');
 			if (!bar || !header || !label || !subheading) return;
 			header.append(bar);
-			const markers = Array.from(document.querySelectorAll('.projects > .section-heading .eyebrow, .disciplines > .eyebrow, .closing-callout > div > .eyebrow, .page-intro > .eyebrow, .work-page__intro > .eyebrow, .case-study__hero > .eyebrow, .case-study__section .eyebrow'));
+			const markers = Array.from(document.querySelectorAll('.projects > .section-heading .eyebrow, .disciplines > .eyebrow, .closing-callout > div > .eyebrow, .page-intro > .eyebrow, .about-intro__copy > .eyebrow, .work-page__intro > .eyebrow, .case-study__hero > .eyebrow, .case-study__section .eyebrow'));
 			const mobile = window.matchMedia('(max-width: 800px)');
 			let pending = false;
 			let heightAnimation;

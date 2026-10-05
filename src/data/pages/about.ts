@@ -7,6 +7,10 @@ export const about = {
 		description: `About ${site.name} and selected work.`,
 	},
 	eyebrow: 'About',
+	portrait: {
+		src: '/images/portfolio/daniel-portrait.png',
+		alt: `Portrait of ${site.name}`,
+	},
 	title: 'Hi, I’m Daniel',
 	intro:
 		'I’m a multidisciplinary designer based in San Diego. I believe thoughtful design begins with curiosity, empathy, and a clear understanding of the people it serves. I value simplicity, honest communication, and purposeful decisions, creating work that is visually engaging, useful, intuitive, and built to last.',
