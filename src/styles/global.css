@@ -517,7 +517,9 @@ img {
 
 .header-inner {
   position: relative;
+  z-index: 2;
   height: 89px;
+  background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
 
@@ -532,6 +534,55 @@ img {
   width: 0;
   height: 100%;
   background: var(--accent);
+}
+
+.home-section-label {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .home-section-label:not([hidden]) {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    inset-inline: 0;
+    min-height: 40px;
+    padding-block: 10px;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    animation: section-label-stick 200ms ease-out both;
+  }
+
+  .home-section-label .shell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .home-section-label .eyebrow {
+    margin: 0;
+  }
+
+  .home-section-label__subheading {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+}
+
+@keyframes section-label-stick {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .wordmark {
@@ -660,7 +711,9 @@ img {
 
 .hero__portrait {
   width: 100%;
+  height: auto;
   aspect-ratio: 1;
+  align-self: start;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1151,18 +1204,39 @@ img {
 
   .hero {
     height: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) 25vw;
+    column-gap: var(--space-16);
+    row-gap: var(--space-48);
     min-height: 0;
   }
 
-  .hero__copy {
-    height: auto;
-    gap: var(--space-64);
+  .hero__copy,
+  .hero__lead {
+    display: contents;
+  }
+
+  .hero h1 {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  .hero__intro {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .hero__footer {
+    grid-column: 1 / -1;
+    grid-row: 3;
   }
 
   .hero__portrait {
-    width: min(100%, 400px);
-    justify-self: center;
+    grid-column: 2;
+    grid-row: 1;
+    width: 25vw;
+    height: 25vw;
+    justify-self: end;
   }
 
   .section-heading {
@@ -1269,10 +1343,6 @@ img {
 
   .section-details div {
     grid-template-columns: 1fr;
-  }
-
-  .hero__portrait {
-    width: min(100%, 328px);
   }
 
   .case-study__gallery {

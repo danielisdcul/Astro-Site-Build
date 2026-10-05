@@ -12,9 +12,15 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 ---
 
 <BaseLayout description={home.intro}>
+	<div class="home-section-label" hidden>
+		<div class="shell">
+			<p class="eyebrow"></p>
+			<p class="home-section-label__subheading" hidden></p>
+		</div>
+	</div>
 	<section class="shell hero" data-scroll-reveal>
 		<div class="hero__copy">
-			<div>
+			<div class="hero__lead">
 				<h1 class="hero__title" data-typed-text={home.title}>{home.title}</h1>
 				<p class="hero__intro">{home.intro}</p>
 			</div>
@@ -123,6 +129,87 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 	</section>
 
 	<script is:inline>
+		(() => {
+			const bar = document.querySelector('.home-section-label');
+			const header = document.querySelector('.site-header');
+			const label = bar?.querySelector('.eyebrow');
+			const subheading = bar?.querySelector('.home-section-label__subheading');
+			if (!bar || !header || !label || !subheading) return;
+			header.append(bar);
+			const markers = Array.from(document.querySelectorAll('.projects > .section-heading .eyebrow, .disciplines > .eyebrow, .closing-callout > div > .eyebrow'));
+			const mobile = window.matchMedia('(max-width: 800px)');
+			let pending = false;
+			let heightAnimation;
+			let previousWidth = window.innerWidth;
+			const update = () => {
+				pending = false;
+				const previousHeight = bar.hidden ? 0 : bar.getBoundingClientRect().height;
+				const boundary = header.getBoundingClientRect().bottom + 40;
+				let current = '';
+				let currentSection = null;
+				let currentSubheading = '';
+				if (mobile.matches) {
+					for (const marker of markers) {
+						if (marker.getBoundingClientRect().top <= boundary) {
+							current = marker.textContent || '';
+							currentSection = marker.closest('section');
+						}
+					}
+					if (currentSection) {
+						for (const heading of currentSection.querySelectorAll('.project-card h2, .disciplines__list h3')) {
+							if (heading.getBoundingClientRect().top <= boundary) currentSubheading = heading.textContent || '';
+						}
+					}
+					if (document.querySelector('.closing-callout').getBoundingClientRect().bottom <= boundary) current = '';
+				}
+				const sizeChanged = label.textContent !== current || subheading.textContent !== currentSubheading || previousWidth !== window.innerWidth;
+				previousWidth = window.innerWidth;
+				if (label.textContent !== current) {
+					const wasVisible = !bar.hidden;
+					label.textContent = current;
+					if (current && wasVisible && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+						label.animate([
+							{ opacity: 0, transform: 'translateY(12px)' },
+							{ opacity: 1, transform: 'translateY(0)' },
+						], { duration: 200, easing: 'ease-out' });
+					}
+				}
+				if (subheading.textContent !== currentSubheading) {
+					const firstSubsection = !subheading.textContent;
+					subheading.textContent = currentSubheading;
+					if (currentSubheading && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+						subheading.animate([
+							{ opacity: 0, transform: firstSubsection ? 'translateY(-100%)' : 'translateY(8px)' },
+							{ opacity: 1, transform: 'translateY(0)' },
+						], { duration: 200, easing: 'ease-out' });
+					}
+				}
+				subheading.hidden = !currentSubheading;
+				bar.hidden = !current;
+				if (current && sizeChanged) {
+					heightAnimation?.cancel();
+					const nextHeight = bar.getBoundingClientRect().height;
+					if (previousHeight && Math.abs(nextHeight - previousHeight) > 0.5 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+						heightAnimation = bar.animate([
+							{ height: `${previousHeight}px` },
+							{ height: `${nextHeight}px` },
+						], { duration: 200, easing: 'ease-out' });
+					}
+				}
+			};
+			const schedule = () => {
+				if (!pending) {
+					pending = true;
+					requestAnimationFrame(update);
+				}
+			};
+			window.addEventListener('scroll', schedule, { passive: true });
+			window.addEventListener('resize', schedule);
+			window.addEventListener('pageshow', schedule);
+			new ResizeObserver(schedule).observe(document.body);
+			update();
+		})();
+
 		if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 			// Reveal tall sections in smaller pieces so each part responds to scrolling.
 			for (const section of document.querySelectorAll('.projects[data-scroll-reveal], .disciplines[data-scroll-reveal]')) {
