@@ -1,13 +1,16 @@
 /** Keep the edge menu's vertical position across pages without changing its handedness. */
 export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement) {
 	const storageKey = 'mobileMenuPosition';
-	const holdDelay = 350;
+	const holdDelay = 100;
 	let position: number | null = null;
 	let press: { id: number; x: number; y: number; offset: number; dragging: boolean } | null = null;
 	let holdTimer: ReturnType<typeof setTimeout> | undefined;
 	let suppressClick = false;
 	try {
-		const saved = localStorage.getItem(storageKey);
+		const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+		// Refresh starts at the middle; following links keeps the position the user chose.
+		if (navigation?.type === 'reload') localStorage.removeItem(storageKey);
+		const saved = navigation?.type === 'reload' ? null : localStorage.getItem(storageKey);
 		if (saved !== null && saved.trim() !== '') {
 			const value = Number(saved);
 			if (Number.isFinite(value) && value >= 0 && value <= 1) position = value;

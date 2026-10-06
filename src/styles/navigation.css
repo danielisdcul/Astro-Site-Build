@@ -101,6 +101,11 @@
     --nav-edge-width: 44px;
     --nav-edge-height: 88px;
     --nav-center-y: calc(var(--header-height) + (100svh - var(--header-height)) / 2);
+    /* Leave 75px below the header and 50px above the bottom; shrink both on short screens. */
+    --nav-drag-space: max(0px, calc(100svh - var(--header-height) - var(--nav-edge-height) - env(safe-area-inset-bottom)));
+    --nav-drag-gap-top: min(75px, calc(var(--nav-drag-space) * 0.6));
+    --nav-drag-gap-bottom: min(50px, calc(var(--nav-drag-space) * 0.4));
+    --nav-edge-top: clamp(calc(var(--header-height) + var(--nav-drag-gap-top)), calc(var(--nav-center-y) - var(--nav-edge-height) / 2), calc(100svh - var(--nav-edge-height) - var(--nav-drag-gap-bottom) - env(safe-area-inset-bottom)));
     --nav-motion-duration: 720ms;
     --nav-motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -122,7 +127,7 @@
     position: fixed;
     left: calc(100% - var(--nav-edge-width) - var(--nav-edge-inset));
     right: auto;
-    top: clamp(calc(var(--header-height) + 8px), calc(var(--nav-center-y) - var(--nav-edge-height) / 2), calc(100svh - var(--nav-edge-height) - max(8px, env(safe-area-inset-bottom))));
+    top: var(--nav-edge-top);
     bottom: auto;
     /* Own touch gestures here so a held drag cannot turn into page scrolling. */
     touch-action: none;
@@ -285,7 +290,7 @@
     --thumb-menu-size: min(80vw, 400px, calc((100svh - var(--header-height)) * 0.44));
     position: fixed;
     /* Follow the button, but keep the larger open menu fully inside the viewport. */
-    top: clamp(var(--header-height), calc(var(--nav-center-y) - var(--thumb-menu-size)), calc(100svh - var(--thumb-menu-size) * 2 - env(safe-area-inset-bottom)));
+    top: clamp(var(--header-height), calc(var(--nav-edge-top) + var(--nav-edge-height) / 2 - var(--thumb-menu-size)), calc(100svh - var(--thumb-menu-size) * 2 - env(safe-area-inset-bottom)));
     left: calc(100% - var(--thumb-menu-size));
     right: auto;
     bottom: auto;
@@ -373,7 +378,7 @@
   .has-mobile-menu .nav-handedness {
     position: fixed;
     left: max(16px, env(safe-area-inset-left));
-    top: clamp(calc(var(--header-height) + 8px), calc(var(--nav-center-y) - var(--nav-control-size) / 2), calc(100svh - var(--nav-control-size) - max(8px, env(safe-area-inset-bottom))));
+    top: calc(var(--nav-edge-top) + (var(--nav-edge-height) - var(--nav-control-size)) / 2);
     bottom: auto;
     z-index: 3;
     display: grid;
