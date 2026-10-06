@@ -42,13 +42,16 @@ const isCurrentLink = (href: string) =>
 			<div class="scroll-progress__fill"></div>
 		</div>
 	</div>
-	<button class="nav-corner-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation">
+	<button class="nav-corner-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-navigation" aria-describedby="menu-position-hint">
 		<span class="nav-toggle__icon" aria-hidden="true"><span></span><span></span><span></span><i class="nav-toggle__close-mark">×</i></span>
 	</button>
+	<span id="menu-position-hint" hidden>Hold and drag to move the menu up or down. With keyboard focus, use the up and down arrow keys.</span>
 	<button class="nav-handedness" type="button" aria-pressed="false"><span>I'm Left Handed</span></button>
 </header>
 
 <script>
+	import { setupMenuPosition } from '../utils/menu-position';
+
 	const header = document.querySelector<HTMLElement>('.site-header');
 	const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
 	const navigation = document.querySelector<HTMLElement>('#primary-navigation');
@@ -56,6 +59,7 @@ const isCurrentLink = (href: string) =>
 		header.classList.add('has-mobile-menu');
 		const handedness = header.querySelector<HTMLButtonElement>('.nav-handedness')!;
 		const cornerOpen = header.querySelector<HTMLButtonElement>('.nav-corner-open')!;
+		setupMenuPosition(cornerOpen, header);
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 		let isLefty = false;
 		try { isLefty = localStorage.getItem('isLefty') === 'true'; } catch {}
@@ -102,7 +106,7 @@ const isCurrentLink = (href: string) =>
 		cornerOpen.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
 		navigation.querySelector('.nav-corner-close')?.addEventListener('click', () => {
 			setOpen(false);
-			toggle.focus();
+			cornerOpen.focus();
 		});
 		toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
 		navigation.addEventListener('click', (event) => {
@@ -110,7 +114,7 @@ const isCurrentLink = (href: string) =>
 		});
 		document.addEventListener('keydown', (event) => {
 			if (event.key === 'Tab' && toggle.getAttribute('aria-expanded') === 'true') {
-				const controls = [toggle, ...navigation.querySelectorAll<HTMLElement>('a'), cornerOpen, handedness];
+				const controls = [...navigation.querySelectorAll<HTMLElement>('a'), cornerOpen, handedness];
 				const first = controls[0];
 				const last = controls[controls.length - 1];
 				if (event.shiftKey && document.activeElement === first) {
@@ -121,7 +125,7 @@ const isCurrentLink = (href: string) =>
 			}
 			if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
 				setOpen(false);
-				toggle.focus();
+				cornerOpen.focus();
 			}
 		});
 		document.addEventListener('click', (event) => {
@@ -136,6 +140,10 @@ const isCurrentLink = (href: string) =>
 		document.addEventListener('wheel', () => setOpen(false), { passive: true });
 		let touchStart: { x: number; y: number } | null = null;
 		document.addEventListener('touchstart', (event) => {
+			if (cornerOpen.contains(event.target as Node)) {
+				touchStart = null;
+				return;
+			}
 			const touch = event.touches[0];
 			touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
 		}, { passive: true });
