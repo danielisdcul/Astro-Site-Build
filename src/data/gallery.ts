@@ -1,3 +1,4 @@
+/** One image, including its accessible description and optional display caption. */
 export type GalleryImage = {
 	src: string;
 	alt: string;
@@ -6,8 +7,10 @@ export type GalleryImage = {
 	height?: number;
 };
 
+// Desktop layouts; mobile uses two-column tiles that open a swipeable viewer.
 export type GalleryLayout = 'grid' | 'wide-top' | 'wide-bottom' | 'stack';
 
+/** Configuration accepted by Gallery.astro and project gallery data. */
 export type GalleryOptions = {
 	images: GalleryImage[];
 	layout?: GalleryLayout;

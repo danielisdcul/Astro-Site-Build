@@ -1,4 +1,4 @@
-/* Image gallery layouts, captions, and dialog viewer
+/* Image gallery layouts, captions, mobile tiles, magnifiers, and swipeable viewer
    Location index: ./global.css
    ========================================================================== */
 
@@ -32,6 +32,7 @@
 }
 
 .gallery__trigger {
+  position: relative;
   display: block;
   cursor: zoom-in;
 }
@@ -45,21 +46,107 @@
   margin-top: var(--space-8);
 }
 
+.gallery__dots,
+.gallery__swipe-track {
+  display: none;
+}
+
+.gallery__expand {
+  display: none;
+}
+
+.gallery__hover-zoom {
+  position: absolute;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 140ms ease;
+}
+
+.gallery__hover-zoom.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Desktop previews stay restrained; the expand cue also appears on keyboard focus. */
+@media (min-width: 801px) {
+  .gallery__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--line);
+  }
+
+  .gallery__media:has(.gallery__trigger:focus-visible) {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+  }
+
+  .gallery__expand {
+    position: absolute;
+    z-index: 1;
+    right: 16px;
+    bottom: 16px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(255 255 255 / 25%);
+    border-radius: 50%;
+    background: rgb(23 34 30 / 70%);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    pointer-events: none;
+  }
+
+  .gallery__expand svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .gallery__trigger:is(:hover, :focus-visible) .gallery__expand {
+    opacity: 1;
+    transform: none;
+  }
+
+  .gallery__caption {
+    margin-top: 12px;
+    padding-inline: 2px;
+  }
+}
+
 /* Native dialog viewer — showModal() places it above the sticky header. */
 
 .gallery__viewer {
-  width: min(calc(100% - 32px), 1280px);
+  width: min(calc(100% - 64px), 1440px);
+  height: min(900px, calc(100dvh - 64px));
   max-width: none;
-  max-height: calc(100dvh - 32px);
+  max-height: none;
   margin: auto;
-  padding: var(--space-16);
-  border: 0;
-  background: var(--paper);
-  color: var(--ink);
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 20px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 24px 80px rgb(0 0 0 / 35%);
 }
 
 .gallery__viewer::backdrop {
-  background: rgb(23 34 30 / 85%);
+  background: rgb(10 16 13 / 85%);
+  backdrop-filter: blur(8px);
+}
+
+.gallery__viewer[open] {
+  animation: gallery-viewer-in 180ms ease-out;
+}
+
+@keyframes gallery-viewer-in {
+  from { opacity: 0; transform: translateY(8px) scale(.99); }
+  to { opacity: 1; transform: none; }
 }
 
 /* Lock page scrolling while the image viewer is open. */
@@ -70,21 +157,29 @@ html:has(.gallery__viewer[open]) {
 
 .gallery__viewer-content {
   display: grid;
-  gap: var(--space-16);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
 }
 
-.gallery__toolbar,
-.gallery__viewer-footer {
+.gallery__toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--space-16);
+  gap: 16px;
+}
+
+/* A stable stage prevents the controls jumping between landscape and portrait images. */
+.gallery__stage {
+  position: relative;
+  min-height: 0;
+  padding-inline: 60px;
 }
 
 .gallery__full-image {
   width: 100%;
-  height: auto;
-  max-height: min(70dvh, 800px);
+  height: 100%;
   object-fit: contain;
 }
 
@@ -99,38 +194,267 @@ html:has(.gallery__viewer[open]) {
 
 .gallery__viewer-caption {
   min-width: 0;
+  margin: 0;
+  color: #d3d3d3;
   overflow-wrap: anywhere;
+  text-align: center;
 }
 
-.gallery__navigation {
+.gallery__count {
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 7%);
+  color: #d3d3d3;
+  font-variant-numeric: tabular-nums;
+}
+
+.gallery__viewer-footer {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  max-height: min(25dvh, 160px);
+  overflow: auto;
+}
+
+.gallery__thumbnails {
   display: flex;
-  flex-shrink: 0;
-  gap: var(--space-8);
+  gap: 8px;
+  max-width: 100%;
+  padding: 4px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 255 255 / 25%) transparent;
+}
+
+.gallery__thumbnail {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 48px;
+  padding: 2px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  opacity: .55;
+  cursor: pointer;
+  transition: opacity 160ms ease, border-color 160ms ease;
+}
+
+.gallery__thumbnail img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.gallery__thumbnail:is(:hover, [aria-pressed='true']) {
+  opacity: 1;
+}
+
+.gallery__thumbnail[aria-pressed='true'] {
+  border-color: #fff;
 }
 
 .gallery__control {
-  min-width: 44px;
-  min-height: 44px;
-  padding: var(--space-8) var(--space-16);
-  border: 1px solid var(--line);
-  background: var(--paper);
-  color: var(--ink);
-  font: inherit;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 7%);
+  color: #fff;
   cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.gallery__control svg {
+  width: 22px;
+  height: 22px;
 }
 
 .gallery__control:hover {
-  border-color: var(--ink);
+  border-color: rgb(255 255 255 / 40%);
+  background: rgb(255 255 255 / 16%);
 }
 
-/* Responsive: (max-width: 544px) */
+.gallery__viewer :is(button, a):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
 
-@media (max-width: 544px) {
-  .gallery__grid {
-    grid-template-columns: 1fr;
+.gallery__previous,
+.gallery__next {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gallery__previous {
+  left: 0;
+}
+
+.gallery__next {
+  right: 0;
+}
+
+@media (min-width: 801px) and (any-hover: hover) {
+  .gallery__full-image {
+    cursor: zoom-in;
+  }
+}
+
+/* Mobile — two-column tiles open an immersive viewer with native swipe navigation. */
+
+@media (max-width: 800px) {
+  .gallery {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    background: var(--ink);
   }
 
-  .gallery__grid .gallery__item {
+  .gallery__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3px;
+  }
+
+  .gallery .gallery__grid .gallery__item {
     grid-column: auto;
+  }
+
+  .gallery__grid .gallery__media {
+    aspect-ratio: 1;
+    overflow: hidden;
+  }
+
+  .gallery__grid .gallery__trigger,
+  .gallery__grid .gallery__item img {
+    height: 100%;
+  }
+
+  .gallery__grid .gallery__item img {
+    object-fit: cover;
+  }
+
+  /* Fill the final row instead of leaving an empty tile beside an odd image count. */
+  .gallery__grid .gallery__item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .gallery__grid .gallery__item:last-child:nth-child(odd) .gallery__media {
+    aspect-ratio: 2 / 1;
+  }
+
+  .gallery__caption {
+    display: none;
+  }
+
+  /* The native dialog sits above the site navigation and restores focus on closing. */
+  .gallery__viewer {
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding: max(16px, env(safe-area-inset-top)) 0 max(16px, env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 0;
+    background: rgb(10 16 13 / 92%);
+    box-shadow: none;
+  }
+
+  .gallery__toolbar {
+    padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
+  }
+
+  .gallery__stage {
+    padding: 0;
+    min-width: 0;
+  }
+
+  .gallery__full-image,
+  .gallery__previous,
+  .gallery__next,
+  .gallery__thumbnails {
+    display: none;
+  }
+
+  .gallery__swipe-track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .gallery__swipe-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery__slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    height: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  /* Preserve the full image in the viewer, including portraits and wide compositions. */
+  .gallery__slide .gallery__media {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  .gallery__slide img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .gallery__media.is-magnifying::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-color: var(--ink);
+    background-image: var(--gallery-zoom-image);
+    background-repeat: no-repeat;
+    background-size: var(--gallery-zoom-size);
+    background-position: var(--gallery-zoom-position);
+  }
+
+  .gallery__viewer-footer {
+    padding-inline: 16px;
+  }
+
+  .gallery__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    padding: 4px;
+  }
+
+  .gallery__dot {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #d3d3d3;
+  }
+
+  .gallery__dot.is-active {
+    background: #fff;
   }
 }

@@ -1,7 +1,11 @@
+// URL helpers for deployments hosted at a subpath, such as GitHub Pages.
+
+// Normalize the configured base once so callers can use paths with or without a leading slash.
 const baseUrl = import.meta.env.BASE_URL.endsWith('/')
 	? import.meta.env.BASE_URL
 	: `${import.meta.env.BASE_URL}/`;
 
+// Leave protocols, protocol-relative URLs, and same-page anchors untouched.
 const externalUrlPattern = /^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i;
 
 // Prefix internal routes and public assets with Astro's configured deployment base.

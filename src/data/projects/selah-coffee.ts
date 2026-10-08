@@ -1,35 +1,57 @@
 import type { Project } from './types.ts';
 
 export const selahCoffee: Project = {
+	// Identity and display settings for project pages and cards.
 	title: 'Selah Coffee',
 	slug: 'selah-coffee',
 	featured: true,
 	showOnHome: true,
 	galleryLayout: 'wide-top',
 	type: 'Bespoke case study',
+
+	// Preview copy and images shown on Home and Work.
 	cardTitle: 'Selah Coffee',
 	cardSummary: 'A self-initiated café concept shaped around pause, reflection, and community.',
 	cardLabel: '01 / Brand identity + Digital',
 	cardMeta: 'Brand strategy · Identity · Web',
 	cardImages: ['/images/portfolio/selah-storefront.png'],
+
+	// Case study gallery: image descriptions, captions, and original dimensions.
 	gallery: {
 		layout: 'wide-top',
 		images: [
-			{ src: '/images/portfolio/selah-storefront.png', alt: 'Selah Coffee storefront branding', caption: 'Selah Coffee — storefront concept', width: 1600, height: 1066 },
+			{
+				src: '/images/portfolio/selah-storefront.png',
+				alt: 'Selah Coffee storefront branding',
+				caption: 'Selah Coffee — storefront concept',
+				width: 1600,
+				height: 1066,
+			},
 		],
 	},
+
+	// Opening summary and optional links for the case study.
 	summary:
 		'Selah Coffee is a self-initiated concept project inspired by the kind of community-focused café I would one day like to create if given the opportunity.',
 	links: [
-		{ label: 'View the Selah Coffee website', href: 'https://danielisdcul.github.io/selah-coffee-website' },
+		{
+			label: 'View the Selah Coffee website',
+			href: 'https://danielisdcul.github.io/selah-coffee-website',
+		},
 	],
+
+	// Project colors used by cards and case study styling.
 	accent: '#d66048',
 	accentSoft: '#f7e0d9',
+
+	// Short project facts displayed alongside the introduction.
 	details: [
 		{ label: 'Project type', value: 'Self-initiated concept project' },
 		{ label: 'Categories', value: 'Branding, Graphic Design, Print and Publishing, Web Development' },
 		{ label: 'Focus', value: 'Brand strategy, identity, digital design, and implementation' },
 	],
+
+	// Case study narrative, rendered in the order below.
 	sections: [
 		{
 			title: 'Project Overview',
@@ -39,7 +61,14 @@ export const selahCoffee: Project = {
 		},
 		{
 			title: 'Tools Used',
-			list: ['Adobe Illustrator', 'Adobe Photoshop', 'Figma', 'Notion', 'Visual Studio Code', 'ChatGPT and Codex'],
+			list: [
+				'Adobe Illustrator',
+				'Adobe Photoshop',
+				'Figma',
+				'Notion',
+				'Visual Studio Code',
+				'ChatGPT and Codex',
+			],
 		},
 		{
 			title: 'Skills Demonstrated',
@@ -67,22 +96,44 @@ export const selahCoffee: Project = {
 				'Selah Coffee is a community-first neighborhood coffee shop designed as a flexible place between home and work. It gives guests control over how they participate: they can work privately, enjoy the presence of others, meet around a shared table, or take part in community activities. The central idea is that community should be available without ever feeling required.',
 			],
 			details: [
-				{ label: 'Audience', value: 'Primarily students, remote workers, and early-career professionals aged 18–35, while remaining welcoming to the broader neighborhood.' },
-				{ label: 'Customer Need', value: 'A comfortable place for sustained focus that still feels warm, social, and distinct from an office or coworking space.' },
-				{ label: 'Positioning', value: 'A community-first café where guests can choose their preferred balance of privacy and connection.' },
+				{
+					label: 'Audience',
+					value:
+						'Primarily students, remote workers, and early-career professionals aged 18–35, while remaining welcoming to the broader neighborhood.',
+				},
+				{
+					label: 'Customer Need',
+					value:
+						'A comfortable place for sustained focus that still feels warm, social, and distinct from an office or coworking space.',
+				},
+				{
+					label: 'Positioning',
+					value:
+						'A community-first café where guests can choose their preferred balance of privacy and connection.',
+				},
 				{ label: 'Brand Promise', value: '“We make room for every way of connecting.”' },
 				{ label: 'Strategic Principle', value: '“Community by invitation, never obligation.”' },
 				{ label: 'Working Tagline', value: '“Start with coffee. Stay for company.”' },
 				{ label: 'Call to Action', value: '“Find your place.”' },
-				{ label: 'Core Values', value: 'Hospitality, generosity, dignity, service, creative community, and care for neighbors.' },
+				{
+					label: 'Core Values',
+					value: 'Hospitality, generosity, dignity, service, creative community, and care for neighbors.',
+				},
 			],
 		},
 		{
 			title: 'Verbal Identity',
 			lead: 'The voice should feel:',
-			list: ['Warm and conversational', 'Clear and unpretentious', 'Calm without becoming solemn', 'Invitational without pressuring people to participate'],
+			list: [
+				'Warm and conversational',
+				'Clear and unpretentious',
+				'Calm without becoming solemn',
+				'Invitational without pressuring people to participate',
+			],
 			listBeforeParagraphs: true,
-			paragraphs: ['The brand should avoid corporate community jargon, unsupported sentimental claims, forced explanations of the name, and language that assumes every guest wants to socialize. Its Christian foundation is expressed through inclusive hospitality and ethical behavior rather than religious messaging.'],
+			paragraphs: [
+				'The brand should avoid corporate community jargon, unsupported sentimental claims, forced explanations of the name, and language that assumes every guest wants to socialize. Its Christian foundation is expressed through inclusive hospitality and ethical behavior rather than religious messaging.',
+			],
 		},
 		{
 			title: 'Phase 02 — Build the Visual Identity',
@@ -97,7 +148,9 @@ export const selahCoffee: Project = {
 		},
 		{
 			title: 'Typography',
-			paragraphs: ['Selah Coffee’s typography balances personality with clarity. Pacaembu is reserved for the wordmark, giving the brand a distinctive and recognizable voice. Helvetica serves as the primary functional typeface across body copy, navigation, and interface elements, while Libre Baskerville is used selectively in expressive headings to introduce warmth and an editorial quality. Together, the typefaces create a system that feels approachable, refined, and easy to navigate.'],
+			paragraphs: [
+				'Selah Coffee’s typography balances personality with clarity. Pacaembu is reserved for the wordmark, giving the brand a distinctive and recognizable voice. Helvetica serves as the primary functional typeface across body copy, navigation, and interface elements, while Libre Baskerville is used selectively in expressive headings to introduce warmth and an editorial quality. Together, the typefaces create a system that feels approachable, refined, and easy to navigate.',
+			],
 			list: ['Pacaembu', 'Helvetica', 'Libre Baskerville'],
 		},
 		{
@@ -113,11 +166,15 @@ export const selahCoffee: Project = {
 		{
 			title: 'Phase 03 — Apply the Brand',
 			lead: 'Testing the identity across physical customer touchpoints.',
-			paragraphs: ['Once the core visual identity was established, I expanded it into a flexible collection of branded graphics and applications. This phase allowed me to test whether the identity could remain recognizable and consistent across different formats, materials, and scales.'],
+			paragraphs: [
+				'Once the core visual identity was established, I expanded it into a flexible collection of branded graphics and applications. This phase allowed me to test whether the identity could remain recognizable and consistent across different formats, materials, and scales.',
+			],
 		},
 		{
 			title: 'Graphic System',
-			paragraphs: ['I developed repeatable patterns, supporting graphics, and alternate logo configurations that could be adapted to a variety of brand materials. Each element was designed to work independently while still feeling connected to the larger visual identity.'],
+			paragraphs: [
+				'I developed repeatable patterns, supporting graphics, and alternate logo configurations that could be adapted to a variety of brand materials. Each element was designed to work independently while still feeling connected to the larger visual identity.',
+			],
 		},
 		{
 			title: 'Phase 04 — Design the Digital Experience',
@@ -129,7 +186,10 @@ export const selahCoffee: Project = {
 		},
 		{
 			title: '1. Prototyping',
-			list: ['Designed responsive desktop and mobile layouts in Figma.', 'Created a detailed representation of the final experience, including spacing, behavior, and how the layout should adapt across screen sizes.'],
+			list: [
+				'Designed responsive desktop and mobile layouts in Figma.',
+				'Created a detailed representation of the final experience, including spacing, behavior, and how the layout should adapt across screen sizes.',
+			],
 		},
 		{
 			title: '2. Prototype to Responsive Website',
@@ -140,7 +200,9 @@ export const selahCoffee: Project = {
 				'I restructured the HTML and CSS using modular sections, consistent class names, reusable root styles, an indexed table of contents, and a more predictable hierarchy.',
 				'This modular structure will also make the site easier to convert into a dynamic CMS template.',
 			],
-			paragraphs: ['The final result is a responsive, single-page static website that functions as an advanced, interactive prototype.'],
+			paragraphs: [
+				'The final result is a responsive, single-page static website that functions as an advanced, interactive prototype.',
+			],
 		},
 		{
 			title: 'Key Takeaways',

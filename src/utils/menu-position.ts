@@ -1,33 +1,50 @@
 /** Keep the edge menu's vertical position across pages without changing its handedness. */
 export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement) {
+	// Configuration and press state — positions are stored as a viewport fraction.
 	const storageKey = 'mobileMenuPosition';
 	const holdDelay = 100;
 	let position: number | null = null;
-	let press: { id: number; x: number; y: number; offset: number; dragging: boolean } | null = null;
+	let press: {
+		id: number;
+		x: number;
+		y: number;
+		offset: number;
+		dragging: boolean;
+	} | null = null;
 	let holdTimer: ReturnType<typeof setTimeout> | undefined;
 	let suppressClick = false;
+
+	// Saved position — refresh resets to the middle; navigation restores the last placement.
 	try {
 		const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
-		// Refresh starts at the middle; following links keeps the position the user chose.
 		if (navigation?.type === 'reload') localStorage.removeItem(storageKey);
 		const saved = navigation?.type === 'reload' ? null : localStorage.getItem(storageKey);
 		if (saved !== null && saved.trim() !== '') {
 			const value = Number(saved);
 			if (Number.isFinite(value) && value >= 0 && value <= 1) position = value;
 		}
-	} catch {}
+	} catch {
+		// Storage may be unavailable; the menu can still be repositioned for this page.
+	}
 
+	// Position helpers — apply, save, and clamp the control to the CSS drag bounds.
 	// A viewport fraction survives orientation changes; CSS keeps the control inside safe areas.
 	const applyPosition = (value: number) => {
 		position = Math.max(0, Math.min(1, value));
 		header.style.setProperty('--nav-center-y', `${position * 100}svh`);
 	};
+
 	const savePosition = () => {
 		if (position !== null) {
-			try { localStorage.setItem(storageKey, String(position)); } catch {}
+			try {
+				localStorage.setItem(storageKey, String(position));
+			} catch {
+				// Saving is optional; retain the current position when storage is blocked.
+			}
 		}
 	};
 	if (position !== null) applyPosition(position);
+
 	const moveTo = (center: number) => {
 		// Resolve the same viewport units as CSS, including when mobile browser bars collapse.
 		const viewportHeight = parseFloat(getComputedStyle(button).maxHeight) || window.innerHeight;
@@ -36,6 +53,8 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 		// Store the clamped position so dragging beyond an edge does not create a dead zone.
 		applyPosition((rect.top + rect.height / 2) / viewportHeight);
 	};
+
+	// Press cleanup — finish dragging, save the position, and release pointer capture.
 	const finishPress = () => {
 		clearTimeout(holdTimer);
 		const previous = press;
@@ -45,12 +64,18 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 		if (previous && button.hasPointerCapture(previous.id)) button.releasePointerCapture(previous.id);
 	};
 
+	// Pointer gestures — a hold starts dragging; early movement cancels a menu tap.
 	button.addEventListener('pointerdown', (event) => {
 		if (!event.isPrimary || event.button !== 0 || press) return;
 		suppressClick = false;
 		const rect = button.getBoundingClientRect();
-		press = { id: event.pointerId, x: event.clientX, y: event.clientY,
-			offset: event.clientY - (rect.top + rect.height / 2), dragging: false };
+		press = {
+			id: event.pointerId,
+			x: event.clientX,
+			y: event.clientY,
+			offset: event.clientY - (rect.top + rect.height / 2),
+			dragging: false,
+		};
 		button.setPointerCapture(event.pointerId);
 		holdTimer = setTimeout(() => {
 			if (!press) return;
@@ -59,6 +84,7 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 			button.classList.add('is-dragging');
 		}, holdDelay);
 	});
+
 	button.addEventListener('pointermove', (event) => {
 		if (!press || event.pointerId !== press.id) return;
 		if (press.dragging) {
@@ -69,12 +95,15 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 			finishPress();
 		}
 	});
+
 	button.addEventListener('pointerup', (event) => {
 		if (press?.id === event.pointerId) finishPress();
 	});
 	for (const type of ['pointercancel', 'lostpointercapture']) {
 		button.addEventListener(type, finishPress);
 	}
+
+	// Activation — suppress drag-generated clicks while allowing keyboard activation.
 	button.addEventListener('click', (event) => {
 		// Keyboard and assistive-technology clicks should always activate the menu.
 		if (suppressClick && event.detail !== 0) {
@@ -83,7 +112,10 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 		}
 		suppressClick = false;
 	}, { capture: true });
+
 	button.addEventListener('contextmenu', (event) => event.preventDefault());
+
+	// Keyboard positioning — move the control vertically in small steps.
 	button.addEventListener('keydown', (event) => {
 		if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
 		event.preventDefault();
@@ -91,6 +123,8 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 		moveTo(rect.top + rect.height / 2 + (event.key === 'ArrowUp' ? -20 : 20));
 		savePosition();
 	});
+
+	// Interrupted gestures — finish the press when focus or viewport size changes.
 	window.addEventListener('blur', finishPress);
 	window.addEventListener('resize', finishPress);
 }

@@ -23,14 +23,23 @@ const {
 		<div class:list={['gallery__grid', `gallery__grid--${layout}`]} style={`--gallery-columns: ${columns};`}>
 			{images.map((image, index) => (
 				<figure class="gallery__item">
-					{lightbox ? (
-						<a class="gallery__trigger" href={withBase(image.src)} aria-label={`View larger image: ${image.alt}`}>
-							<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" />
-						</a>
-					) : (
-						<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" />
+					<div class="gallery__media">
+						{lightbox ? (
+							<a class="gallery__trigger" href={withBase(image.src)} aria-label={`View larger image: ${image.alt}`}>
+								<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+								<span class="gallery__expand" aria-hidden="true">
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" /></svg>
+								</span>
+							</a>
+						) : (
+							<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+						)}
+					</div>
+					{image.caption && (
+						<figcaption class="gallery__caption">
+							<span class="gallery__caption-text">{image.caption}</span>
+						</figcaption>
 					)}
-					{image.caption && <figcaption class="gallery__caption">{image.caption}</figcaption>}
 				</figure>
 			))}
 		</div>
@@ -39,15 +48,46 @@ const {
 				<div class="gallery__viewer-content">
 					<div class="gallery__toolbar">
 						<p class="gallery__count" aria-live="polite" aria-atomic="true"></p>
-						<button class="gallery__control" type="button" data-gallery-close autofocus>Close <span aria-hidden="true">×</span></button>
+						<button class="gallery__control" type="button" data-gallery-close aria-label="Close image viewer" title="Close (Escape)" autofocus>
+							<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 6 12 12M18 6 6 18" /></svg>
+						</button>
 					</div>
-					<img class="gallery__full-image" src={withBase(images[0].src)} alt={images[0].alt} loading="lazy" decoding="async" />
+					<div class="gallery__stage">
+						<img class="gallery__full-image" src={withBase(images[0].src)} alt={images[0].alt} loading="lazy" decoding="async" />
+						<div class="gallery__swipe-track" role="group" aria-roledescription="carousel" aria-label="Images. Swipe or use arrow keys to browse.">
+							{images.map((image, index) => (
+								<div class="gallery__slide" role="group" aria-roledescription="slide" aria-label={`Image ${index + 1} of ${images.length}`}>
+									<div class="gallery__media">
+										<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" draggable="false" />
+									</div>
+								</div>
+							))}
+						</div>
+						{images.length > 1 && (
+							<>
+								<button class="gallery__control gallery__previous" type="button" data-gallery-prev aria-label="Previous image" title="Previous image (Left arrow)">
+									<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m14 6-6 6 6 6" /></svg>
+								</button>
+								<button class="gallery__control gallery__next" type="button" data-gallery-next aria-label="Next image" title="Next image (Right arrow)">
+									<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m10 6 6 6-6 6" /></svg>
+								</button>
+							</>
+						)}
+					</div>
 					<div class="gallery__viewer-footer">
 						<p class="gallery__viewer-caption"></p>
 						{images.length > 1 && (
-							<div class="gallery__navigation">
-								<button class="gallery__control" type="button" data-gallery-prev aria-label="Previous image">←</button>
-								<button class="gallery__control" type="button" data-gallery-next aria-label="Next image">→</button>
+							<div class="gallery__dots" aria-hidden="true">
+								{images.map((_, index) => <span class:list={['gallery__dot', { 'is-active': index === 0 }]} />)}
+							</div>
+						)}
+						{images.length > 1 && (
+							<div class="gallery__thumbnails" role="group" aria-label="Choose an image">
+								{images.map((image, index) => (
+									<button class="gallery__thumbnail" type="button" data-gallery-image={index} aria-label={`View image ${index + 1}: ${image.alt}`} aria-pressed={index === 0}>
+										<img src={withBase(image.src)} alt="" loading="lazy" decoding="async" />
+									</button>
+								))}
 							</div>
 						)}
 					</div>
@@ -58,51 +98,18 @@ const {
 )}
 
 <script>
+	import { setupGallery } from '../utils/gallery';
+
 	class ImageGallery extends HTMLElement {
-		private initialized = false;
+		private cleanup?: () => void;
 
 		connectedCallback() {
-			if (this.initialized) return;
-			const dialog = this.querySelector<HTMLDialogElement>('dialog');
-			const fullImage = this.querySelector<HTMLImageElement>('.gallery__full-image');
-			const caption = this.querySelector<HTMLElement>('.gallery__viewer-caption');
-			const count = this.querySelector<HTMLElement>('.gallery__count');
-			const triggers = Array.from(this.querySelectorAll<HTMLAnchorElement>('.gallery__trigger'));
-			if (!dialog || !fullImage || !caption || !count || !triggers.length || !dialog.showModal) return;
-			this.initialized = true;
-			let activeIndex = 0;
+			this.cleanup ??= setupGallery(this);
+		}
 
-			const showImage = (index: number) => {
-				activeIndex = (index + triggers.length) % triggers.length;
-				const trigger = triggers[activeIndex];
-				const thumbnail = trigger.querySelector('img')!;
-				fullImage.src = trigger.href;
-				fullImage.alt = thumbnail.alt;
-				caption.textContent = trigger.closest('figure')?.querySelector('figcaption')?.textContent || thumbnail.alt;
-				count.textContent = `Image ${activeIndex + 1} of ${triggers.length}`;
-			};
-
-			triggers.forEach((trigger, index) => {
-				trigger.addEventListener('click', (event) => {
-					// Preserve normal browser actions such as opening an image in a new tab.
-					if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
-					event.preventDefault();
-					showImage(index);
-					dialog.showModal();
-				});
-			});
-			this.querySelector('[data-gallery-close]')?.addEventListener('click', () => dialog.close());
-			this.querySelector('[data-gallery-prev]')?.addEventListener('click', () => showImage(activeIndex - 1));
-			this.querySelector('[data-gallery-next]')?.addEventListener('click', () => showImage(activeIndex + 1));
-			dialog.addEventListener('keydown', (event) => {
-				if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-					event.preventDefault();
-					showImage(activeIndex + (event.key === 'ArrowRight' ? 1 : -1));
-				}
-			});
-			dialog.addEventListener('click', (event) => {
-				if (event.target === dialog) dialog.close();
-			});
+		disconnectedCallback() {
+			this.cleanup?.();
+			this.cleanup = undefined;
 		}
 	}
 
