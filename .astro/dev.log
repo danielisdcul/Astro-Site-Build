@@ -221,3 +221,6 @@
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] / 60ms","label":null,"level":"info"}
+{"message":"[200] / 3ms","label":null,"level":"info"}
+{"message":"[console.error] Astro Error while running audit's match function: TypeError: Failed to fetch","label":"vite","level":"error"}
