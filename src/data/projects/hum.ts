@@ -27,6 +27,7 @@ export const hum: Project = {
 		images: [
 			{
 				src: '/images/portfolio/hum-book.png',
+				previewSrc: '/images/portfolio/previews/hum-book.webp',
 				alt: 'Hum book cover design',
 				caption: 'Book cover design',
 				width: 1600,
@@ -34,6 +35,7 @@ export const hum: Project = {
 			},
 			{
 				src: '/images/portfolio/hum-jacket.png',
+				previewSrc: '/images/portfolio/previews/hum-jacket.webp',
 				alt: 'Hum dust jacket design',
 				caption: 'Dust jacket',
 				width: 1600,
@@ -41,6 +43,7 @@ export const hum: Project = {
 			},
 			{
 				src: '/images/portfolio/hum-layout.png',
+				previewSrc: '/images/portfolio/previews/hum-layout.webp',
 				alt: 'Hum interior page layouts',
 				caption: 'Interior layouts and typography',
 				width: 3588,

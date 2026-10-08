@@ -22,6 +22,7 @@ export const selahCoffee: Project = {
 		images: [
 			{
 				src: '/images/portfolio/selah-storefront.png',
+				previewSrc: '/images/portfolio/previews/selah-storefront.webp',
 				alt: 'Selah Coffee storefront branding',
 				caption: 'Selah Coffee — storefront concept',
 				width: 1600,

@@ -154,6 +154,7 @@ gallery: {
   images: [
     {
       src: '/images/portfolio/new-project.png',
+      previewSrc: '/images/portfolio/previews/new-project.webp',
       alt: 'Description of the image',
       caption: 'Optional visible caption',
       width: 1600,
@@ -165,12 +166,25 @@ gallery: {
 
 Layouts are `grid`, `wide-top` (first image spans the row), `wide-bottom` (last
 image spans the row), and `stack`. `columns` accepts 1–4 and defaults to 2;
-all layouts become one column on narrow screens. Images retain their original
-proportions. Captions and dimensions are optional; use actual image dimensions
-to reserve space while loading.
+all layouts become two-column tiles on mobile. An odd final image fills the last
+row. The lightbox retains each image's original proportions. Captions and dimensions
+are optional; use actual image dimensions to reserve space while loading.
+
+`previewSrc` is optional. It supplies a small image for mobile tiles and lightbox
+previews. The selected lightbox image loads its original after the preview decodes,
+keeping the preview visible until the original is ready. Create or refresh a 640px
+WebP preview with Astro's existing image service:
+
+```sh
+node scripts/gallery-previews.mjs public/images/portfolio/new-project.png
+```
+
+Add the generated preview URL to the project's gallery data and include the preview
+file when committing the project. The command accepts multiple original image paths.
 
 Click an image to open the viewer. Use its buttons or left/right arrow keys to
-browse, and Escape, Close, or the backdrop to dismiss it. Set `lightbox: false`
+browse, and Escape, Close, or the backdrop to dismiss it. On mobile, swipe sideways
+to browse or swipe down quickly to close. Hold an image to magnify it. Set `lightbox: false`
 for a static gallery. Without JavaScript, image links open the original file.
 
 To use the component on any other page:

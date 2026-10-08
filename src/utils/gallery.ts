@@ -1,5 +1,7 @@
 import { setupGalleryMagnifier } from './gallery-magnifier';
 import { setupGalleryHoverZoom } from './gallery-hover-zoom';
+import { setupGalleryDismiss } from './gallery-dismiss';
+import { createGalleryImageLoader } from './gallery-image-loading';
 
 /** Tiled previews open a shared lightbox, with native swipe navigation on mobile. */
 export function setupGallery(gallery: HTMLElement) {
@@ -10,6 +12,7 @@ export function setupGallery(gallery: HTMLElement) {
 	const mobile = window.matchMedia('(max-width: 800px)');
 	const cleanupLightbox = setupLightbox(gallery, mobile, options);
 	const cleanupMagnifier = setupGalleryMagnifier(gallery, mobile, options);
+	setupGalleryDismiss(gallery, mobile, options);
 	const cleanupHoverZoom = setupGalleryHoverZoom(gallery, options);
 
 	// Teardown — release listeners, observers, and zoom overlays when disconnected.
@@ -41,7 +44,21 @@ function setupLightbox(
 	const dots = Array.from(dialog.querySelectorAll<HTMLElement>('.gallery__dot'));
 	const thumbnails = Array.from(dialog.querySelectorAll<HTMLButtonElement>('[data-gallery-image]'));
 	const thumbnailStrip = dialog.querySelector<HTMLElement>('.gallery__thumbnails');
+	const slides = Array.from(track.querySelectorAll<HTMLImageElement>('img'));
 	let activeIndex = 0;
+
+	// Loading — only the visible lightbox image upgrades from its preview to the original.
+	const loadImage = createGalleryImageLoader(
+		image => dialog.open && image === (mobile.matches ? slides[activeIndex] : fullImage),
+		options.signal!,
+	);
+	const loadSelectedImage = () => {
+		if (!dialog.open) return;
+		const trigger = triggers[activeIndex];
+		const image = mobile.matches ? slides[activeIndex] : fullImage;
+		const preview = trigger.querySelector<HTMLImageElement>('img')!.dataset.galleryPreview || trigger.href;
+		void loadImage(image, trigger.href, preview);
+	};
 
 	// Alignment — preserve the selected image across opening and viewport changes.
 	const alignSlide = () => {
@@ -63,7 +80,6 @@ function setupLightbox(
 		activeIndex = (index + triggers.length) % triggers.length;
 		const trigger = triggers[activeIndex];
 		const image = trigger.querySelector('img')!;
-		fullImage.src = trigger.href;
 		fullImage.alt = image.alt;
 		caption.textContent = mobile.matches ? image.alt
 			: trigger.closest('figure')?.querySelector('.gallery__caption-text')?.textContent || image.alt;
@@ -72,6 +88,7 @@ function setupLightbox(
 		thumbnails.forEach((thumbnail, i) => thumbnail.setAttribute('aria-pressed', String(i === activeIndex)));
 		if (align) alignSlide();
 		alignThumbnail();
+		loadSelectedImage();
 	};
 
 	// Opening — every tile starts the viewer at the image the user selected.
@@ -85,6 +102,7 @@ function setupLightbox(
 			dialog.showModal();
 			alignSlide();
 			alignThumbnail();
+			loadSelectedImage();
 		}, options);
 	});
 

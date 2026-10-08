@@ -42,6 +42,10 @@
   height: auto;
 }
 
+.gallery__item picture {
+  display: block;
+}
+
 .gallery__caption {
   margin-top: var(--space-8);
 }
@@ -312,12 +316,12 @@ html:has(.gallery__viewer[open]) {
   .gallery {
     width: 100vw;
     margin-inline: calc(50% - 50vw);
-    background: var(--ink);
+    background: var(--paper);
   }
 
   .gallery__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 3px;
+    gap: 8px;
   }
 
   .gallery .gallery__grid .gallery__item {
@@ -330,6 +334,7 @@ html:has(.gallery__viewer[open]) {
   }
 
   .gallery__grid .gallery__trigger,
+  .gallery__grid picture,
   .gallery__grid .gallery__item img {
     height: 100%;
   }
@@ -387,6 +392,9 @@ html:has(.gallery__viewer[open]) {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     overscroll-behavior-x: contain;
+    /* Leave horizontal scrolling and pinch zoom native; handle downward swipes ourselves. */
+    touch-action: pan-x pinch-zoom;
+    overscroll-behavior-y: none;
     scrollbar-width: none;
   }
 

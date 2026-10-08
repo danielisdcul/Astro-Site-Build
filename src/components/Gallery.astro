@@ -1,6 +1,7 @@
 ---
 import type { GalleryOptions } from '../data/gallery.ts';
 import { withBase } from '../utils/paths.ts';
+import GalleryPreview from './GalleryPreview.astro';
 
 type Props = GalleryOptions & {
 	label?: string;
@@ -26,13 +27,13 @@ const {
 					<div class="gallery__media">
 						{lightbox ? (
 							<a class="gallery__trigger" href={withBase(image.src)} aria-label={`View larger image: ${image.alt}`}>
-								<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+								<GalleryPreview image={image} eager={eager && index === 0} />
 								<span class="gallery__expand" aria-hidden="true">
 									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" /></svg>
 								</span>
 							</a>
 						) : (
-							<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading={eager && index === 0 ? 'eager' : 'lazy'} decoding="async" draggable="false" />
+							<GalleryPreview image={image} eager={eager && index === 0} />
 						)}
 					</div>
 					{image.caption && (
@@ -53,12 +54,13 @@ const {
 						</button>
 					</div>
 					<div class="gallery__stage">
-						<img class="gallery__full-image" src={withBase(images[0].src)} alt={images[0].alt} loading="lazy" decoding="async" />
-						<div class="gallery__swipe-track" role="group" aria-roledescription="carousel" aria-label="Images. Swipe or use arrow keys to browse.">
+						<!-- Hidden slides carry only previews; selected images upgrade after opening. -->
+						<img class="gallery__full-image" src={withBase(images[0].previewSrc || images[0].src)} alt={images[0].alt} loading="lazy" decoding="async" />
+						<div class="gallery__swipe-track" role="group" aria-roledescription="carousel" aria-label="Images. Swipe sideways or use arrow keys to browse. Swipe down quickly to close.">
 							{images.map((image, index) => (
 								<div class="gallery__slide" role="group" aria-roledescription="slide" aria-label={`Image ${index + 1} of ${images.length}`}>
 									<div class="gallery__media">
-										<img src={withBase(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" draggable="false" />
+										<img src={withBase(image.previewSrc || image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" draggable="false" />
 									</div>
 								</div>
 							))}
@@ -85,7 +87,7 @@ const {
 							<div class="gallery__thumbnails" role="group" aria-label="Choose an image">
 								{images.map((image, index) => (
 									<button class="gallery__thumbnail" type="button" data-gallery-image={index} aria-label={`View image ${index + 1}: ${image.alt}`} aria-pressed={index === 0}>
-										<img src={withBase(image.src)} alt="" loading="lazy" decoding="async" />
+										<img src={withBase(image.previewSrc || image.src)} alt="" loading="lazy" decoding="async" />
 									</button>
 								))}
 							</div>

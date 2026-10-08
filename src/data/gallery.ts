@@ -1,6 +1,8 @@
 /** One image, including its accessible description and optional display caption. */
 export type GalleryImage = {
 	src: string;
+	/** Small mobile tile and lightbox preview; the original loads when selected. */
+	previewSrc?: string;
 	alt: string;
 	caption?: string;
 	width?: number;
