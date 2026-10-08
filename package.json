@@ -9,6 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "images:prepare": "node scripts/image-assets.mjs",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "astro": "astro"
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 ---
 import type { Project } from '../data/projects/types.ts';
 import { withBase } from '../utils/paths.ts';
+import ProgressiveImage from './ProgressiveImage.astro';
 
 type Props = {
 	project: Project;
@@ -27,11 +28,9 @@ const { galleryLayout } = project;
 			{
 				project.cardImages.map((image, index) => (
 					<div class="project-card__image">
-						<img
-							src={withBase(image)}
+						<ProgressiveImage
+							src={image}
 							alt={`${project.cardTitle} project image ${index + 1}`}
-							loading="eager"
-							decoding="async"
 						/>
 					</div>
 				))

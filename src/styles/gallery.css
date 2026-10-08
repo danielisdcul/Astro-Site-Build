@@ -16,6 +16,8 @@
 }
 
 .gallery__item {
+  grid-column: var(--gallery-column, auto) / span var(--gallery-column-span, 1);
+  grid-row: var(--gallery-row, auto) / span var(--gallery-row-span, 1);
   min-width: 0;
   margin: 0;
 }
@@ -23,6 +25,11 @@
 .gallery__grid--wide-top .gallery__item:first-child,
 .gallery__grid--wide-bottom .gallery__item:last-child {
   grid-column: 1 / -1;
+}
+
+/* Fill earlier open cells when content-aware items have different spans. */
+.gallery__grid--grid {
+  grid-auto-flow: dense;
 }
 
 /* Keep all supported layouts, including options not selected by current project data. */
@@ -42,8 +49,10 @@
   height: auto;
 }
 
-.gallery__item picture {
+.gallery__inline-video {
   display: block;
+  width: 100%;
+  height: auto;
 }
 
 .gallery__caption {
@@ -57,6 +66,22 @@
 
 .gallery__expand {
   display: none;
+}
+
+.gallery__play {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgb(255 255 255 / 60%);
+  border-radius: 50%;
+  background: rgb(10 16 13 / 70%);
+  color: #fff;
+  font-size: 18px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .gallery__hover-zoom {
@@ -137,6 +162,8 @@
   background: var(--ink);
   color: #fff;
   box-shadow: 0 24px 80px rgb(0 0 0 / 35%);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .gallery__viewer::backdrop {
@@ -185,6 +212,25 @@ html:has(.gallery__viewer[open]) {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.gallery__full-video,
+.gallery__slide-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  background: #000;
+  object-fit: contain;
+}
+
+.gallery__full-video[hidden] {
+  display: none;
+}
+
+.gallery__full-image[hidden] {
+  display: none;
 }
 
 .gallery__caption,
@@ -312,7 +358,7 @@ html:has(.gallery__viewer[open]) {
 
 /* Mobile — two-column tiles open an immersive viewer with native swipe navigation. */
 
-@media (max-width: 800px) {
+@media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
   .gallery {
     width: 100vw;
     margin-inline: calc(50% - 50vw);
@@ -326,6 +372,7 @@ html:has(.gallery__viewer[open]) {
 
   .gallery .gallery__grid .gallery__item {
     grid-column: auto;
+    grid-row: auto;
   }
 
   .gallery__grid .gallery__media {
@@ -334,7 +381,6 @@ html:has(.gallery__viewer[open]) {
   }
 
   .gallery__grid .gallery__trigger,
-  .gallery__grid picture,
   .gallery__grid .gallery__item img {
     height: 100%;
   }
@@ -350,6 +396,36 @@ html:has(.gallery__viewer[open]) {
 
   .gallery__grid .gallery__item:last-child:nth-child(odd) .gallery__media {
     aspect-ratio: 2 / 1;
+  }
+
+  /* Preserve authored order and full media proportions in galleries that opt into stacking. */
+  .gallery__grid--mobile-stack {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-flow: row;
+  }
+
+  .gallery__grid--mobile-stack .gallery__item {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .gallery__grid--mobile-stack .gallery__media,
+  .gallery__grid--mobile-stack .gallery__item:last-child:nth-child(odd) .gallery__media {
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+
+  .gallery__grid--mobile-stack .gallery__trigger,
+  .gallery__grid--mobile-stack .gallery__item img {
+    height: auto;
+  }
+
+  .gallery__grid--mobile-stack .gallery__item img {
+    object-fit: contain;
+  }
+
+  .gallery__grid--mobile-stack .gallery__item:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 
   .gallery__caption {
@@ -380,6 +456,7 @@ html:has(.gallery__viewer[open]) {
   }
 
   .gallery__full-image,
+  .gallery__full-video,
   .gallery__previous,
   .gallery__next,
   .gallery__thumbnails {
@@ -430,6 +507,13 @@ html:has(.gallery__viewer[open]) {
     object-fit: contain;
   }
 
+  .gallery__slide-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    touch-action: pan-x pinch-zoom;
+  }
+
   .gallery__media.is-magnifying::after {
     content: '';
     position: absolute;
@@ -464,5 +548,16 @@ html:has(.gallery__viewer[open]) {
 
   .gallery__dot.is-active {
     background: #fff;
+  }
+}
+
+/* Keep landscape phone controls compact while the dots replace desktop previews. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .gallery__viewer-content {
+    gap: 8px;
+  }
+
+  .gallery__viewer-footer {
+    gap: 4px;
   }
 }

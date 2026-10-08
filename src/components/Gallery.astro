@@ -1,51 +1,98 @@
 ---
-import type { GalleryOptions } from '../data/gallery.ts';
+import { getGallerySlides, type GalleryImage, type GalleryOptions, type GallerySlide } from '../data/gallery.ts';
+import { getImageAsset } from '../utils/image-assets';
 import { withBase } from '../utils/paths.ts';
-import GalleryPreview from './GalleryPreview.astro';
+import ProgressiveImage from './ProgressiveImage.astro';
 
 type Props = GalleryOptions & {
 	label?: string;
 	/** Load the first image eagerly when the gallery is near the top of a page. */
 	eager?: boolean;
+	/** Slides shared across a project page's otherwise separate gallery sections. */
+	viewerSlides?: GallerySlide[];
+	/** Only one gallery renders the page-wide lightbox. */
+	pageViewer?: boolean;
 };
 
 const {
 	images,
 	layout = 'grid',
+	mobileLayout = 'grid',
 	columns = 2,
 	lightbox = true,
 	label = 'Image gallery',
 	eager = false,
+	videos = [],
+	pageViewer = true,
 } = Astro.props;
+
+const gallerySlides = getGallerySlides(images, videos);
+const viewerSlides = Astro.props.viewerSlides ?? gallerySlides;
+
+// Captions belong to the figure; forward only image attributes to the shared component.
+const imageAttributes = ({ src, alt, width, height }: GalleryImage) => ({ src, alt, width, height });
+const findPageIndex = (image: GalleryImage) => viewerSlides.findIndex((slide) => slide === image);
+const findVideoIndex = (src: string) => viewerSlides.findIndex((slide) => 'type' in slide && slide.src === src);
+const firstViewerImage = viewerSlides.find((slide) => !('type' in slide));
+
+// Landscape media gets two columns; portrait media gets two rows in content-aware grids.
+const placementStyle = (slide: GallerySlide) => {
+	const ratio = slide.width && slide.height ? slide.width / slide.height : 1;
+	const inferred = layout === 'grid'
+		? ratio >= 1.4 ? { columnSpan: Math.min(2, columns), rowSpan: 1 }
+			: ratio <= 0.7 ? { columnSpan: 1, rowSpan: 2 }
+				: { columnSpan: 1, rowSpan: 1 }
+		: {};
+	const placement = { ...inferred, ...slide.placement };
+	return [
+		placement.column && `--gallery-column: ${placement.column}`,
+		placement.row && `--gallery-row: ${placement.row}`,
+		`--gallery-column-span: ${placement.columnSpan ?? 1}`,
+		`--gallery-row-span: ${placement.rowSpan ?? 1}`,
+	].filter(Boolean).join('; ');
+};
 ---
 
-{images.length > 0 && (
+{(images.length > 0 || videos.length > 0) && (
 	<image-gallery class="gallery" role="group" aria-label={label}>
-		<div class:list={['gallery__grid', `gallery__grid--${layout}`]} style={`--gallery-columns: ${columns};`}>
-			{images.map((image, index) => (
-				<figure class="gallery__item">
+		<div class:list={['gallery__grid', `gallery__grid--${layout}`, { 'gallery__grid--mobile-stack': mobileLayout === 'stack' }]} style={`--gallery-columns: ${columns};`}>
+			{gallerySlides.map((slide, index) => (
+				<figure class="gallery__item" style={placementStyle(slide)}>
 					<div class="gallery__media">
-						{lightbox ? (
-							<a class="gallery__trigger" href={withBase(image.src)} aria-label={`View larger image: ${image.alt}`}>
-								<GalleryPreview image={image} eager={eager && index === 0} />
-								<span class="gallery__expand" aria-hidden="true">
-									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" /></svg>
-								</span>
-							</a>
+						{'type' in slide ? (
+							lightbox ? (
+								<a class="gallery__trigger" data-gallery-index={findVideoIndex(slide.src)} href={withBase(slide.src)} aria-label={`View video: ${slide.alt}`}>
+									<ProgressiveImage src={slide.poster} alt={slide.alt} eager={eager && index === 0} />
+									<span class="gallery__play" aria-hidden="true">▶</span>
+								</a>
+							) : (
+								<video class="gallery__inline-video" controls playsinline preload="none" poster={withBase(getImageAsset(slide.poster).preview)} width={slide.width} height={slide.height} aria-label={slide.alt}>
+									<source src={withBase(slide.src)} type="video/mp4" />
+								</video>
+							)
 						) : (
-							<GalleryPreview image={image} eager={eager && index === 0} />
+							lightbox ? (
+								<a class="gallery__trigger" data-gallery-index={findPageIndex(slide)} href={withBase(slide.src)} aria-label={`View larger image: ${slide.alt}`}>
+									<ProgressiveImage {...imageAttributes(slide)} eager={eager && index === 0} />
+									<span class="gallery__expand" aria-hidden="true">
+										<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7" /></svg>
+									</span>
+								</a>
+							) : (
+								<ProgressiveImage {...imageAttributes(slide)} eager={eager && index === 0} />
+							)
 						)}
 					</div>
-					{image.caption && (
+					{slide.caption && (
 						<figcaption class="gallery__caption">
-							<span class="gallery__caption-text">{image.caption}</span>
+							<span class="gallery__caption-text">{slide.caption}</span>
 						</figcaption>
 					)}
 				</figure>
 			))}
 		</div>
-		{lightbox && (
-			<dialog class="gallery__viewer" aria-label={`${label} image viewer`}>
+		{lightbox && pageViewer && viewerSlides.length > 0 && (
+			<dialog class="gallery__viewer" aria-label={`${label} media viewer`}>
 				<div class="gallery__viewer-content">
 					<div class="gallery__toolbar">
 						<p class="gallery__count" aria-live="polite" aria-atomic="true"></p>
@@ -55,17 +102,32 @@ const {
 					</div>
 					<div class="gallery__stage">
 						<!-- Hidden slides carry only previews; selected images upgrade after opening. -->
-						<img class="gallery__full-image" src={withBase(images[0].previewSrc || images[0].src)} alt={images[0].alt} loading="lazy" decoding="async" />
-						<div class="gallery__swipe-track" role="group" aria-roledescription="carousel" aria-label="Images. Swipe sideways or use arrow keys to browse. Swipe down quickly to close.">
-							{images.map((image, index) => (
-								<div class="gallery__slide" role="group" aria-roledescription="slide" aria-label={`Image ${index + 1} of ${images.length}`}>
+						{firstViewerImage && <ProgressiveImage class="gallery__full-image" {...imageAttributes(firstViewerImage)} upgrade="on-demand" />}
+						<video class="gallery__full-video" controls playsinline preload="none" hidden aria-label="Gallery video"></video>
+						<div class="gallery__swipe-track" role="group" aria-roledescription="carousel" aria-label="Page media. Swipe sideways or use arrow keys to browse. Swipe down quickly to close.">
+							{viewerSlides.map((slide, index) => (
+								<div class="gallery__slide" data-gallery-type={'type' in slide ? 'video' : 'image'} data-gallery-index={index} role="group" aria-roledescription="slide" aria-label={`${'type' in slide ? slide.caption : slide.alt}. Item ${index + 1} of ${viewerSlides.length}`}>
 									<div class="gallery__media">
-										<img src={withBase(image.previewSrc || image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" draggable="false" />
+										{!('type' in slide) ? (
+											<ProgressiveImage {...imageAttributes(slide)} upgrade="on-demand" />
+										) : (
+											<video
+												class="gallery__slide-video"
+												controls
+												playsinline
+												preload="none"
+												data-gallery-video-src={withBase(slide.src)}
+												data-gallery-video-poster={withBase(getImageAsset(slide.poster).preview)}
+												width={slide.width}
+												height={slide.height}
+												aria-label={slide.alt}
+											></video>
+										)}
 									</div>
 								</div>
 							))}
 						</div>
-						{images.length > 1 && (
+						{viewerSlides.length > 1 && (
 							<>
 								<button class="gallery__control gallery__previous" type="button" data-gallery-prev aria-label="Previous image" title="Previous image (Left arrow)">
 									<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m14 6-6 6 6 6" /></svg>
@@ -78,16 +140,16 @@ const {
 					</div>
 					<div class="gallery__viewer-footer">
 						<p class="gallery__viewer-caption"></p>
-						{images.length > 1 && (
+						{viewerSlides.length > 1 && (
 							<div class="gallery__dots" aria-hidden="true">
-								{images.map((_, index) => <span class:list={['gallery__dot', { 'is-active': index === 0 }]} />)}
+								{viewerSlides.map((_, index) => <span class:list={['gallery__dot', { 'is-active': index === 0 }]} />)}
 							</div>
 						)}
-						{images.length > 1 && (
+						{viewerSlides.length > 1 && (
 							<div class="gallery__thumbnails" role="group" aria-label="Choose an image">
-								{images.map((image, index) => (
-									<button class="gallery__thumbnail" type="button" data-gallery-image={index} aria-label={`View image ${index + 1}: ${image.alt}`} aria-pressed={index === 0}>
-										<img src={withBase(image.previewSrc || image.src)} alt="" loading="lazy" decoding="async" />
+								{viewerSlides.map((slide, index) => (
+									<button class="gallery__thumbnail" type="button" data-gallery-image={index} aria-label={`View ${'type' in slide ? 'video' : 'image'} ${index + 1}: ${slide.alt}`} aria-pressed={index === 0}>
+										<ProgressiveImage src={'type' in slide ? slide.poster : slide.src} alt="" upgrade="preview" />
 									</button>
 								))}
 							</div>

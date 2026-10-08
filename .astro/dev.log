@@ -1,373 +1,223 @@
 {"message":"connected.","label":"vite","level":"info"}
 {"message":"Generated 0ms","label":"types","level":"info"}
-{"message":"Port 4321 is in use, trying another one...","label":"vite","level":"info"}
 {"message":"connected.","label":"vite","level":"info"}
 {"message":"Re-optimizing dependencies because vite config has changed","label":"vite","level":"info"}
-{"message":"Port 4322 is in use, trying another one...","label":"vite","level":"info"}
-{"message":" astro  v7.3.2 ready in 787 ms\n┃ Local    http://localhost:4323/Astro-Site-Build/\n┃ Network  use --host to expose","label":"SKIP_FORMAT","level":"info"}
+{"message":" astro  v7.3.2 ready in 917 ms\n┃ Local    http://localhost:4323/Astro-Site-Build/\n┃ Network  http://192.168.1.18:4323/Astro-Site-Build/","label":"SKIP_FORMAT","level":"info"}
 {"message":"watching for file changes...","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 24ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] / 16ms","label":null,"level":"info"}
-{"message":"[200] /work/ 22ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 15ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] / 23ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 17ms","label":null,"level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"[200] / 22ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Header.astro","label":"watch","level":"info"}
-{"message":"[200] / 13ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Header.astro","label":"watch","level":"info"}
-{"message":"[200] / 12ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"[200] /work/ 25ms","label":null,"level":"info"}
-{"message":"[200] /about/ 12ms","label":null,"level":"info"}
-{"message":"[200] /contact/ 16ms","label":null,"level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] / 7ms","label":null,"level":"info"}
-{"message":"[200] / 3ms","label":null,"level":"info"}
-{"message":"[200] / 5ms","label":null,"level":"info"}
-{"message":"[200] / 9ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] / 9ms","label":null,"level":"info"}
-{"message":"[200] / 5ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] / 6ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] / 6ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] / 35ms","label":null,"level":"info"}
-{"message":"[200] / 19ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 23ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 4ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 61ms","label":null,"level":"info"}
-{"message":"[200] /work/ 27ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 23ms","label":null,"level":"info"}
 {"message":"[200] /projects/selah-coffee/ 6ms","label":null,"level":"info"}
-{"message":"[200] /work/ 4ms","label":null,"level":"info"}
-{"message":"[200] /projects/hum/ 4ms","label":null,"level":"info"}
-{"message":"[200] / 6ms","label":null,"level":"info"}
-{"message":"[200] /work/ 5ms","label":null,"level":"info"}
-{"message":"[200] /projects/hum/ 5ms","label":null,"level":"info"}
-{"message":"[200] / 6ms","label":null,"level":"info"}
-{"message":"[200] /projects/selah-coffee/ 5ms","label":null,"level":"info"}
-{"message":"[200] /work/ 3ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 4ms","label":null,"level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 8ms","label":null,"level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 5ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 16ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 35ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 14ms","label":null,"level":"info"}
-{"message":"[200] /about/ 3ms","label":null,"level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /work/ 18ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 12ms","label":null,"level":"info"}
-{"message":"[200] / 18ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 6ms","label":null,"level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 16ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 5ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 16ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 11ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 16ms","label":null,"level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 4ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 38ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 13ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 19ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 34ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 16ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 4ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 39ms","label":null,"level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 14ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-image-loading.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-dismiss.ts","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 26ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 19ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-sign.webp/ 3ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-sign.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-fabric.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-tags.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-sign.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-fabric.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-tags.webp/ 0ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery-dismiss.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 5ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 7ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /work/ 22ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 3ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /work/ 4ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 4ms","label":null,"level":"info"}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           {"message":"[200] /work/ 25ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 6ms","label":null,"level":"info"}
-{"message":"[200] / 3ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 6ms","label":null,"level":"info"}
-{"message":"[200] /work/ 4ms","label":null,"level":"info"}
-{"message":"[200] /projects/hum/ 3ms","label":null,"level":"info"}
-{"message":"[200] /work/ 4ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /work/ 18ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Header.astro","label":"watch","level":"info"}
-{"message":"[200] /work/ 20ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Header.astro","label":"watch","level":"info"}
-{"message":"[200] /work/ 17ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /work/ 5ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /work/ 9ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /work/ 7ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /work/ 27ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /work/ 9ms","label":null,"level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /work/ 6ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /work/ 8ms","label":null,"level":"info"}
-{"message":"[200] /work/ 20ms","label":null,"level":"info"}
-{"message":"[200] /work/ 57ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /work/ 12ms","label":null,"level":"info"}
-{"message":"[200] /work/ 12ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /work/ 4ms","label":null,"level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /work/ 5ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /work/ 45ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/hum/ 28ms","label":null,"level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/hum/ 32ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/hum/ 8ms","label":null,"level":"info"}
-{"message":"[200] / 28ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 9ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 23ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 12ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 7ms","label":null,"level":"info"}
 {"message":"[200] /projects/selah-coffee/ 3ms","label":null,"level":"info"}
-{"message":"[200] / 4ms","label":null,"level":"info"}
-{"message":"[200] /contact/ 20ms","label":null,"level":"info"}
-{"message":"[200] /work/ 37ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 5ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 16ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 62ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 62ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 7ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 4ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 5ms","label":null,"level":"info"}
+{"message":"Request URLs for public/ assets must also include your base. \"/Astro-Site-Build//favicon.ico\" expected, but received \"/favicon.ico\".","label":"router","level":"error"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 20ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 20ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 22ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 22ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 3ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 17ms","label":null,"level":"info"}
+{"message":"Request URLs for public/ assets must also include your base. \"/Astro-Site-Build//favicon.ico\" expected, but received \"/favicon.ico\".","label":"router","level":"error"}
+{"message":"[200] /projects/selah-coffee/ 18ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 5ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 2ms","label":null,"level":"info"}
+{"message":"Request URLs for public/ assets must also include your base. \"/Astro-Site-Build//favicon.ico\" expected, but received \"/favicon.ico\".","label":"router","level":"error"}
+{"message":"[200] /projects/selah-coffee/ 3ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 18ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 19ms","label":null,"level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 15ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 15ms","label":null,"level":"info"}
+{"message":"[Unhandled error] TypeError: Cannot read properties of null (reading 'addEventListener')\n > src/utils/gallery-magnifier.ts:89:8\n    87 |  \tmedia.forEach((frame, index) => {\n    88 |  \t\tconst image = images[index];\n    89 |  \t\timage.addEventListener('load', () => {\n       |          ^\n    90 |  \t\t\tif (selection?.frame === frame) stop();\n    91 |  \t\t}, options);\n > setupGalleryMagnifier src/utils/gallery-magnifier.ts:87:7\n > setupGallery src/utils/gallery.ts:14:26\n > ImageGallery.connectedCallback ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:5:20\n > ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:12:58\n","label":"vite","level":"error"}
+{"message":"[Unhandled error] TypeError: Cannot read properties of null (reading 'addEventListener')\n > src/utils/gallery-magnifier.ts:89:8\n    87 |  \tmedia.forEach((frame, index) => {\n    88 |  \t\tconst image = images[index];\n    89 |  \t\timage.addEventListener('load', () => {\n       |          ^\n    90 |  \t\t\tif (selection?.frame === frame) stop();\n    91 |  \t\t}, options);\n > setupGalleryMagnifier src/utils/gallery-magnifier.ts:87:7\n > setupGallery src/utils/gallery.ts:14:26\n > ImageGallery.connectedCallback ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:5:20\n > ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:12:58\n","label":"vite","level":"error"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 16ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 16ms","label":null,"level":"info"}
+{"message":"[Unhandled error] TypeError: Cannot read properties of null (reading 'addEventListener')\n > src/utils/gallery-magnifier.ts:89:8\n    87 |  \tmedia.forEach((frame, index) => {\n    88 |  \t\tconst image = images[index];\n    89 |  \t\timage.addEventListener('load', () => {\n       |          ^\n    90 |  \t\t\tif (selection?.frame === frame) stop();\n    91 |  \t\t}, options);\n > setupGalleryMagnifier src/utils/gallery-magnifier.ts:87:7\n > setupGallery src/utils/gallery.ts:14:26\n > ImageGallery.connectedCallback ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:5:20\n > ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:12:58\n","label":"vite","level":"error"}
+{"message":"[Unhandled error] TypeError: Cannot read properties of null (reading 'addEventListener')\n > src/utils/gallery-magnifier.ts:89:8\n    87 |  \tmedia.forEach((frame, index) => {\n    88 |  \t\tconst image = images[index];\n    89 |  \t\timage.addEventListener('load', () => {\n       |          ^\n    90 |  \t\t\tif (selection?.frame === frame) stop();\n    91 |  \t\t}, options);\n > setupGalleryMagnifier src/utils/gallery-magnifier.ts:87:7\n > setupGallery src/utils/gallery.ts:14:26\n > ImageGallery.connectedCallback ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:5:20\n > ../../../../../../src/components/Gallery.astro?astro=&type=script&index=0&lang.ts=:12:58\n","label":"vite","level":"error"}
 {"message":"src/utils/gallery.ts","label":"watch","level":"info"}
 {"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 10ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 11ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 11ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 17ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 52ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 52ms","label":null,"level":"info"}
 {"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 21ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"src/utils/menu-position.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 22ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 14ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 13ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 49ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 50ms","label":null,"level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 4ms","label":null,"level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 51ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 51ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 37ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 37ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 23ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 23ms","label":null,"level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 57ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 57ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 20ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 20ms","label":null,"level":"info"}
+{"message":"getImageAsset is not defined\n  Stack trace:\n    at /Users/danielculley/Documents/Design/myServer/Astro Site Build/eval at runInlinedModule (file:/Users/danielculley/Documents/Design/myServer/Astro%20Site%20Build/node_modules/.pnpm/vite@8.2.2_esbuild@0.28.2/node_modules/vite/dist/node/module-runner.js:1021:9\n    [...] See full stack trace in the browser, or rerun with --verbose.","label":null,"level":"error"}
+{"message":"getImageAsset is not defined\n  Stack trace:\n    at /Users/danielculley/Documents/Design/myServer/Astro Site Build/eval at runInlinedModule (file:/Users/danielculley/Documents/Design/myServer/Astro%20Site%20Build/node_modules/.pnpm/vite@8.2.2_esbuild@0.28.2/node_modules/vite/dist/node/module-runner.js:1021:9\n    [...] See full stack trace in the browser, or rerun with --verbose.","label":null,"level":"error"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 8ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 8ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 65ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 65ms","label":null,"level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 6ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 3ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 42ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 42ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 15ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 15ms","label":null,"level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 31ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 31ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 22ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 22ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 25ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 25ms","label":null,"level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 50ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 50ms","label":null,"level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 21ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 86ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 86ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 25ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 25ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /work/ 20ms","label":null,"level":"info"}
+{"message":"[200] / 24ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 5ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 6ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"[200] /projects/selah-coffee/ 66ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 65ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] / 19ms","label":null,"level":"info"}
+{"message":"[200] /about/ 26ms","label":null,"level":"info"}
+{"message":"[200] /contact/ 22ms","label":null,"level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /contact/ 4ms","label":null,"level":"info"}
+{"message":"[200] /projects/selah-coffee/ 7ms","label":null,"level":"info"}
+{"message":"[200] /contact/ 3ms","label":null,"level":"info"}
+{"message":"[200] /work/ 28ms","label":null,"level":"info"}
 {"message":"[200] /projects/selah-coffee/ 4ms","label":null,"level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] / 16ms","label":null,"level":"info"}
-{"message":"[200] /work/ 22ms","label":null,"level":"info"}
-{"message":"[200] /projects/vita-terra/ 3ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"src/utils/gallery.ts","label":"watch","level":"info"}
 {"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 17ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"src/components/Gallery.astro","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 15ms","label":null,"level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 13ms","label":null,"level":"info"}
-{"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 30ms","label":null,"level":"info"}
 {"message":"src/utils/gallery.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 6ms","label":null,"level":"info"}
-{"message":"src/utils/gallery-image-loading.ts","label":"watch","level":"info"}
-{"message":"src/utils/gallery-dismiss.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"src/components/Gallery.astro","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 61ms","label":null,"level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery-magnifier.ts","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 20ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-sign.webp/ 14ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-sign.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-sign.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-fabric.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-tags.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-sign.webp/ 1ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-fabric.webp/ 0ms","label":null,"level":"info"}
-{"message":"[404] /images/portfolio/previews/vita-tags.webp/ 0ms","label":null,"level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
-{"message":"src/utils/gallery-dismiss.ts","label":"watch","level":"info"}
-{"message":"[200] /projects/vita-terra/ 5ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/utils/gallery-hover-zoom.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/components/Gallery.astro","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"src/utils/gallery.ts","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}
 {"message":"/src/styles/global.css","label":"watch","level":"info"}

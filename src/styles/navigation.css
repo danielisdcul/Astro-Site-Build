@@ -91,11 +91,11 @@
   gap: var(--space-32);
 }
 
-/* Responsive: (max-width: 800px)
+/* Responsive: narrow screens and short landscape phones.
    has-mobile-menu is added by Header.astro; navigation remains visible without JavaScript.
    Keep --nav-motion-duration aligned with the handedness-switch timer in Header.astro. */
 
-@media (max-width: 800px) {
+@media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
   .has-mobile-menu {
     --nav-control-size: 54px;
     --nav-edge-width: 44px;
@@ -457,6 +457,35 @@
 
   .site-nav {
     gap: var(--space-16);
+  }
+}
+
+/* Landscape phones use a centered menu circle with a diameter of half the viewport width. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .has-mobile-menu {
+    --nav-edge-top: calc(50svh - var(--nav-edge-height) / 2);
+  }
+
+  .has-mobile-menu #primary-navigation {
+    --thumb-menu-size: 25vw;
+    top: calc(50svh - var(--thumb-menu-size));
+    height: calc(var(--thumb-menu-size) * 2);
+  }
+
+  .has-mobile-menu #primary-navigation .site-nav {
+    left: calc(100% - 12px);
+    gap: 4px;
+  }
+
+  .has-mobile-menu #primary-navigation a {
+    min-width: 0;
+    min-height: 32px;
+    padding-block: 2px;
+    font-size: clamp(14px, 4svh, 18px);
+  }
+
+  .has-mobile-menu.is-lefty #primary-navigation .site-nav {
+    left: 12px;
   }
 }
 

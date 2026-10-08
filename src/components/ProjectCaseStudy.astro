@@ -1,7 +1,9 @@
 ---
 import type { Project } from '../data/projects/types.ts';
+import { getGallerySlides, type GallerySlide } from '../data/gallery.ts';
 import { withBase } from '../utils/paths.ts';
 import Gallery from './Gallery.astro';
+import ProgressiveImage from './ProgressiveImage.astro';
 
 type Props = {
 	project: Project;
@@ -12,9 +14,18 @@ const gallery = project.gallery ?? {
 	layout: project.galleryLayout,
 	images: project.cardImages.map((src, index) => ({ src, alt: `${project.title} project image ${index + 1}` })),
 };
+// A case-study viewer follows every authored image and video in document order.
+const pageSlides: GallerySlide[] = [
+	...getGallerySlides(gallery.images, gallery.videos),
+	...project.sections.flatMap((section) => [
+		...(section.videos ?? []).map((video) => ({ ...video, type: 'video' as const, alt: video.caption })),
+		...getGallerySlides(section.gallery?.images ?? [], section.gallery?.videos),
+	]),
+];
+const videoSlideIndex = (src: string) => pageSlides.findIndex((slide) => 'type' in slide && slide.src === src);
 ---
 
-<article class="case-study">
+<article class:list={['case-study', { 'case-study--margin-media': project.sections.some((section) => section.gallery) }]}>
 	<header class="case-study__hero shell">
 		<p class="eyebrow">{project.type}</p>
 		<h1>{project.title}</h1>
@@ -46,14 +57,14 @@ const gallery = project.gallery ?? {
 	</header>
 
 	<div class="shell case-study__feature">
-		<Gallery {...gallery} label={`${project.title} project gallery`} eager />
+		<Gallery {...gallery} viewerSlides={pageSlides} pageViewer label={`${project.title} project gallery`} eager />
 	</div>
 
 	<div class="shell case-study__content">
 		{
 			project.sections.map((section) => (
 				<section class="case-study__section content-split content-split--case-study">
-					<div>
+					<div class="case-study__section-heading">
 						<p class="eyebrow">{section.title}</p>
 					</div>
 					<div class="case-study__section-body">
@@ -97,6 +108,33 @@ const gallery = project.gallery ?? {
 							</p>
 						)}
 					</div>
+					{section.videos && section.videos.length > 0 && (
+						<div class:list={['case-study__videos', { 'case-study__videos--pair': section.videos.length > 1 }]}>
+							{section.videos.map((video) => (
+								<figure class:list={['case-study__video', { 'case-study__video--portrait': video.height > video.width }]}>
+									<button
+										class="case-study__video-trigger"
+										type="button"
+										data-gallery-video-trigger
+										data-gallery-index={videoSlideIndex(video.src)}
+										aria-label={`Play ${video.caption} in gallery`}
+										style={`aspect-ratio: ${video.width} / ${video.height};`}
+									>
+										<ProgressiveImage src={video.poster} alt="" width={video.width} height={video.height} upgrade="preview" />
+										<span class="gallery__play" aria-hidden="true">▶</span>
+									</button>
+									<figcaption class="gallery__caption">
+										<span class="gallery__caption-text">{video.caption}</span>
+									</figcaption>
+								</figure>
+							))}
+						</div>
+					)}
+					{section.gallery && (
+						<div class="case-study__section-media">
+							<Gallery {...section.gallery} viewerSlides={pageSlides} pageViewer={false} label={`${project.title} — ${section.title}`} />
+						</div>
+					)}
 				</section>
 			))
 		}

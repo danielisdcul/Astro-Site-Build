@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { about } from '../data/pages/about.ts';
-import { withBase } from '../utils/paths.ts';
+import ProgressiveImage from '../components/ProgressiveImage.astro';
 ---
 
 <BaseLayout title={about.metadata.title} description={about.metadata.description}>
@@ -14,12 +14,13 @@ import { withBase } from '../utils/paths.ts';
 					<p>{about.intro}</p>
 				</div>
 			</div>
-			<img
+			<ProgressiveImage
 				class="about-intro__portrait"
-				src={withBase(about.portrait.src)}
+				src={about.portrait.src}
 				alt={about.portrait.alt}
 				width="520"
 				height="520"
+				eager
 			/>
 		</div>
 		<div class="about-sections">

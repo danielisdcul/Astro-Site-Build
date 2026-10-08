@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import ProgressiveImage from '../components/ProgressiveImage.astro';
 import { home } from '../data/pages/home.ts';
 import { projects } from '../data/projects/index.ts';
 import { emailLink, site } from '../data/site.ts';
@@ -27,12 +28,13 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 				</p>
 			</div>
 		</div>
-		<img
+		<ProgressiveImage
 			class="hero__portrait"
-			src={withBase(home.portrait.src)}
+			src={home.portrait.src}
 			alt={home.portrait.alt}
 			width="520"
 			height="520"
+			eager
 		/>
 	</section>
 

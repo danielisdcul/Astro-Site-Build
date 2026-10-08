@@ -1,0 +1,98 @@
+{
+	"/images/portfolio/daniel-portrait.png": {
+		"preview": "/images/generated/portfolio/daniel-portrait.png-12480160b8f2-preview.webp",
+		"full": "/images/generated/portfolio/daniel-portrait.png-12480160b8f2-full.webp",
+		"width": 1200,
+		"height": 1200
+	},
+	"/images/portfolio/hum-book.png": {
+		"preview": "/images/generated/portfolio/hum-book.png-7731d4395349-preview.webp",
+		"full": "/images/generated/portfolio/hum-book.png-7731d4395349-full.webp",
+		"width": 1600,
+		"height": 1200
+	},
+	"/images/portfolio/hum-jacket.png": {
+		"preview": "/images/generated/portfolio/hum-jacket.png-122a94995985-preview.webp",
+		"full": "/images/generated/portfolio/hum-jacket.png-122a94995985-full.webp",
+		"width": 1600,
+		"height": 1200
+	},
+	"/images/portfolio/hum-layout.png": {
+		"preview": "/images/generated/portfolio/hum-layout.png-59687438ab97-preview.webp",
+		"full": "/images/generated/portfolio/hum-layout.png-59687438ab97-full.webp",
+		"width": 3588,
+		"height": 1600
+	},
+	"/images/portfolio/selah-coffee/selah-coffee-brand-positioning.png": {
+		"preview": "/images/generated/portfolio/selah-coffee/selah-coffee-brand-positioning.png-664f40758204-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/selah-coffee-brand-positioning.png-664f40758204-full.webp",
+		"width": 1080,
+		"height": 1920
+	},
+	"/images/portfolio/selah-coffee/selah-coffee-color-palette.png": {
+		"preview": "/images/generated/portfolio/selah-coffee/selah-coffee-color-palette.png-1b23ea94675d-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/selah-coffee-color-palette.png-1b23ea94675d-full.webp",
+		"width": 1080,
+		"height": 1920
+	},
+	"/images/portfolio/selah-coffee/selah-coffee-final-logo-assets.png": {
+		"preview": "/images/generated/portfolio/selah-coffee/selah-coffee-final-logo-assets.png-8c1ffb0f04c5-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/selah-coffee-final-logo-assets.png-8c1ffb0f04c5-full.webp",
+		"width": 1080,
+		"height": 1920
+	},
+	"/images/portfolio/selah-coffee/selah-coffee-initial-logo-sketches.png": {
+		"preview": "/images/generated/portfolio/selah-coffee/selah-coffee-initial-logo-sketches.png-b779126a2219-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/selah-coffee-initial-logo-sketches.png-b779126a2219-full.webp",
+		"width": 1080,
+		"height": 1920
+	},
+	"/images/portfolio/selah-coffee/selah-coffee-name-selection.png": {
+		"preview": "/images/generated/portfolio/selah-coffee/selah-coffee-name-selection.png-f878f308a4a5-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/selah-coffee-name-selection.png-f878f308a4a5-full.webp",
+		"width": 1080,
+		"height": 1920
+	},
+	"/images/portfolio/selah-coffee/selah-coffee-typography.png": {
+		"preview": "/images/generated/portfolio/selah-coffee/selah-coffee-typography.png-01f727b7b412-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/selah-coffee-typography.png-01f727b7b412-full.webp",
+		"width": 1080,
+		"height": 1920
+	},
+	"/images/portfolio/selah-coffee/website-walkthrough-cropped-poster.jpg": {
+		"preview": "/images/generated/portfolio/selah-coffee/website-walkthrough-cropped-poster.jpg-9769f99ebfb1-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/website-walkthrough-cropped-poster.jpg-9769f99ebfb1-full.webp",
+		"width": 1184,
+		"height": 648
+	},
+	"/images/portfolio/selah-coffee/website-walkthrough-poster.jpg": {
+		"preview": "/images/generated/portfolio/selah-coffee/website-walkthrough-poster.jpg-da766973faad-preview.webp",
+		"full": "/images/generated/portfolio/selah-coffee/website-walkthrough-poster.jpg-da766973faad-full.webp",
+		"width": 800,
+		"height": 1516
+	},
+	"/images/portfolio/selah-storefront.png": {
+		"preview": "/images/generated/portfolio/selah-storefront.png-e65cba33b121-preview.webp",
+		"full": "/images/generated/portfolio/selah-storefront.png-e65cba33b121-full.webp",
+		"width": 1600,
+		"height": 1066
+	},
+	"/images/portfolio/vita-fabric.png": {
+		"preview": "/images/generated/portfolio/vita-fabric.png-5713d488c834-preview.webp",
+		"full": "/images/generated/portfolio/vita-fabric.png-5713d488c834-full.webp",
+		"width": 1044,
+		"height": 1044
+	},
+	"/images/portfolio/vita-sign.png": {
+		"preview": "/images/generated/portfolio/vita-sign.png-3b0191b52223-preview.webp",
+		"full": "/images/generated/portfolio/vita-sign.png-3b0191b52223-full.webp",
+		"width": 1600,
+		"height": 1066
+	},
+	"/images/portfolio/vita-tags.png": {
+		"preview": "/images/generated/portfolio/vita-tags.png-9d09c7c442d6-preview.webp",
+		"full": "/images/generated/portfolio/vita-tags.png-9d09c7c442d6-full.webp",
+		"width": 1600,
+		"height": 1200
+	}
+}

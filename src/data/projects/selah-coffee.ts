@@ -16,17 +16,42 @@ export const selahCoffee: Project = {
 	cardMeta: 'Brand strategy · Identity · Web',
 	cardImages: ['/images/portfolio/selah-storefront.png'],
 
-	// Case study gallery: image descriptions, captions, and original dimensions.
+	// Content-aware gallery with explicit placement for this three-column composition.
 	gallery: {
-		layout: 'wide-top',
+		layout: 'grid',
+		mobileLayout: 'stack',
+		columns: 3,
 		images: [
 			{
 				src: '/images/portfolio/selah-storefront.png',
-				previewSrc: '/images/portfolio/previews/selah-storefront.webp',
 				alt: 'Selah Coffee storefront branding',
 				caption: 'Selah Coffee — storefront concept',
 				width: 1600,
 				height: 1066,
+				order: 1,
+				placement: { column: 1, row: 2, columnSpan: 2, rowSpan: 1 },
+			},
+		],
+		videos: [
+			{
+				src: '/videos/selah-coffee-website-walkthrough-cropped.mp4',
+				poster: '/images/portfolio/selah-coffee/website-walkthrough-cropped-poster.jpg',
+				width: 1280,
+				height: 700,
+				order: 0,
+				placement: { column: 1, row: 1, columnSpan: 2, rowSpan: 1 },
+				alt: 'Desktop walkthrough of the Selah Coffee website, from the home page through its brand story and site sections.',
+				caption: 'Desktop website walkthrough',
+			},
+			{
+				src: '/videos/selah-coffee-website-walkthrough.mp4',
+				poster: '/images/portfolio/selah-coffee/website-walkthrough-poster.jpg',
+				width: 1180,
+				height: 2236,
+				order: 2,
+				placement: { column: 3, row: 1, columnSpan: 1, rowSpan: 2 },
+				alt: 'Mobile walkthrough of the Selah Coffee website showing its responsive home page, navigation, and content sections.',
+				caption: 'Mobile website walkthrough',
 			},
 		],
 	},
@@ -90,6 +115,18 @@ export const selahCoffee: Project = {
 				'What would a coffee shop look and feel like if it were built around the people it serves?',
 				'My answer was a community-focused shop designed to invite people to slow down, pause, reflect, and connect with others. Selah is a Hebrew word found throughout the Psalms. Often understood as a musical or reflective pause, it introduces a moment of rest in the cadence, an invitation to stop and consider. This idea became the foundation of the brand and guided the experience I wanted Selah Coffee to create.',
 			],
+			gallery: {
+				layout: 'stack',
+				images: [
+					{
+						src: '/images/portfolio/selah-coffee/selah-coffee-name-selection.png',
+						alt: 'Selah Coffee naming infographic explaining the meaning of Selah, its connection to pause and community, and the alternative names considered.',
+						width: 1080,
+						height: 1920,
+						caption: 'Choosing the Selah Coffee name',
+					},
+				],
+			},
 		},
 		{
 			title: 'Brand Identity Summary',
@@ -121,6 +158,18 @@ export const selahCoffee: Project = {
 					value: 'Hospitality, generosity, dignity, service, creative community, and care for neighbors.',
 				},
 			],
+			gallery: {
+				layout: 'stack',
+				images: [
+					{
+						src: '/images/portfolio/selah-coffee/selah-coffee-brand-positioning.png',
+						alt: 'Selah Coffee brand positioning: a community-first neighborhood coffee shop where guests choose their level of focus and connection, supported by thoughtful sourcing, creative community, and room to pause.',
+						width: 1080,
+						height: 1920,
+						caption: 'Brand positioning',
+					},
+				],
+			},
 		},
 		{
 			title: 'Verbal Identity',
@@ -146,6 +195,36 @@ export const selahCoffee: Project = {
 				'I learned a long time ago that your initial knee-jerk ideas for a logo are often unimaginative and generic. Once you start running out of ideas, the creative ones start to flow. When developing a logo, I sit down with a sketchpad and just draw everything that comes to mind. These are some of the early sketches that I made in this stage of the process:',
 				'After I have a couple of good options to work with, I move over to design software and start playing around with the general designs and then apply them to different things. At this point, I get feedback from different people and then move forward or go back to my sketchpad and repeat this cycle until I have a final product.',
 			],
+			gallery: {
+				layout: 'stack',
+				images: [
+					{
+						src: '/images/portfolio/selah-coffee/selah-coffee-initial-logo-sketches.png',
+						alt: 'Early Selah Coffee logo sketches showing eight wordmark explorations, directional S-shaped marks, and rejected organic mark concepts.',
+						width: 1080,
+						height: 1920,
+						caption: 'Initial logo sketches',
+					},
+				],
+			},
+		},
+		{
+			title: 'Final Logo Assets',
+			paragraphs: [
+				'The final logo’s flowing form evokes the natural movement of water, reinforcing the brand’s sense of ease, reflection, and intentional pause. The system includes left-aligned and centered lockups, a standalone wordmark and mark, and a favicon.',
+			],
+			gallery: {
+				layout: 'stack',
+				images: [
+					{
+						src: '/images/portfolio/selah-coffee/selah-coffee-final-logo-assets.png',
+						alt: 'The final Selah Coffee logo system with a flowing S-shaped mark, left-aligned and centered lockups, standalone wordmark, brand mark, and circular favicon.',
+						width: 1080,
+						height: 1920,
+						caption: 'Final logo system and variations',
+					},
+				],
+			},
 		},
 		{
 			title: 'Typography',
@@ -153,6 +232,18 @@ export const selahCoffee: Project = {
 				'Selah Coffee’s typography balances personality with clarity. Pacaembu is reserved for the wordmark, giving the brand a distinctive and recognizable voice. Helvetica serves as the primary functional typeface across body copy, navigation, and interface elements, while Libre Baskerville is used selectively in expressive headings to introduce warmth and an editorial quality. Together, the typefaces create a system that feels approachable, refined, and easy to navigate.',
 			],
 			list: ['Pacaembu', 'Helvetica', 'Libre Baskerville'],
+			gallery: {
+				layout: 'stack',
+				images: [
+					{
+						src: '/images/portfolio/selah-coffee/selah-coffee-typography.png',
+						alt: 'Selah Coffee typography specimens: Pacaembu for the wordmark, Libre Baskerville for expressive headings, and Helvetica for body text and navigation.',
+						width: 1080,
+						height: 1920,
+						caption: 'Typography system',
+					},
+				],
+			},
 		},
 		{
 			title: 'Colors',
@@ -163,6 +254,18 @@ export const selahCoffee: Project = {
 				'Deep Olive (#40451F): Primary brand color, buttons, and dark surfaces',
 				'Warm Ink (#252116): Primary text, marks, and fine details',
 			],
+			gallery: {
+				layout: 'stack',
+				images: [
+					{
+						src: '/images/portfolio/selah-coffee/selah-coffee-color-palette.png',
+						alt: 'Selah Coffee color palette showing Deep Olive #40451F, Paper Cream #FBF7EC, Warm Sand #F4E9D2, Warm Ink #252116, and Gold #E3B78E, with examples of color use.',
+						width: 1080,
+						height: 1920,
+						caption: 'Brand color palette',
+					},
+				],
+			},
 		},
 		{
 			title: 'Phase 03 — Apply the Brand',

@@ -24,6 +24,7 @@ export function setupGalleryHoverZoom(gallery: HTMLElement, options: AddEventLis
 				!hover.matches ||
 				event.pointerType !== 'mouse' ||
 				event.buttons ||
+				image.hidden ||
 				!image.complete ||
 				!image.naturalWidth
 			) {

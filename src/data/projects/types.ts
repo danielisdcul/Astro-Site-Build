@@ -1,4 +1,4 @@
-import type { GalleryOptions } from '../gallery.ts';
+import type { GalleryOptions, GalleryVideoOptions } from '../gallery.ts';
 
 // Reusable facts and links used in project introductions and content sections.
 export type Detail = {
@@ -11,6 +11,9 @@ export type ProjectLink = {
 	href: string;
 };
 
+/** A playable case study video, with a lightweight preview before playback. */
+export type ProjectVideo = GalleryVideoOptions;
+
 /** A narrative section; optional fields control its paragraphs, lists, facts, and link. */
 export type ProjectSection = {
 	title: string;
@@ -20,6 +23,8 @@ export type ProjectSection = {
 	listBeforeParagraphs?: boolean;
 	details?: Detail[];
 	link?: ProjectLink;
+	gallery?: GalleryOptions;
+	videos?: ProjectVideo[];
 };
 
 /** Shared data shape for project cards and case study pages. */

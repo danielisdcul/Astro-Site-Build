@@ -1,0 +1,36 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { getImageAsset } from '../utils/image-assets';
+import { withBase } from '../utils/paths';
+
+type Props = Omit<HTMLAttributes<'img'>, 'src' | 'loading'> & {
+	src: string;
+	previewSrc?: string;
+	eager?: boolean;
+	/** Ordinary images upgrade after page load; viewers on demand; thumbnails stay small. */
+	upgrade?: 'after-load' | 'on-demand' | 'preview';
+};
+
+const { src, previewSrc, eager = false, upgrade = 'after-load', ...attributes } = Astro.props;
+const asset = getImageAsset(src, previewSrc);
+const preview = withBase(asset.preview);
+---
+
+<!-- Only the small source appears in src: the browser cannot preload the large variant. -->
+<img
+	{...attributes}
+	src={preview}
+	width={attributes.width ?? asset.width}
+	height={attributes.height ?? asset.height}
+	loading={eager ? 'eager' : 'lazy'}
+	decoding="async"
+	draggable={attributes.draggable ?? false}
+	data-image-preview={preview}
+	data-image-full={upgrade === 'preview' ? undefined : withBase(asset.full)}
+	data-image-upgrade={upgrade}
+/>
+
+<script>
+	import { setupProgressiveImages } from '../utils/image-loading';
+	setupProgressiveImages();
+</script>

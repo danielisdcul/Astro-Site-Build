@@ -9,8 +9,10 @@ export function setupGalleryMagnifier(
 	const track = dialog?.querySelector<HTMLElement>('.gallery__swipe-track');
 	if (!dialog || !track) return () => {};
 
-	const media = Array.from(track.querySelectorAll<HTMLElement>('.gallery__media'));
-	const images = media.map(frame => frame.querySelector('img')!);
+	// Videos remain playable slides, but only image frames receive magnifier controls.
+	const media = Array.from(track.querySelectorAll<HTMLElement>('.gallery__media'))
+		.filter(frame => frame.querySelector('img'));
+	const images = media.map(frame => frame.querySelector<HTMLImageElement>('img')!);
 	const holdDelay = 200;
 	let timer: ReturnType<typeof setTimeout> | undefined;
 	let selection: {

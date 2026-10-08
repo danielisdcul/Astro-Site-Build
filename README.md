@@ -55,6 +55,7 @@ src/
 │   ├── Header.astro
 │   ├── Footer.astro
 │   ├── ProjectCard.astro         Home-page project preview
+│   ├── ProgressiveImage.astro    Shared preview-first image rendering
 │   └── ProjectCaseStudy.astro    Full project-page structure
 ├── layouts/BaseLayout.astro     Shared page shell
 └── styles/
@@ -127,6 +128,18 @@ Sections appear in their array order. A section can contain a `lead`,
 `paragraphs`, a `list`, `details`, and a `link`. Set `listBeforeParagraphs: true`
 when the list should appear before the paragraphs.
 
+Sections can also include a `gallery` using the same options as the main project
+image gallery. Related images sit in the right-hand margin alongside their section’s
+text on desktop, then stack below the text at 800px and narrower. Section images stay
+uncropped and retain the shared image viewer and progressive loading.
+
+Add a `videos` array of objects with `src`, `poster`, `width`, `height`, and `caption`
+for recordings with native playback controls. Paired recordings sit side by side
+on desktop and stack at 800px and narrower. Videos load when played and never
+autoplay. Selah Coffee's six infographics and walkthrough posters are in
+`public/images/portfolio/selah-coffee/`; its desktop and mobile recordings are in
+`public/videos/`.
+
 Add an optional `links` array to a project to show a **Project links** section
 below its opening details and above the gallery. Use it for websites, prototypes,
 repositories, or other project resources:
@@ -154,7 +167,6 @@ gallery: {
   images: [
     {
       src: '/images/portfolio/new-project.png',
-      previewSrc: '/images/portfolio/previews/new-project.webp',
       alt: 'Description of the image',
       caption: 'Optional visible caption',
       width: 1600,
@@ -164,28 +176,41 @@ gallery: {
 },
 ```
 
-Layouts are `grid`, `wide-top` (first image spans the row), `wide-bottom` (last
-image spans the row), and `stack`. `columns` accepts 1–4 and defaults to 2;
-all layouts become two-column tiles on mobile. An odd final image fills the last
-row. The lightbox retains each image's original proportions. Captions and dimensions
-are optional; use actual image dimensions to reserve space while loading.
+Layouts are `grid`, `wide-top` (first item spans the row), `wide-bottom` (last
+item spans the row), and `stack`. `columns` accepts 1–4 and defaults to 2;
+galleries use two-column tiles on mobile by default. Set `mobileLayout: 'stack'`
+to keep a mixed gallery's order and show each item at its natural proportions. An
+odd final image fills the last row in the default mobile grid. The lightbox retains
+each image's original proportions. Captions and dimensions are optional; use actual
+image dimensions to reserve space while loading.
 
-`previewSrc` is optional. It supplies a small image for mobile tiles and lightbox
-previews. The selected lightbox image loads its original after the preview decodes,
-keeping the preview visible until the original is ready. Create or refresh a 640px
-WebP preview with Astro's existing image service:
+Mixed galleries can set `order` on images and videos to control their shared tile
+and viewer sequence. In `grid` layout, landscape items automatically span two
+columns and portrait items span two rows; dense placement fills open cells. Override
+that behavior per item with a one-based `placement`, for example:
 
-```sh
-node scripts/gallery-previews.mjs public/images/portfolio/new-project.png
+```ts
+placement: { column: 3, row: 1, columnSpan: 1, rowSpan: 2 }
 ```
 
-Add the generated preview URL to the project's gallery data and include the preview
-file when committing the project. The command accepts multiple original image paths.
+Manual placement is used on desktop; mobile tiles return to the standard two-column
+layout.
+
+Gallery images use the same progressive image loader as portraits and project cards.
+Small previews appear first on mobile and desktop. Opening the viewer immediately
+requests its selected full-size image; hidden slides keep their previews.
 
 Click an image to open the viewer. Use its buttons or left/right arrow keys to
 browse, and Escape, Close, or the backdrop to dismiss it. On mobile, swipe sideways
 to browse or swipe down quickly to close. Hold an image to magnify it. Set `lightbox: false`
 for a static gallery. Without JavaScript, image links open the original file.
+
+Add `videos` to a gallery to show clickable video poster tiles alongside its images.
+Each video needs a source, poster, description, caption, and dimensions. Selecting
+a poster opens and plays the video in the shared viewer. Video slides use native
+controls and fit the available viewport as the phone rotates. The lightbox viewer
+in a case study spans its main gallery and every section gallery, so swiping
+continues through that page's images and videos.
 
 To use the component on any other page:
 
@@ -201,6 +226,42 @@ const images = [
 
 Add `eager` when the gallery is near the top of a page. Gallery styles and viewer
 controls are in `src/styles/gallery.css`.
+
+## Shared image loading
+
+Use `src/components/ProgressiveImage.astro` for site images. It renders a small
+preview, reserves the image's dimensions, and defaults to native lazy loading:
+
+```astro
+<ProgressiveImage src="/images/portfolio/new-project.png" alt="Describe the image" />
+```
+
+After the window's `load` event, `src/utils/image-loading.ts` upgrades nearby images
+during idle time with at most two background downloads. Offscreen images wait until
+they approach the viewport. Clicking an image can request an upgrade before page
+load completes. Original downloads are shared across components, and previews stay
+visible until larger images decode. Failed requests retain the preview and can retry.
+
+Add `eager` for a preview above the fold. Use `upgrade="on-demand"` for viewer images
+that upgrade on click or through `upgradeImage()`, and `upgrade="preview"` for small
+thumbnails that never need an upgrade. Normal links keep their navigation behavior.
+External URLs and SVGs pass through; external images can provide `previewSrc`.
+
+`scripts/image-assets.mjs` prepares preview and full-size WebPs for raster originals
+under `public/images/` before Astro starts or builds. Previews are at most 640px wide;
+larger WebPs retain original dimensions. Source files remain available for downloads.
+Generated assets live in `public/images/generated/`, and their lookup table is
+`src/data/generated/images.json`. Content hashes invalidate stale variants and browser
+caches when originals change. No per-project preview paths are needed.
+
+To refresh variants after editing images while the dev server is running:
+
+```sh
+npm run images:prepare
+```
+
+New builds regenerate them automatically. The old gallery-only loader, preview
+component, generator, and hand-maintained project preview paths have been removed.
 
 ## Shared settings and assets
 

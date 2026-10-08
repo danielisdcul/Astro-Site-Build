@@ -27,7 +27,6 @@ export const vitaTerra: Project = {
 		images: [
 			{
 				src: '/images/portfolio/vita-sign.png',
-				previewSrc: '/images/portfolio/previews/vita-sign.webp',
 				alt: 'Vita Terra brand sign',
 				caption: 'Brand signage',
 				width: 1600,
@@ -35,7 +34,6 @@ export const vitaTerra: Project = {
 			},
 			{
 				src: '/images/portfolio/vita-fabric.png',
-				previewSrc: '/images/portfolio/previews/vita-fabric.webp',
 				alt: 'Vita Terra branding on fabric',
 				caption: 'Fabric branding',
 				width: 1044,
@@ -43,7 +41,6 @@ export const vitaTerra: Project = {
 			},
 			{
 				src: '/images/portfolio/vita-tags.png',
-				previewSrc: '/images/portfolio/previews/vita-tags.webp',
 				alt: 'Vita Terra clothing tags',
 				caption: 'Clothing tags',
 				width: 1600,

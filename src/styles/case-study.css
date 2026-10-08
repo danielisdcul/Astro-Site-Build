@@ -91,6 +91,7 @@
 }
 
 .case-study__section-body {
+  min-width: 0;
   max-width: 736px;
 }
 
@@ -110,6 +111,132 @@
   display: grid;
   gap: var(--space-8);
   margin: var(--space-16) 0;
+}
+
+/* Keep one reading column with related images in the right-hand margin. */
+
+.case-study--margin-media .case-study__section {
+  grid-template-columns: 160px minmax(0, 1fr) minmax(240px, 320px);
+  align-items: start;
+}
+
+.case-study--margin-media .case-study__section-heading {
+  grid-column: 1;
+}
+
+.case-study--margin-media .case-study__section-body {
+  grid-column: 2;
+}
+
+.case-study__section-media {
+  grid-column: 3;
+  min-width: 0;
+  margin: 0;
+}
+
+@media (min-width: 801px) and (max-width: 1100px) {
+  .case-study--margin-media .case-study__section {
+    grid-template-columns: 144px minmax(0, 1fr) 240px;
+    gap: var(--space-24);
+  }
+}
+
+@media (max-width: 800px) {
+  .case-study--margin-media .case-study__section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .case-study--margin-media .case-study__section-heading,
+  .case-study--margin-media .case-study__section-body,
+  .case-study__section-media {
+    grid-column: 1;
+  }
+
+  .case-study__section-media {
+    width: 100%;
+    max-width: 480px;
+  }
+}
+
+/* Section infographics stay uncropped; the shared viewer provides close inspection. */
+
+.case-study__videos {
+  display: grid;
+  grid-column: 2 / -1;
+  gap: var(--space-32);
+  align-items: start;
+  min-width: 0;
+}
+
+.case-study__videos--pair {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.case-study__video {
+  min-width: 0;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .case-study__videos {
+    grid-column: 1;
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.case-study__section-media .gallery {
+  width: 100%;
+  margin-inline: 0;
+  background: transparent;
+}
+
+.case-study__section-media .gallery__grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.case-study__section-media .gallery__grid .gallery__media,
+.case-study__section-media .gallery__grid .gallery__item:last-child:nth-child(odd) .gallery__media {
+  aspect-ratio: auto;
+}
+
+.case-study__section-media .gallery__grid .gallery__trigger,
+.case-study__section-media .gallery__grid .gallery__item img {
+  height: auto;
+}
+
+.case-study__section-media .gallery__grid .gallery__item img {
+  object-fit: contain;
+}
+
+.case-study__section-media .gallery__caption,
+.case-study__video .gallery__caption {
+  display: block;
+}
+
+.case-study__video-trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: #000;
+  cursor: pointer;
+}
+
+.case-study__video-trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.case-study__video--portrait .case-study__video-trigger {
+  max-width: 360px;
+}
+
+.case-study__video-trigger:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
 }
 
 /* Section detail lists */
