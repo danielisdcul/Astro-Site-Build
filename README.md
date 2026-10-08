@@ -91,7 +91,7 @@ The display settings near the top of each project file are explicit:
 ```ts
 featured: true,
 showOnHome: true,
-galleryLayout: 'wide-top',
+cardLayout: 'wide-top',
 ```
 
 - `featured: true` displays a full-width card above the regular project grid.
@@ -102,8 +102,8 @@ galleryLayout: 'wide-top',
 - `showOnHome: true` includes the project in the landing page's selected work.
 - `showOnHome: false` keeps it on the full Work page without adding it to the
   landing page.
-- `galleryLayout: 'wide-top'` makes the first image in a regular card span both columns.
-- `galleryLayout: 'wide-bottom'` makes the last image span both columns instead.
+- `cardLayout: 'wide-top'` makes the first image in a regular card span both columns.
+- `cardLayout: 'wide-bottom'` makes the last image span both columns instead.
 
 The order in `projects/index.ts` controls the full Work page and the order within
 each landing-page group. `cardLabel` is authored text, so update its displayed
@@ -116,7 +116,7 @@ To add a project:
 1. Copy a project file into `src/data/projects/` with a new filename.
 2. Give its exported variable a new name and its `slug` a unique value.
 3. Replace the content and image paths, then choose `featured`, `showOnHome`,
-   and `galleryLayout`.
+   and `cardLayout`.
 4. Import that variable in `src/data/projects/index.ts` and add it to `projects`.
 5. Run a build. The shared `[slug].astro` template creates its case-study page.
 
@@ -128,15 +128,22 @@ Sections appear in their array order. A section can contain a `lead`,
 `paragraphs`, a `list`, `details`, and a `link`. Set `listBeforeParagraphs: true`
 when the list should appear before the paragraphs.
 
+Every page supplies section links to the shared layout. Case studies generate their
+hierarchy from section titles; `navigationLevel: 1` or `2` overrides a section's level.
+On desktop the rail expands on hover when space is limited. On mobile it sits opposite
+the main menu, opens with a tap or inward swipe, and slides away while that menu is open.
+The current section highlights as you scroll, and anchor IDs follow the section data.
+
 Sections can also include a `gallery` using the same options as the main project
 image gallery. Related images sit in the right-hand margin alongside their section’s
 text on desktop, then stack below the text at 800px and narrower. Section images stay
 uncropped and retain the shared image viewer and progressive loading.
 
-Add a `videos` array of objects with `src`, `poster`, `width`, `height`, and `caption`
+Add a `videos` array of objects with `src`, `poster`, `alt`, `width`, `height`, and `caption`
 for recordings with native playback controls. Paired recordings sit side by side
-on desktop and stack at 800px and narrower. Videos load when played and never
-autoplay. Selah Coffee's six infographics and walkthrough posters are in
+on desktop and stack at 800px and narrower. Selecting a video opens the shared
+viewer and attempts playback; browser autoplay restrictions can require a tap.
+Selah Coffee's six infographics and walkthrough posters are in
 `public/images/portfolio/selah-coffee/`; its desktop and mobile recordings are in
 `public/videos/`.
 
@@ -157,7 +164,7 @@ Projects with no links omit this section.
 
 Every project page uses `src/components/Gallery.astro`. Edit a project's `gallery`
 in `src/data/projects/` to adjust its case-study images independently of `cardImages`.
-If `gallery` is omitted, the page uses its card images and `galleryLayout`.
+If `gallery` is omitted, the page uses its card images and `cardLayout`.
 
 ```ts
 gallery: {
@@ -267,7 +274,14 @@ component, generator, and hand-maintained project preview paths have been remove
 
 Edit the email address once in `site.ts`. The `emailLink` export builds its
 `mailto:` URL from that address, and the home page uses the same address as its
-visible link text. Social links are shared by Contact and the footer.
+visible link text. Social links are shared by Contact and the footer. The portrait
+in `site.ts` is shared by Home and About. Shared link and identity types live in
+`src/data/types.ts`; page contracts live in `src/data/pages/types.ts`.
+
+Keep card configuration in `cardLayout` and full-gallery configuration in `gallery`.
+`cardMeta` is optional and only appears on featured Home cards. Project colors are
+controlled by the stylesheets; the unused project `accent` and `accentSoft` fields
+have been removed. Avoid editing `src/data/generated/images.json` by hand.
 
 Files in `public/` are available from the site root. For example:
 
@@ -286,7 +300,7 @@ or renaming a module. Avoid editing `dist/`, which is replaced when Astro builds
 
 ## Local development and builds
 
-Run commands from the `Static Portfolio Build` folder. Use Node.js 22.12 or newer.
+Run commands from the project root. Use Node.js 22.12 or newer.
 The dependency lockfile is managed with pnpm; use `pnpm install --frozen-lockfile`
 when installing the project's dependencies.
 
@@ -296,11 +310,18 @@ when installing the project's dependencies.
 | Check the development server | `npm run astro -- dev status` |
 | Read development server logs | `npm run astro -- dev logs` |
 | Stop the development server | `npm run astro -- dev stop` |
+| Check TypeScript and Astro component types | `npm run check` |
+| Validate data, assets, image loading, and section navigation | `npm test` |
 | Build the static site into `dist/` | `npm run build` |
 | Preview the most recent build | `npm run preview` |
 
 The development server updates as you save source files. A production preview
 shows the last build, so rebuild after making changes you want to preview there.
+
+The checker uses TypeScript 6, which provides the compiler API required by
+`@astrojs/check`. Keep validation tools in `devDependencies` and use the pnpm lockfile
+when installing them. `.gitignore` prevents adding new local dependencies and tool
+caches; files already tracked by Git retain their existing tracking.
 
 Reference: [Astro project structure](https://docs.astro.build/en/basics/project-structure/)
 and [Astro routing](https://docs.astro.build/en/guides/routing/).

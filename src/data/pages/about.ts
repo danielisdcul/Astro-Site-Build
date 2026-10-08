@@ -1,7 +1,8 @@
 import { site } from '../site.ts';
+import type { AboutPage } from './types.ts';
 
 // Copy for src/pages/about.astro.
-export const about = {
+export const about: AboutPage = {
 	// Browser title and page description.
 	metadata: {
 		title: 'About',
@@ -10,10 +11,7 @@ export const about = {
 
 	// Visible page introduction.
 	eyebrow: 'About',
-	portrait: {
-		src: '/images/portfolio/daniel-portrait.png',
-		alt: `Portrait of ${site.name}`,
-	},
+	portrait: site.portrait,
 	title: 'Hi, I’m Daniel',
 	intro:
 		'I’m a multidisciplinary designer based in San Diego. I believe thoughtful design begins with curiosity, empathy, and a clear understanding of the people it serves. I value simplicity, honest communication, and purposeful decisions, creating work that is visually engaging, useful, intuitive, and built to last.',
@@ -41,17 +39,13 @@ export const about = {
 				{
 					degree: 'Associate of Arts',
 					major: 'Web Development and Design',
-					concentration: null,
 					school: 'MiraCosta College',
-					honors: null,
 					year: 2022,
 				},
 				{
 					degree: 'Associate of Arts',
 					major: 'Communications',
-					concentration: null,
 					school: 'MiraCosta College',
-					honors: null,
 					year: 2023,
 				},
 				{
@@ -59,7 +53,6 @@ export const about = {
 					major: 'Liberal Arts',
 					concentration: 'Social and Behavioral Sciences',
 					school: 'MiraCosta College',
-					honors: null,
 					year: 2023,
 				},
 			],

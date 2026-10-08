@@ -1,0 +1,71 @@
+---
+import type { SectionNavigationItem } from '../utils/section-navigation';
+
+type Props = {
+	items: SectionNavigationItem[];
+	gallery?: boolean;
+};
+
+const { items, gallery = false } = Astro.props;
+const panelId = `section-jump-panel-${items[0]?.id ?? 'project'}`;
+const sidebarItems = gallery ? [{ id: 'project-gallery', title: 'Gallery', children: [] }, ...items] : items;
+---
+
+{sidebarItems.length > 0 && (
+	<nav class="section-jump" aria-label="Jump to section">
+		<details class="section-jump__mobile">
+			<summary class="eyebrow">Jump to links</summary>
+			<div class="section-jump__mobile-panel">
+				<ul class="section-jump__mobile-list list-reset">
+					{sidebarItems.map((item) => (
+						<li><a href={`#${item.id}`}>{item.title}</a></li>
+					))}
+				</ul>
+			</div>
+		</details>
+		<button class="section-jump__rail-toggle" type="button" aria-label="Open section navigation" aria-expanded="false" aria-controls={panelId}>
+			<span class="section-jump__rail-track" aria-hidden="true">
+				{sidebarItems.map((item) => (
+					<span class="section-jump__rail-section" style={`--section-weight: ${1 + item.children.length / 2}`}>
+						<span class="section-jump__rail-dot" data-section-id={item.id}></span>
+					</span>
+				))}
+			</span>
+		</button>
+		<div class="section-jump__panel" id={panelId}>
+			<p class="eyebrow section-jump__heading">On this page</p>
+			<button class="section-jump__close" type="button" aria-label="Close section navigation">×</button>
+			<ul class="section-jump__list section-jump__desktop list-reset">
+				{sidebarItems.map((item) => (
+					<li data-mobile-only={item.id === 'project-gallery' || undefined} class:list={['section-jump__desktop-group', { 'section-jump__desktop-group--nested': item.children.length > 0 }]}>
+						<a href={`#${item.id}`} title={item.title}>
+							<span class="section-jump__marker section-jump__marker--section" aria-hidden="true"></span>
+							<span class="section-jump__label">{item.title}</span>
+						</a>
+						{item.children.length > 0 && (
+							<ul class="section-jump__children list-reset">
+								{item.children.map((child) => (
+									<li>
+										<a href={`#${child.id}`} title={child.title}>
+											<span class="section-jump__label">{child.title}</span>
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+					</li>
+				))}
+			</ul>
+		</div>
+	</nav>
+)}
+
+<script>
+	import { setupSectionNavigationActive } from '../utils/section-navigation-active';
+	import { setupSectionNavigationMobile } from '../utils/section-navigation-mobile';
+
+	document.querySelectorAll<HTMLElement>('.section-jump').forEach(navigation => {
+		setupSectionNavigationMobile(navigation);
+		setupSectionNavigationActive(navigation);
+	});
+</script>

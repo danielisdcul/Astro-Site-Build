@@ -2,11 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { about } from '../data/pages/about.ts';
 import ProgressiveImage from '../components/ProgressiveImage.astro';
+import { createSectionNavigation } from '../utils/section-navigation';
+
+const sectionNavigation = createSectionNavigation([{ title: about.eyebrow }, ...about.sections]);
 ---
 
-<BaseLayout title={about.metadata.title} description={about.metadata.description}>
+<BaseLayout title={about.metadata.title} description={about.metadata.description} sectionNavigation={sectionNavigation}>
 	<section class="shell page-intro">
-		<div class="about-intro">
+		<div class="about-intro" id={sectionNavigation[0].id}>
 			<div class="about-intro__copy">
 				<p class="eyebrow">{about.eyebrow}</p>
 				<h1>{about.title}</h1>
@@ -25,8 +28,8 @@ import ProgressiveImage from '../components/ProgressiveImage.astro';
 		</div>
 		<div class="about-sections">
 			{
-				about.sections.map((section) => (
-					<section class="content-split content-split--about">
+				about.sections.map((section, index) => (
+					<section class="content-split content-split--about" id={sectionNavigation[index + 1].id}>
 						<h2>{section.title}</h2>
 
 						<div class="about-section__content">

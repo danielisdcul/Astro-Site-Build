@@ -17,9 +17,10 @@
    6. pages.css          Shared page intro, Work, About and education, Contact
    7. case-study.css     Header and project details, optional project links,
                          content sections, section detail lists, back link
-   8. gallery.css        Gallery layout and captions, mobile tiles and swipe viewer,
+   8. section-navigation.css  Hierarchical case study jump links, mobile menu and desktop rail
+   9. gallery.css        Gallery layout and captions, mobile tiles and swipe viewer,
                          touch and hover magnifiers
-   9. accessibility.css  Reduced-motion overrides
+   10. accessibility.css Reduced-motion overrides
 
    Keep this import order: foundations precede components, and accessibility
    overrides come last. Shared tokens are defined in foundations.css.
@@ -32,5 +33,6 @@
 @import './project-cards.css';
 @import './pages.css';
 @import './case-study.css';
+@import './section-navigation.css';
 @import './gallery.css';
 @import './accessibility.css';

@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "check": "astro check",
     "images:prepare": "node scripts/image-assets.mjs",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "astro": "astro"
@@ -18,5 +19,9 @@
   },
   "allowScripts": {
     "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "typescript": "^6.0.3"
   }
 }

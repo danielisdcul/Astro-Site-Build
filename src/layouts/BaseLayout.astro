@@ -2,6 +2,8 @@
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import SectionTracker from '../components/SectionTracker.astro';
+import SectionJumpNav from '../components/SectionJumpNav.astro';
+import type { SectionNavigationItem } from '../utils/section-navigation';
 import { site } from '../data/site.ts';
 import { withBase } from '../utils/paths.ts';
 import '../styles/global.css';
@@ -9,9 +11,11 @@ import '../styles/global.css';
 type Props = {
 	title?: string;
 	description?: string;
+	sectionNavigation?: SectionNavigationItem[];
+	galleryNavigation?: boolean;
 };
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, sectionNavigation = [], galleryNavigation = false } = Astro.props;
 const pageTitle = title
 	? `${title} — ${site.name}`
 	: `${site.name} — ${site.title}`;
@@ -35,7 +39,12 @@ const pageTitle = title
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<Header />
-		<main id="main-content">
+		<main class="page-content" id="main-content">
+			{sectionNavigation.length > 0 && (
+				<div class="shell section-jump-host">
+					<SectionJumpNav items={sectionNavigation} gallery={galleryNavigation} />
+				</div>
+			)}
 			<slot />
 		</main>
 		<SectionTracker />

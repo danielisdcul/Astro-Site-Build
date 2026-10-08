@@ -1,4 +1,5 @@
 import { site } from '../site.ts';
+import type { HomePage } from './types.ts';
 
 // Copy and image references for src/pages/index.astro.
 export const home = {
@@ -8,10 +9,7 @@ export const home = {
 		'I’m a multidisciplinary designer who enjoys bringing ideas to life through branding, graphic design, and digital experiences. I believe the best design starts with curiosity, thoughtful problem-solving, and a genuine understanding of the people it’s made for.',
 	heroMeta: ['Values', 'Story', 'Mission'],
 	aboutLink: { label: 'More about me', href: '/about/' },
-	portrait: {
-		src: '/images/portfolio/daniel-portrait.png',
-		alt: `Portrait of ${site.name}`,
-	},
+	portrait: site.portrait,
 
 	// Selected work introduction; project cards use ../projects/.
 	workLabel: '01 — Selected Work',
@@ -46,4 +44,4 @@ export const home = {
 	calloutLabel: '03 — Start a conversation',
 	calloutHeading: 'Have an idea in mind? Let’s make something clear, useful, and memorable.',
 	availability: 'Available for freelance work and open to long-term opportunities.',
-};
+} satisfies HomePage;

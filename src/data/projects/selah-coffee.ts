@@ -6,13 +6,13 @@ export const selahCoffee: Project = {
 	slug: 'selah-coffee',
 	featured: true,
 	showOnHome: true,
-	galleryLayout: 'wide-top',
 	type: 'Bespoke case study',
 
 	// Preview copy and images shown on Home and Work.
+	cardLayout: 'wide-top',
 	cardTitle: 'Selah Coffee',
 	cardSummary: 'A self-initiated café concept shaped around pause, reflection, and community.',
-	cardLabel: '01 / Brand identity + Digital',
+	cardLabel: '01 / Brand Identity + Digital',
 	cardMeta: 'Brand strategy · Identity · Web',
 	cardImages: ['/images/portfolio/selah-storefront.png'],
 
@@ -65,10 +65,6 @@ export const selahCoffee: Project = {
 			href: 'https://danielisdcul.github.io/selah-coffee-website',
 		},
 	],
-
-	// Project colors used by cards and case study styling.
-	accent: '#d66048',
-	accentSoft: '#f7e0d9',
 
 	// Short project facts displayed alongside the introduction.
 	details: [

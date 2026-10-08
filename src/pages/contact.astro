@@ -2,18 +2,20 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { contact } from '../data/pages/contact.ts';
 import { emailLink, site } from '../data/site.ts';
+import { createSectionNavigation } from '../utils/section-navigation';
 
 const links = [emailLink, ...site.socialLinks];
+const sectionNavigation = createSectionNavigation([{ title: contact.eyebrow }, { title: 'Contact links' }]);
 ---
 
-<BaseLayout title={contact.metadata.title} description={contact.metadata.description}>
-	<section class="shell page-intro">
+<BaseLayout title={contact.metadata.title} description={contact.metadata.description} sectionNavigation={sectionNavigation}>
+	<section class="shell page-intro" id={sectionNavigation[0].id}>
 		<p class="eyebrow">{contact.eyebrow}</p>
 		<h1>{contact.title}</h1>
 		<div class="page-intro__copy">
 			<p>{contact.intro}</p>
 		</div>
-		<ul class="contact-links list-reset">
+		<ul class="contact-links list-reset" id={sectionNavigation[1].id}>
 			{
 				links.map((link) => (
 					<li>

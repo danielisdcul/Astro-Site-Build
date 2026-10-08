@@ -6,14 +6,27 @@ import { home } from '../data/pages/home.ts';
 import { projects } from '../data/projects/index.ts';
 import { emailLink, site } from '../data/site.ts';
 import { withBase } from '../utils/paths.ts';
+import { createSectionNavigation } from '../utils/section-navigation';
 
 const homeProjects = projects.filter((project) => project.showOnHome);
 const featuredProjects = homeProjects.filter((project) => project.featured);
 const gridProjects = homeProjects.filter((project) => !project.featured);
+
+// Build section links from the same labels and collections rendered below.
+const sectionNavigation = createSectionNavigation(
+	['Introduction', home.workLabel, home.disciplinesLabel, home.calloutLabel]
+		.map(title => ({ title: title.replace(/^\d+\s*[—–-]\s*/, '') })),
+);
+sectionNavigation[1].children = [...featuredProjects, ...gridProjects].map(project => ({
+	id: `project-${project.slug}`, title: project.cardTitle, children: [],
+}));
+sectionNavigation[2].children = home.services.map((service, index) => ({
+	id: `discipline-${index + 1}`, title: service.title, children: [],
+}));
 ---
 
-<BaseLayout description={home.intro}>
-	<section class="shell hero" data-scroll-reveal>
+<BaseLayout description={home.intro} sectionNavigation={sectionNavigation}>
+	<section class="shell hero" id={sectionNavigation[0].id} data-scroll-reveal>
 		<div class="hero__copy">
 			<div class="hero__lead">
 				<h1 class="hero__title" data-typed-text={home.title}>{home.title}</h1>
@@ -78,7 +91,7 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 		}
 	</script>
 
-	<section class="shell projects" aria-labelledby="selected-work" data-scroll-reveal>
+	<section class="shell projects" id={sectionNavigation[1].id} aria-labelledby="selected-work" data-scroll-reveal>
 		<header class="section-heading">
 			<div>
 				<p class="eyebrow">{home.workLabel}</p>
@@ -86,13 +99,13 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 			</div>
 			<p>{home.workIntro}</p>
 		</header>
-		{featuredProjects.map((project) => <ProjectCard project={project} />)}
+		{featuredProjects.map((project) => <ProjectCard project={project} id={`project-${project.slug}`} />)}
 		<div class="project-grid">
-			{gridProjects.map((project) => <ProjectCard project={project} />)}
+			{gridProjects.map((project) => <ProjectCard project={project} id={`project-${project.slug}`} />)}
 		</div>
 	</section>
 
-	<section class="shell disciplines" aria-labelledby="disciplines-heading" data-scroll-reveal>
+	<section class="shell disciplines" id={sectionNavigation[2].id} aria-labelledby="disciplines-heading" data-scroll-reveal>
 		<p class="eyebrow">{home.disciplinesLabel}</p>
 		<div class="disciplines__intro">
 			<h2 id="disciplines-heading">{home.disciplinesHeading}</h2>
@@ -101,7 +114,7 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 		<ol class="disciplines__list list-reset">
 			{
 				home.services.map((service, index) => (
-					<li>
+					<li id={sectionNavigation[2].children[index].id}>
 						<span class="eyebrow">{String(index + 1).padStart(2, '0')}</span>
 						<h3>{service.title}</h3>
 						<p>{service.description}</p>
@@ -111,7 +124,7 @@ const gridProjects = homeProjects.filter((project) => !project.featured);
 		</ol>
 	</section>
 
-	<section class="shell closing-callout" data-scroll-reveal>
+	<section class="shell closing-callout" id={sectionNavigation[3].id} data-scroll-reveal>
 		<div>
 			<p class="eyebrow">{home.calloutLabel}</p>
 			<h2>{home.calloutHeading}</h2>

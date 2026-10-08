@@ -3,11 +3,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { work } from '../data/pages/work.ts';
 import { projects } from '../data/projects/index.ts';
+import { createSectionNavigation } from '../utils/section-navigation';
+
+const sectionNavigation = createSectionNavigation([{ title: work.eyebrow }, { title: 'Projects' }]);
+sectionNavigation[1].children = projects.map(project => ({
+	id: `project-${project.slug}`, title: project.cardTitle, children: [],
+}));
 ---
 
-<BaseLayout title={work.metadata.title} description={work.metadata.description}>
+<BaseLayout title={work.metadata.title} description={work.metadata.description} sectionNavigation={sectionNavigation}>
 	<section class="shell work-page" aria-labelledby="work-heading">
-		<header class="work-page__intro">
+		<header class="work-page__intro" id={sectionNavigation[0].id}>
 			<p class="eyebrow">{work.eyebrow}</p>
 			<h1 id="work-heading">{work.title}</h1>
 			<div class="page-intro__copy">
@@ -15,8 +21,8 @@ import { projects } from '../data/projects/index.ts';
 			</div>
 		</header>
 
-		<div class="project-grid">
-			{projects.map((project) => <ProjectCard project={project} layout="grid" />)}
+		<div class="project-grid" id={sectionNavigation[1].id}>
+			{projects.map((project) => <ProjectCard project={project} layout="grid" id={`project-${project.slug}`} />)}
 		</div>
 	</section>
 </BaseLayout>

@@ -7,9 +7,11 @@ type ImageAsset = {
 	height?: number;
 };
 
+const imageAssets: Partial<Record<string, ImageAsset>> = manifest;
+
 /** Resolve shared build-generated variants; SVGs and external URLs pass through. */
 export function getImageAsset(source: string, preview?: string): ImageAsset {
-	const asset = (manifest as Record<string, ImageAsset>)[source];
+	const asset = imageAssets[source];
 	return {
 		preview: preview || asset?.preview || source,
 		full: asset?.full || source,

@@ -1,17 +1,20 @@
 ---
 import type { Project } from '../data/projects/types.ts';
-import { getGallerySlides, type GallerySlide } from '../data/gallery.ts';
+import { getGallerySlides, type GalleryOptions, type GallerySlide } from '../data/gallery.ts';
+import { createSectionNavigation, flattenSectionNavigation, type SectionNavigationItem } from '../utils/section-navigation';
 import { withBase } from '../utils/paths.ts';
 import Gallery from './Gallery.astro';
 import ProgressiveImage from './ProgressiveImage.astro';
 
 type Props = {
 	project: Project;
+	sectionNavigation?: SectionNavigationItem[];
 };
 
-const { project } = Astro.props;
-const gallery = project.gallery ?? {
-	layout: project.galleryLayout,
+const { project, sectionNavigation = createSectionNavigation(project.sections) } = Astro.props;
+const sectionNavigationInDocumentOrder = flattenSectionNavigation(sectionNavigation);
+const gallery: GalleryOptions = project.gallery ?? {
+	layout: project.cardLayout,
 	images: project.cardImages.map((src, index) => ({ src, alt: `${project.title} project image ${index + 1}` })),
 };
 // A case-study viewer follows every authored image and video in document order.
@@ -56,16 +59,16 @@ const videoSlideIndex = (src: string) => pageSlides.findIndex((slide) => 'type' 
 		)}
 	</header>
 
-	<div class="shell case-study__feature">
+	<div class="shell case-study__feature" id="project-gallery">
 		<Gallery {...gallery} viewerSlides={pageSlides} pageViewer label={`${project.title} project gallery`} eager />
 	</div>
 
 	<div class="shell case-study__content">
 		{
-			project.sections.map((section) => (
-				<section class="case-study__section content-split content-split--case-study">
+				project.sections.map((section, index) => (
+				<section class="case-study__section content-split content-split--case-study" id={sectionNavigationInDocumentOrder[index].id}>
 					<div class="case-study__section-heading">
-						<p class="eyebrow">{section.title}</p>
+						<h2 class="eyebrow">{section.title}</h2>
 					</div>
 					<div class="case-study__section-body">
 						{section.lead && <p class="case-study__lead">{section.lead}</p>}

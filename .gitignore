@@ -1,0 +1,6 @@
+# Local dependencies and tool caches are regenerated from the lockfile.
+node_modules/
+.astro/
+.pnpm-store/
+*.tsbuildinfo
+.DS_Store

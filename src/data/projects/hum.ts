@@ -1,20 +1,22 @@
 import type { Project } from './types.ts';
 
+// The card and case study share this opening summary.
+const projectSummary =
+	'A complete book design system for a speculative science-fiction novel set in a dystopian near future where technology has disappeared. The project includes a vintage-inspired cover illustration, dust jacket, hardcover concept, expressive typography, typesetting, and interior layouts designed to create a cohesive reading experience.';
+
 export const hum: Project = {
 	// Identity and display settings for project pages and cards.
 	title: 'Hum: Book Design and Illustration',
 	slug: 'hum',
 	featured: false,
 	showOnHome: true,
-	galleryLayout: 'wide-bottom',
 	type: 'Standard case study',
 
 	// Preview copy and images shown on Home and Work.
+	cardLayout: 'wide-bottom',
 	cardTitle: 'Hum',
-	cardSummary:
-		'A complete book design system for a speculative science-fiction novel set in a dystopian near future where technology has disappeared. The project includes a vintage-inspired cover illustration, dust jacket, hardcover concept, expressive typography, typesetting, and interior layouts designed to create a cohesive reading experience.',
-	cardLabel: '03 / Graphic design + Illustration',
-	cardMeta: 'Illustration · Editorial · Typography',
+	cardSummary: projectSummary,
+	cardLabel: '03 / Graphic Design + Illustration',
 	cardImages: [
 		'/images/portfolio/hum-book.png',
 		'/images/portfolio/hum-jacket.png',
@@ -50,12 +52,7 @@ export const hum: Project = {
 	},
 
 	// Opening summary and optional links for the case study.
-	summary:
-		'A complete book design system for a speculative science-fiction novel set in a dystopian near future where technology has disappeared. The project includes a vintage-inspired cover illustration, dust jacket, hardcover concept, expressive typography, typesetting, and interior layouts designed to create a cohesive reading experience.',
-
-	// Project colors used by cards and case study styling.
-	accent: '#526685',
-	accentSoft: '#dee6f2',
+	summary: projectSummary,
 
 	// Short project facts displayed alongside the introduction.
 	details: [

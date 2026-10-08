@@ -6,20 +6,22 @@ import ProgressiveImage from './ProgressiveImage.astro';
 type Props = {
 	project: Project;
 	layout?: 'home' | 'grid';
+	id?: string;
 };
 
-const { project, layout = 'home' } = Astro.props;
+const { project, layout = 'home', id } = Astro.props;
 const featured = layout === 'home' && project.featured;
-const { galleryLayout } = project;
+const { cardLayout } = project;
 ---
 
 <article
+	id={id}
 	class:list={[
 		'project-card',
 		{
 			'project-card--featured': featured,
 			'project-card--single-image': project.cardImages.length === 1,
-			'project-card--wide-bottom': galleryLayout === 'wide-bottom',
+			'project-card--wide-bottom': cardLayout === 'wide-bottom',
 		},
 	]}
 >
@@ -46,7 +48,7 @@ const { galleryLayout } = project;
 				<span>
 					{featured ? 'Explore the case study' : 'View project'} <span class="link-arrow" aria-hidden="true">→</span>
 				</span>
-				{featured && <small>{project.cardMeta}</small>}
+				{featured && project.cardMeta && <small>{project.cardMeta}</small>}
 			</div>
 		</div>
 	</a>

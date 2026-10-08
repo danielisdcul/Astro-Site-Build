@@ -6,15 +6,14 @@ export const vitaTerra: Project = {
 	slug: 'vita-terra',
 	featured: false,
 	showOnHome: true,
-	galleryLayout: 'wide-top',
 	type: 'Standard case study',
 
 	// Preview copy and images shown on Home and Work.
+	cardLayout: 'wide-top',
 	cardTitle: 'Vita Terra',
 	cardSummary:
 		'A sustainable clothing brand identity shaped around transparency, ethical production, and thoughtful craftsmanship.',
 	cardLabel: '02 / Brand Identity + Campaign',
-	cardMeta: 'Brand strategy · Identity · Campaign',
 	cardImages: [
 		'/images/portfolio/vita-sign.png',
 		'/images/portfolio/vita-fabric.png',
@@ -52,10 +51,6 @@ export const vitaTerra: Project = {
 	// Opening summary and optional links for the case study.
 	summary:
 		'Vita Terra is a sustainable clothing brand committed to producing high-quality apparel while supporting the farmers who grow its cotton.',
-
-	// Project colors used by cards and case study styling.
-	accent: '#54735a',
-	accentSoft: '#dce7dc',
 
 	// Short project facts displayed alongside the introduction.
 	details: [
