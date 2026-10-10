@@ -29,6 +29,8 @@ export type GalleryVideo = {
 	caption: string;
 	width: number;
 	height: number;
+	/** Disable sound for this video while keeping native playback controls. */
+	muted?: boolean;
 	/** Optional position in a mixed image/video gallery. */
 	order?: number;
 	/** Manual desktop placement; omitted grid layouts infer spans from media aspect ratio. */
@@ -48,8 +50,8 @@ export type GalleryOptions = {
 	images: GalleryImage[];
 	videos?: GalleryVideoOptions[];
 	layout?: GalleryLayout;
-	/** Mobile tile arrangement. Stack preserves each item's natural proportions. */
-	mobileLayout?: 'grid' | 'stack';
+	/** Mobile arrangement. Desktop reuses authored grid placement; stack preserves natural proportions. */
+	mobileLayout?: 'grid' | 'stack' | 'desktop';
 	columns?: 1 | 2 | 3 | 4;
 	lightbox?: boolean;
 };

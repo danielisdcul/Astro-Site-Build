@@ -7,7 +7,7 @@ import { createSectionNavigation } from '../utils/section-navigation';
 const sectionNavigation = createSectionNavigation([{ title: about.eyebrow }, ...about.sections]);
 ---
 
-<BaseLayout title={about.metadata.title} description={about.metadata.description} sectionNavigation={sectionNavigation}>
+<BaseLayout title={about.metadata.title} description={about.metadata.description}>
 	<section class="shell page-intro">
 		<div class="about-intro" id={sectionNavigation[0].id}>
 			<div class="about-intro__copy">

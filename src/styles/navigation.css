@@ -97,15 +97,18 @@
 
 @media (max-width: 800px), (orientation: landscape) and (max-height: 500px) {
   .has-mobile-menu {
+    /* JavaScript freezes these in pixels until rotation or a viewport width change. */
+    --nav-viewport-height: 100svh;
+    --nav-safe-area-bottom: env(safe-area-inset-bottom, 0px);
     --nav-control-size: 54px;
     --nav-edge-width: 44px;
     --nav-edge-height: 88px;
-    --nav-center-y: calc(var(--header-height) + (100svh - var(--header-height)) / 2);
+    --nav-center-y: calc(var(--header-height) + (var(--nav-viewport-height) - var(--header-height)) / 2);
     /* Leave 75px below the header and 50px above the bottom; shrink both on short screens. */
-    --nav-drag-space: max(0px, calc(100svh - var(--header-height) - var(--nav-edge-height) - env(safe-area-inset-bottom)));
+    --nav-drag-space: max(0px, calc(var(--nav-viewport-height) - var(--header-height) - var(--nav-edge-height) - var(--nav-safe-area-bottom)));
     --nav-drag-gap-top: min(75px, calc(var(--nav-drag-space) * 0.6));
     --nav-drag-gap-bottom: min(50px, calc(var(--nav-drag-space) * 0.4));
-    --nav-edge-top: clamp(calc(var(--header-height) + var(--nav-drag-gap-top)), calc(var(--nav-center-y) - var(--nav-edge-height) / 2), calc(100svh - var(--nav-edge-height) - var(--nav-drag-gap-bottom) - env(safe-area-inset-bottom)));
+    --nav-edge-top: clamp(calc(var(--header-height) + var(--nav-drag-gap-top)), calc(var(--nav-center-y) - var(--nav-edge-height) / 2), calc(var(--nav-viewport-height) - var(--nav-edge-height) - var(--nav-drag-gap-bottom) - var(--nav-safe-area-bottom)));
     --nav-motion-duration: 720ms;
     --nav-motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -139,7 +142,7 @@
     place-items: center;
     width: calc(var(--nav-edge-width) + var(--nav-edge-inset));
     height: var(--nav-edge-height);
-    max-height: 100svh;
+    max-height: var(--nav-viewport-height);
     padding: 0 var(--nav-edge-inset) 0 0;
     border: 1px solid rgb(255 255 255 / 80%);
     border-right: 0;
@@ -287,10 +290,10 @@
   }
 
   .has-mobile-menu #primary-navigation {
-    --thumb-menu-size: min(80vw, 400px, calc((100svh - var(--header-height)) * 0.44));
+    --thumb-menu-size: min(80vw, 400px, calc((var(--nav-viewport-height) - var(--header-height)) * 0.44));
     position: fixed;
     /* Follow the button, but keep the larger open menu fully inside the viewport. */
-    top: clamp(var(--header-height), calc(var(--nav-edge-top) + var(--nav-edge-height) / 2 - var(--thumb-menu-size)), calc(100svh - var(--thumb-menu-size) * 2 - env(safe-area-inset-bottom)));
+    top: clamp(var(--header-height), calc(var(--nav-edge-top) + var(--nav-edge-height) / 2 - var(--thumb-menu-size)), calc(var(--nav-viewport-height) - var(--thumb-menu-size) * 2 - var(--nav-safe-area-bottom)));
     left: calc(100% - var(--thumb-menu-size));
     right: auto;
     bottom: auto;
@@ -463,12 +466,12 @@
 /* Landscape phones use a centered menu circle with a diameter of half the viewport width. */
 @media (orientation: landscape) and (max-height: 500px) {
   .has-mobile-menu {
-    --nav-edge-top: calc(50svh - var(--nav-edge-height) / 2);
+    --nav-edge-top: calc(var(--nav-viewport-height) / 2 - var(--nav-edge-height) / 2);
   }
 
   .has-mobile-menu #primary-navigation {
     --thumb-menu-size: 25vw;
-    top: calc(50svh - var(--thumb-menu-size));
+    top: calc(var(--nav-viewport-height) / 2 - var(--thumb-menu-size));
     height: calc(var(--thumb-menu-size) * 2);
   }
 
@@ -481,7 +484,7 @@
     min-width: 0;
     min-height: 32px;
     padding-block: 2px;
-    font-size: clamp(14px, 4svh, 18px);
+    font-size: clamp(14px, calc(var(--nav-viewport-height) * 0.04), 18px);
   }
 
   .has-mobile-menu.is-lefty #primary-navigation .site-nav {

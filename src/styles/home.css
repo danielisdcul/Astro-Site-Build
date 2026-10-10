@@ -30,7 +30,7 @@
   color: var(--paper);
 }
 
-/* Hero — typing and visibility states are applied by the home-page script. */
+/* Hero — quick, staggered text fades keep the full copy in place. */
 
 .hero {
   display: grid;
@@ -56,32 +56,29 @@
   min-height: 1.1em;
 }
 
-.hero__title.is-typing::after {
-  content: '';
-  display: inline-block;
-  width: 0.08em;
-  height: 0.9em;
-  margin-left: 0.08em;
-  background: var(--ink);
-  vertical-align: text-bottom;
-  animation: blink 0.9s steps(1) infinite;
-}
-
-.hero__intro,
-.hero__link {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 280ms ease, transform 280ms ease;
-}
-
 .hero__intro {
   max-width: 600px;
 }
 
-.hero__intro.is-hidden,
-.hero__link.is-hidden {
-  opacity: 0;
-  transform: translateY(12px);
+@media (prefers-reduced-motion: no-preference) {
+  .hero__title,
+  .hero__intro,
+  .hero__link,
+  .hero__footer .meta-list {
+    animation: hero-text-fade-in 280ms ease-out backwards;
+  }
+
+  .hero__intro {
+    animation-delay: 90ms;
+  }
+
+  .hero__link {
+    animation-delay: 180ms;
+  }
+
+  .hero__footer .meta-list {
+    animation-delay: 270ms;
+  }
 }
 
 .hero__footer {
@@ -200,17 +197,15 @@
   align-items: end;
 }
 
-/* Typing cursor animation */
+/* Hero text animation */
 
-@keyframes blink {
-  0%,
-  50% {
-    opacity: 1;
+@keyframes hero-text-fade-in {
+  from {
+    opacity: 0;
   }
 
-  50.01%,
-  100% {
-    opacity: 0;
+  to {
+    opacity: 1;
   }
 }
 

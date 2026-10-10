@@ -229,6 +229,12 @@ html:has(.gallery__viewer[open]) {
   display: none;
 }
 
+/* Omit sound controls for videos authored to stay muted. */
+video[data-gallery-video-muted='true']::-webkit-media-controls-mute-button,
+video[data-gallery-video-muted='true']::-webkit-media-controls-volume-slider {
+  display: none;
+}
+
 .gallery__full-image[hidden] {
   display: none;
 }
@@ -370,7 +376,7 @@ html:has(.gallery__viewer[open]) {
     gap: 8px;
   }
 
-  .gallery .gallery__grid .gallery__item {
+  .gallery .gallery__grid:where(:not(.gallery__grid--mobile-desktop)) .gallery__item {
     grid-column: auto;
     grid-row: auto;
   }
@@ -378,23 +384,26 @@ html:has(.gallery__viewer[open]) {
   .gallery__grid .gallery__media {
     aspect-ratio: 1;
     overflow: hidden;
+    background: var(--line);
   }
 
   .gallery__grid .gallery__trigger,
-  .gallery__grid .gallery__item img {
+  .gallery__grid .gallery__item img,
+  .gallery__grid .gallery__inline-video {
     height: 100%;
   }
 
-  .gallery__grid .gallery__item img {
-    object-fit: cover;
+  .gallery__grid .gallery__item img,
+  .gallery__grid .gallery__inline-video {
+    object-fit: contain;
   }
 
   /* Fill the final row instead of leaving an empty tile beside an odd image count. */
-  .gallery__grid .gallery__item:last-child:nth-child(odd) {
+  .gallery__grid:where(:not(.gallery__grid--mobile-desktop)) .gallery__item:last-child:nth-child(odd) {
     grid-column: 1 / -1;
   }
 
-  .gallery__grid .gallery__item:last-child:nth-child(odd) .gallery__media {
+  .gallery__grid:where(:not(.gallery__grid--mobile-desktop)) .gallery__item:last-child:nth-child(odd) .gallery__media {
     aspect-ratio: 2 / 1;
   }
 
@@ -416,7 +425,8 @@ html:has(.gallery__viewer[open]) {
   }
 
   .gallery__grid--mobile-stack .gallery__trigger,
-  .gallery__grid--mobile-stack .gallery__item img {
+  .gallery__grid--mobile-stack .gallery__item img,
+  .gallery__grid--mobile-stack .gallery__inline-video {
     height: auto;
   }
 
@@ -426,6 +436,28 @@ html:has(.gallery__viewer[open]) {
 
   .gallery__grid--mobile-stack .gallery__item:last-child:nth-child(odd) {
     grid-column: auto;
+  }
+
+  /* Reuse the authored desktop composition at phone scale without square tiles. */
+  .gallery__grid--mobile-desktop {
+    grid-template-columns: repeat(var(--gallery-columns, 2), minmax(0, 1fr));
+  }
+
+  .gallery__grid--mobile-desktop .gallery__media {
+    aspect-ratio: auto;
+    border-radius: 8px;
+  }
+
+  .gallery__grid--mobile-desktop .gallery__trigger,
+  .gallery__grid--mobile-desktop .gallery__item img,
+  .gallery__grid--mobile-desktop .gallery__inline-video {
+    height: auto;
+  }
+
+  .gallery__grid--mobile-desktop .gallery__play {
+    width: clamp(28px, 8vw, 52px);
+    height: clamp(28px, 8vw, 52px);
+    font-size: 14px;
   }
 
   .gallery__caption {
@@ -491,7 +523,11 @@ html:has(.gallery__viewer[open]) {
   .gallery__slide .gallery__media {
     position: relative;
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
     place-items: center;
+    min-width: 0;
+    min-height: 0;
     height: 100%;
     overflow: hidden;
     user-select: none;

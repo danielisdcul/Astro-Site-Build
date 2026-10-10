@@ -18,15 +18,8 @@
     transition-duration: 0.01ms !important;
   }
 
-  .hero__title,
-  .hero__intro,
-  .hero__link,
   [data-scroll-reveal].is-reveal-pending {
     opacity: 1;
     transform: none;
-  }
-
-  .hero__title::after {
-    display: none;
   }
 }

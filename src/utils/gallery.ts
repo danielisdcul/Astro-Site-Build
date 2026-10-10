@@ -46,6 +46,12 @@ function setupLightbox(
 	const thumbnailStrip = dialog.querySelector<HTMLElement>('.gallery__thumbnails');
 	const slides = Array.from(track.querySelectorAll<HTMLElement>('.gallery__slide'));
 	let activeIndex = 0;
+	// Authored mute settings apply to both the mobile and shared desktop player.
+	for (const player of dialog.querySelectorAll('video')) {
+		player.addEventListener('volumechange', () => {
+			if (player.dataset.galleryVideoMuted === 'true' && !player.muted) player.muted = true;
+		}, options);
+	}
 
 	// Loading — the shared site loader handles previews, decoding, caching, and failures.
 	const loadSelectedImage = () => {
@@ -98,10 +104,11 @@ function setupLightbox(
 		dialog.querySelectorAll('.gallery__hover-zoom.is-active').forEach((overlay) => {
 			overlay.classList.remove('is-active');
 		});
-		fullVideo.pause();
+		const selectedPlayer = video ? (mobile.matches ? video : fullVideo) : null;
+		if (fullVideo !== selectedPlayer) fullVideo.pause();
 		slides.forEach((item) => {
 			const itemVideo = item.querySelector<HTMLVideoElement>('[data-gallery-video-src]');
-			if (itemVideo && itemVideo !== video) itemVideo.pause();
+			if (itemVideo && itemVideo !== selectedPlayer) itemVideo.pause();
 		});
 
 		if (image) {
@@ -121,10 +128,12 @@ function setupLightbox(
 			fullImage.hidden = true;
 			fullVideo.hidden = false;
 			fullVideo.setAttribute('aria-label', video.getAttribute('aria-label') || 'Gallery video');
+			fullVideo.dataset.galleryVideoMuted = video.dataset.galleryVideoMuted;
 			const source = video.dataset.galleryVideoSrc!;
 			if (fullVideo.dataset.galleryVideoSrc !== source) {
 				fullVideo.pause();
 				fullVideo.dataset.galleryVideoSrc = source;
+				fullVideo.muted = video.dataset.galleryVideoMuted === 'true';
 				fullVideo.src = source;
 				fullVideo.poster = video.dataset.galleryVideoPoster || '';
 			}

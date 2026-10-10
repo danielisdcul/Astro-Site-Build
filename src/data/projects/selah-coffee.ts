@@ -6,7 +6,7 @@ export const selahCoffee: Project = {
 	slug: 'selah-coffee',
 	featured: true,
 	showOnHome: true,
-	type: 'Bespoke case study',
+	type: 'Standard case study',
 
 	// Preview copy and images shown on Home and Work.
 	cardLayout: 'wide-top',
@@ -19,7 +19,7 @@ export const selahCoffee: Project = {
 	// Content-aware gallery with explicit placement for this three-column composition.
 	gallery: {
 		layout: 'grid',
-		mobileLayout: 'stack',
+		mobileLayout: 'desktop',
 		columns: 3,
 		images: [
 			{
@@ -45,6 +45,7 @@ export const selahCoffee: Project = {
 			},
 			{
 				src: '/videos/selah-coffee-website-walkthrough.mp4',
+				muted: true,
 				poster: '/images/portfolio/selah-coffee/website-walkthrough-poster.jpg',
 				width: 1180,
 				height: 2236,

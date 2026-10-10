@@ -25,11 +25,11 @@ sectionNavigation[2].children = home.services.map((service, index) => ({
 }));
 ---
 
-<BaseLayout description={home.intro} sectionNavigation={sectionNavigation}>
-	<section class="shell hero" id={sectionNavigation[0].id} data-scroll-reveal>
+<BaseLayout description={home.intro}>
+	<section class="shell hero" id={sectionNavigation[0].id}>
 		<div class="hero__copy">
 			<div class="hero__lead">
-				<h1 class="hero__title" data-typed-text={home.title}>{home.title}</h1>
+				<h1 class="hero__title">{home.title}</h1>
 				<p class="hero__intro">{home.intro}</p>
 			</div>
 			<div class="hero__footer">
@@ -50,46 +50,6 @@ sectionNavigation[2].children = home.services.map((service, index) => ({
 			eager
 		/>
 	</section>
-
-	<script is:inline>
-		const heroTitle = document.querySelector('.hero__title');
-		const heroIntro = document.querySelector('.hero__intro');
-		const heroLink = document.querySelector('.hero__link');
-
-		if (heroTitle && heroIntro && heroLink && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-			const fullText = heroTitle.dataset.typedText || heroTitle.textContent || '';
-			heroTitle.setAttribute('aria-label', fullText);
-			heroTitle.textContent = '';
-			heroTitle.classList.add('is-typing');
-			heroIntro.classList.add('is-hidden');
-			heroLink.classList.add('is-hidden');
-
-			const characters = Array.from(fullText);
-			let index = 0;
-
-			const typeTitle = () => {
-				if (index < characters.length) {
-					heroTitle.textContent = characters.slice(0, index + 1).join('');
-					index += 1;
-					setTimeout(typeTitle, 22);
-					return;
-				}
-
-				heroTitle.classList.remove('is-typing');
-				heroTitle.classList.add('is-visible');
-				setTimeout(() => {
-					heroIntro.classList.remove('is-hidden');
-					heroIntro.classList.add('is-visible');
-				}, 80);
-				setTimeout(() => {
-					heroLink.classList.remove('is-hidden');
-					heroLink.classList.add('is-visible');
-				}, 180);
-			};
-
-			typeTitle();
-		}
-	</script>
 
 	<section class="shell projects" id={sectionNavigation[1].id} aria-labelledby="selected-work" data-scroll-reveal>
 		<header class="section-heading">

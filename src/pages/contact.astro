@@ -8,7 +8,7 @@ const links = [emailLink, ...site.socialLinks];
 const sectionNavigation = createSectionNavigation([{ title: contact.eyebrow }, { title: 'Contact links' }]);
 ---
 
-<BaseLayout title={contact.metadata.title} description={contact.metadata.description} sectionNavigation={sectionNavigation}>
+<BaseLayout title={contact.metadata.title} description={contact.metadata.description}>
 	<section class="shell page-intro" id={sectionNavigation[0].id}>
 		<p class="eyebrow">{contact.eyebrow}</p>
 		<h1>{contact.title}</h1>

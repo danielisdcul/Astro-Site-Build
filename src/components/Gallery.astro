@@ -55,7 +55,7 @@ const placementStyle = (slide: GallerySlide) => {
 
 {(images.length > 0 || videos.length > 0) && (
 	<image-gallery class="gallery" role="group" aria-label={label}>
-		<div class:list={['gallery__grid', `gallery__grid--${layout}`, { 'gallery__grid--mobile-stack': mobileLayout === 'stack' }]} style={`--gallery-columns: ${columns};`}>
+		<div class:list={['gallery__grid', `gallery__grid--${layout}`, { 'gallery__grid--mobile-stack': mobileLayout === 'stack', 'gallery__grid--mobile-desktop': mobileLayout === 'desktop' }]} style={`--gallery-columns: ${columns};`}>
 			{gallerySlides.map((slide, index) => (
 				<figure class="gallery__item" style={placementStyle(slide)}>
 					<div class="gallery__media">
@@ -66,7 +66,7 @@ const placementStyle = (slide: GallerySlide) => {
 									<span class="gallery__play" aria-hidden="true">▶</span>
 								</a>
 							) : (
-								<video class="gallery__inline-video" controls playsinline preload="none" poster={withBase(getImageAsset(slide.poster).preview)} width={slide.width} height={slide.height} aria-label={slide.alt}>
+								<video class="gallery__inline-video" controls playsinline muted={slide.muted} preload="none" poster={withBase(getImageAsset(slide.poster).preview)} width={slide.width} height={slide.height} aria-label={slide.alt}>
 									<source src={withBase(slide.src)} type="video/mp4" />
 								</video>
 							)
@@ -115,9 +115,11 @@ const placementStyle = (slide: GallerySlide) => {
 												class="gallery__slide-video"
 												controls
 												playsinline
+												muted={slide.muted}
 												preload="none"
 												data-gallery-video-src={withBase(slide.src)}
 												data-gallery-video-poster={withBase(getImageAsset(slide.poster).preview)}
+												data-gallery-video-muted={slide.muted ?? false}
 												width={slide.width}
 												height={slide.height}
 												aria-label={slide.alt}

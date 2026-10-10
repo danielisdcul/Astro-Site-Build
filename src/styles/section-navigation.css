@@ -488,12 +488,13 @@
     --section-jump-hide-direction: -100%;
     --section-jump-glass-origin: 0%;
     position: fixed;
-    top: calc(var(--header-height) + (100dvh - var(--header-height)) / 2);
+    /* Small viewport units keep the rail still when Safari's toolbars change. */
+    top: calc(var(--header-height) + (100svh - var(--header-height)) / 2);
     left: 0;
     right: auto;
     z-index: 40;
     width: var(--section-jump-mobile-gutter);
-    height: min(360px, calc(100dvh - var(--header-height) - 48px));
+    height: min(360px, calc(100svh - var(--header-height) - 48px));
     max-height: none;
     margin: 0;
     padding: 0;
@@ -601,7 +602,7 @@
     left: 100%;
     display: block;
     width: min(280px, calc(100vw - var(--section-jump-mobile-gutter) - 16px));
-    max-height: calc(100dvh - var(--header-height) - 32px);
+    max-height: calc(100svh - var(--header-height) - 32px);
     padding: 16px;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -747,5 +748,21 @@
       var(--line) calc(var(--section-jump-child-position) + 48px));
     content: '';
     pointer-events: none;
+  }
+}
+
+/* Temporarily hide phone section navigation while preserving tablet and desktop states. */
+@media (max-width: 544px), (orientation: landscape) and (max-width: 960px) and (max-height: 500px) {
+  .section-jump-host,
+  .home-section-label:not([hidden]) {
+    display: none;
+  }
+
+  /* Release the rail's gutter so content is centered and galleries span the viewport. */
+  .page-content:has(.section-jump),
+  .page-content:has(.section-jump[data-mobile-ready]),
+  body:has(.site-header.is-lefty) .page-content:has(.section-jump[data-mobile-ready]) {
+    --section-jump-mobile-gutter: 0px;
+    padding-inline: 0;
   }
 }

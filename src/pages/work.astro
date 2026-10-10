@@ -11,7 +11,7 @@ sectionNavigation[1].children = projects.map(project => ({
 }));
 ---
 
-<BaseLayout title={work.metadata.title} description={work.metadata.description} sectionNavigation={sectionNavigation}>
+<BaseLayout title={work.metadata.title} description={work.metadata.description}>
 	<section class="shell work-page" aria-labelledby="work-heading">
 		<header class="work-page__intro" id={sectionNavigation[0].id}>
 			<p class="eyebrow">{work.eyebrow}</p>

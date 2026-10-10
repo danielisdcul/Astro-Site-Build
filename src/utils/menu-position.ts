@@ -1,5 +1,8 @@
+import { setupStableMenuViewport } from './stable-menu-viewport';
+
 /** Keep the edge menu's vertical position across pages without changing its handedness. */
 export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement) {
+	setupStableMenuViewport(header);
 	// Configuration and press state — positions are stored as a viewport fraction.
 	const storageKey = 'mobileMenuPosition';
 	const holdDelay = 100;
@@ -31,7 +34,7 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 	// A viewport fraction survives orientation changes; CSS keeps the control inside safe areas.
 	const applyPosition = (value: number) => {
 		position = Math.max(0, Math.min(1, value));
-		header.style.setProperty('--nav-center-y', `${position * 100}svh`);
+		header.style.setProperty('--nav-center-y', `calc(var(--nav-viewport-height, 100svh) * ${position})`);
 	};
 
 	const savePosition = () => {
@@ -46,7 +49,7 @@ export function setupMenuPosition(button: HTMLButtonElement, header: HTMLElement
 	if (position !== null) applyPosition(position);
 
 	const moveTo = (center: number) => {
-		// Resolve the same viewport units as CSS, including when mobile browser bars collapse.
+		// Use the same frozen viewport measurement as CSS while browser toolbars change.
 		const viewportHeight = parseFloat(getComputedStyle(button).maxHeight) || window.innerHeight;
 		applyPosition(center / viewportHeight);
 		const rect = button.getBoundingClientRect();
